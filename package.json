@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.js",
+  "main": "lib/scrollerful.js",
   "type": "module",
   "scripts": {
 		"lint": "npx eslint",
