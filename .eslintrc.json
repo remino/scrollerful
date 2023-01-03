@@ -3,7 +3,7 @@
 		"browser": true,
 		"node": true
 	},
-	"extends": ["airbnb-base"],
+	"extends": ["airbnb-base", "plugin:no-template-curly-in-string-fix/recommended"],
 	"overrides": [
 		{
 			"files": ["source/nav/nav.js"],

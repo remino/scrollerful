@@ -24,6 +24,7 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-no-template-curly-in-string-fix": "^1.0.4",
     "rollup": "^3.6.0",
     "rollup-plugin-sass": "^1.12.17"
   }
