@@ -1,7 +1,9 @@
-\:root
-	--scrollerful-delay: 0s
+$script-name: scrollerful
 
-.scrollerful
+\:root
+	--#{$script-name}-delay: 0s
+
+.#{$script-name}
 	min-height: 100%
 
 	&--snap, &__snap-page, &__snap-page body
@@ -10,7 +12,7 @@
 	&--snap, &__snap-page
 		overflow-y: auto
 
-		.scrollerful__tray
+		.#{$script-name}__tray
 			scroll-snap-align: start end
 
 	&--snap
@@ -31,7 +33,7 @@
 		transform-style: preserve-3d
 
 	&__sprite
-		animation-delay: calc(var(--scrollerful-progress-outer, 0) * -100s + var(--scrollerful-delay, 0))
+		animation-delay: calc(var(--#{$script-name}-progress-outer, 0) * -100s + var(--#{$script-name}-delay, 0))
 		animation-duration: 100s
 		animation-fill-mode: both
 		animation-play-state: paused
