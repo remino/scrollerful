@@ -1,0 +1,51 @@
+#!/bin/sh
+
+build_brotli_main() {
+	scriptinv="$( basename "$0" )"
+	scriptpath="$( realpath "$0" )"
+	scriptdir="$( dirname "$scriptpath" )"
+
+	[ $# -lt 1 ] && _help && return
+
+	[ ! -d "$1" ] && echo "No directory: $1" >&2 && return 17
+
+	command -v brotli > /dev/null 2>&1 \
+		|| ( echo "Brotli not installed" >&2 && return 16 )
+
+	find "$1" \
+		\( \
+			-iname '*.css' \
+			-or -iname '*.htm' \
+			-or -iname '*.html' \
+			-or -iname '*.js' \
+			-or -iname '*.otf' \
+			-or -iname '*.svg' \
+			-or -iname '*.ttf' \
+			-or -iname '*.woff' \
+			-or -iname '*.woff2' \
+			-or -iname '*.xhtml' \
+		\) \
+		| while read -r src
+	do
+		echo "$src.br"
+
+		brotli -fq 11 "$src"
+
+		# Append a null byte at the end of .br because something
+		# with nginx or the brotli plugin sometimes eats the last byte.
+		# https://github.com/google/ngx_brotli/issues/118
+		truncate -s +1 "$src.br"
+	done
+}
+
+_help() {
+cat <<USAGE
+Usage: $scriptinv <build_dir>
+
+Build Brotli files for Web files,
+including CSS, HTML, JavaScript, SVG, and fonts.
+
+USAGE
+}
+
+build_brotli_main "$@"

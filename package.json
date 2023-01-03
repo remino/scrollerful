@@ -1,21 +1,30 @@
 {
-  "name": "template-js",
-  "version": "1.0.0",
+  "name": "scrollerful",
+  "version": "0.1.0",
   "description": "",
   "private": true,
   "main": "lib/scrollerful.js",
   "type": "module",
   "scripts": {
-		"lint": "npx eslint",
-		"lint:fix": "npx eslint --fix",
+    "build": "npm run js:build && npm run middleman:build",
+    "js:build": "npx rollup --config rollup.config.js",
+    "js:watch": "npx rollup --config rollup.config.js --watch",
+    "lint": "npx eslint",
+    "lint:fix": "npx eslint --fix",
+    "middleman": "bundle exec middleman",
+    "middleman:build": "bundle exec middleman build --clean",
+    "start": "concurrently --kill-others \"npm:js:watch\" \"npm:middleman\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "rollup": "^3.6.0",
+    "rollup-plugin-sass": "^1.12.17"
   }
 }

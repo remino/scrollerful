@@ -1,0 +1,156 @@
+#!/bin/sh
+# deploy
+
+deploy_main() {
+	trap _exit INT TERM
+
+	e_args=16
+	e_missing_app=17
+	e_missing_env=18
+	e_no_config=19
+
+	scriptinv="$( basename "$0" )"
+	scriptpath="$( readlink -f "$0" )"
+	scriptdir="$( dirname "$scriptpath" )"
+	rootdir="$( dirname "$scriptdir" )"
+
+	dry_run_arg='-n'
+	rc=
+
+	while getopts c:hr opt
+	do
+		case $opt in
+			c) rc="$OPTARG" ;;
+			h) cmd=help ;;
+			r) dry_run_arg= ;;
+			*) _invalid_opt ;;
+		esac
+	done
+
+	shift "$(( OPTIND - 1 ))"
+
+	[ -z "$cmd" ] && cmd="process"
+
+	case "$cmd" in
+		help|process) "deploy_$cmd" "$@" ;;
+		*) _invalid_cmd ;;
+	esac
+
+	_exit
+}
+
+deploy_help() {
+cat <<USAGE
+Usage: $scriptinv [-hr] -c <file> [<rsync_args>]
+
+Deploy site.
+
+Options:
+
+	-c <file>   Specify config file location.
+	-h          Show this help screen.
+	-r          Run deploy.
+	            When not specified, a dry run is performed by default.
+
+USAGE
+}
+
+deploy_process() {
+	_require rsync
+	_init
+
+	# shellcheck disable=SC2086
+	rsync \
+		-aOJvz \
+		--delete-after \
+		--no-perms \
+		--progress \
+		$dry_run_arg \
+		"$@" \
+		"$rootdir/$DEPLOY_SRC" \
+		"$DEPLOY_DEST" \
+	;
+}
+
+_echo() {
+	echo "$@"
+}
+
+_error() {
+	_echo "$@" >&2
+}
+
+_exit() {
+	exit_code=$?
+	exit $exit_code
+}
+
+_fatal() {
+	exit_code="$1"
+	shift
+	_error "$@"
+	exit "$exit_code"
+}
+
+_init() {
+	_load_config
+}
+
+_invalid_cmd() {
+	_error "Invalid command: $cmd"
+	_echo
+	deploy_help
+	exit $e_args
+}
+
+_invalid_opt() {
+	_error "Invalid option: $opt"
+	_echo
+	deploy_help
+	exit $e_args
+}
+
+_load_config() {
+	[ -z "$rc" ] &&
+		_fatal $e_no_config "No config file specified."
+
+	if [ -f "$rc" ]
+	then
+		eval "$(
+			# shellcheck source=/dev/null
+			. "$rc"
+			echo "DEPLOY_DEST=$DEPLOY_DEST"
+			echo "DEPLOY_SRC=$DEPLOY_SRC"
+		)"
+
+		[ -n "$DEPLOY_DEST" ] && export DEPLOY_DEST
+		[ -n "$DEPLOY_SRC" ] && export DEPLOY_SRC
+	fi
+
+	missing=""
+
+	[ -z "$DEPLOY_DEST" ] && missing="$missing$DEPLOY_DEST "
+	[ -z "$DEPLOY_SRC" ] && missing="$missing$DEPLOY_SRC "
+
+	[ -n "$missing" ] && _fatal $e_missing_env "Missing env vars: $missing"
+}
+
+_require() {
+	missing_bin=0
+
+	for bin in "$@"
+	do
+		if ! which "$bin" > /dev/null 2>&1
+		then
+			missing_bin=1
+			_error "Required: $bin"
+		fi
+	done
+
+	if [ $missing_bin -ne 0 ]
+	then
+		_fatal $e_missing_app "One or more executables or apps are missing."
+	fi
+}
+
+deploy_main "$@"

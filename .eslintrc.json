@@ -1,0 +1,41 @@
+{
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"extends": ["airbnb-base"],
+	"overrides": [
+		{
+			"files": ["source/nav/nav.js"],
+			"rules": {
+				"wrap-iife": ["error", "inside"]
+			}
+		}
+	],
+	"root": true,
+	"rules": {
+		"arrow-parens": ["error", "as-needed"],
+		"import/extensions": [
+			"error",
+			{
+				"js": "always"
+			}
+		],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"no-tabs": [
+			"error",
+			{
+				"allowIndentationTabs": true
+			}
+		],
+		"no-underscore-dangle": 1,
+		"nuxt/no-cjs-in-config": "off",
+		"semi": ["error", "never"]
+	}
+}
