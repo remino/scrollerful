@@ -1,9 +1,7 @@
 #!/bin/sh
 
 build_brotli_main() {
-	scriptinv="$( basename "$0" )"
-	scriptpath="$( realpath "$0" )"
-	scriptdir="$( dirname "$scriptpath" )"
+	SCRIPT_INV="$( basename "$0" )"
 
 	[ $# -lt 1 ] && _help && return
 
@@ -27,20 +25,22 @@ build_brotli_main() {
 		\) \
 		| while read -r src
 	do
-		echo "$src.br"
+		br_file="$src.br"
+
+		echo "$br_file"
 
 		brotli -fq 11 "$src"
 
 		# Append a null byte at the end of .br because something
 		# with nginx or the brotli plugin sometimes eats the last byte.
 		# https://github.com/google/ngx_brotli/issues/118
-		truncate -s +1 "$src.br"
+		truncate -s +1 "$br_file"
 	done
 }
 
 _help() {
 cat <<USAGE
-Usage: $scriptinv <build_dir>
+Usage: $SCRIPT_INV <build_dir>
 
 Build Brotli files for Web files,
 including CSS, HTML, JavaScript, SVG, and fonts.
