@@ -106,6 +106,8 @@ const scroll = event => {
 };
 
 const init$1 = () => {
+	addStyle();
+
 	Array.from(document.querySelectorAll(CSS_CLASS_SNAP)).forEach(target => {
 		target.addEventListener('resize', scroll);
 		target.addEventListener('scroll', scroll);
@@ -115,8 +117,6 @@ const init$1 = () => {
 	window.addEventListener('resize', scroll);
 	window.addEventListener('scroll', scroll);
 	scroll({ target: document });
-
-	addStyle();
 };const init = () => {
 	if (document.readyState === 'interactive') {
 		init$1();
