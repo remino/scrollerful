@@ -1,17 +1,6 @@
 \:root
 	--scrollerful-delay: 0s
 
-.scrollerful__animated
-	animation-name: bg-rotate
-	align-items: center
-	background-color: #333
-	display: flex
-	flex-flow: column
-	height: 100lvh
-	justify-content: center
-	overflow: hidden
-	width: 100vw
-
 .scrollerful
 	min-height: 100%
 
@@ -21,35 +10,35 @@
 	&--snap, &__snap-page
 		overflow-y: auto
 
-		.scrollerful__section
+		.scrollerful__tray
 			scroll-snap-align: start end
 
 	&--snap
 		height: 100%
 
-	&__animated
+	&__plate
+		align-items: center
+		display: flex
+		flex-flow: column
+		height: 100lvh
+		justify-content: center
+		max-height: 100%
+		overflow: hidden
+		perspective-origin: center
+		perspective: 150px
+		position: sticky
+		top: 0
+		transform-style: preserve-3d
+
+	&__sprite
 		animation-delay: calc(var(--scrollerful-progress-outer, 0) * -100s + var(--scrollerful-delay, 0))
 		animation-duration: 100s
 		animation-fill-mode: both
 		animation-play-state: paused
 		animation-timing-function: linear
 
-	&__section
+	&__tray
 		height: 300lvh
 
 		&--padding
 			height: 100lvh
-
-		&__content
-			align-items: center
-			display: flex
-			flex-flow: column
-			height: 100lvh
-			justify-content: center
-			max-height: 100%
-			overflow: hidden
-			perspective-origin: center
-			perspective: 150px
-			position: sticky
-			top: 0
-			transform-style: preserve-3d
