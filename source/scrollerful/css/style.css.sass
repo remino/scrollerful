@@ -1,50 +1,39 @@
-@keyframes bg-rotate
+@keyframes caption-1
+	from
+		transform: translateX(120lvw)
+
+	to
+		transform: translateX(-120lvw)
+
+@keyframes title-slide-up
 	0%, 25%
-		filter: invert(0)
+		transform: scale(0.5) translateY(100lvh)
 
-	75%, 100%
-		filter: invert(1)
-
-@keyframes fade-in-out
-	0%
-		opacity: 0.5
-		transform: scale(0.6)
-
-	25%
-		opacity: 1
-		transform: scale(1)
-
-	75%
-		opacity: 1
-		transform: scale(2)
+	50%, 75%
+		transform: scale(1) translateY(0)
 
 	100%
-		opacity: 0.5
-		transform: scale(5)
+		transform: scale(0.5) translateY(0)
 
-html, body
-	height: 100%
-	margin: 0
-	padding: 0
-	width: 100%
+html
+	&, > body
+		height: 100%
+		margin: 0
+		padding: 0
+		width: 100%
 
-body
-	background: #000
-	color: #fff
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+	> body
+		background: #000
+		color: #fff
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
 
-h1
-	font-size: 3rem
+		> header.scrollerful__tray > .scrollerful__plate
+			> h1
+				animation-name: title-slide-up
+				font-size: 6rem
+				text-transform: uppercase
 
-h1, .piechart
-	&.scrollerful__animated
-		animation-name: fade-in-out
-
-.piechart.scrollerful__animated
-	$size: 10rem
-	background-image: conic-gradient(#fff 0%, #fff calc(var(--scrollerful-progress-inner, 0) * 100%), rgba(100%,100%,100%,0) calc(var(--scrollerful-progress-inner, 0) * 100%), rgba(100%,100%,100%,0) 100%)
-	border-radius: 100%
-	border: solid 0.2rem #fff
-	display: block
-	height: $size
-	width: $size
+		> .scrollerful__tray:nth-child(2) > .scrollerful__plate
+			> p
+				animation-name: caption-1
+				font-size: 3rem
