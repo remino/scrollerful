@@ -7,5 +7,9 @@ export default {
 		file: 'source/scrollerful/script.js',
 		format: 'iife',
 	},
-	plugins: [sass()],
+	plugins: [sass({
+		options: {
+			outputStyle: 'compressed',
+		},
+	})],
 }
