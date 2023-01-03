@@ -59,8 +59,8 @@ page '/*.xml', layout: false
 prefix = '/scrollerful'
 
 set :build_dir, 'docs'
-set :css_dir, "#{prefix}/css"
+set :css_dir, prefix
 set :haml, { format: :html5 }
-set :images_dir, "#{prefix}/img"
-set :js_dir, "#{prefix}/js"
+set :images_dir, prefix
+set :js_dir, prefix
 set :relative_links, false

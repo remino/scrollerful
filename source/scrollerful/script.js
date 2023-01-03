@@ -1,7 +1,7 @@
-(function(){'use strict';var style = ":root {\n  --scrollerful-delay: 0s;\n}\n\n.scrollerful {\n  min-height: 100%;\n}\n.scrollerful--snap, .scrollerful__snap-page, .scrollerful__snap-page body {\n  scroll-snap-type: y proximity;\n}\n.scrollerful--snap, .scrollerful__snap-page {\n  overflow-y: auto;\n}\n.scrollerful--snap .scrollerful__tray, .scrollerful__snap-page .scrollerful__tray {\n  scroll-snap-align: start end;\n}\n.scrollerful--snap {\n  height: 100%;\n}\n.scrollerful__plate {\n  align-items: center;\n  display: flex;\n  flex-flow: column;\n  height: 100lvh;\n  justify-content: center;\n  max-height: 100%;\n  overflow: hidden;\n  perspective-origin: center;\n  perspective: 150px;\n  position: sticky;\n  top: 0;\n  transform-style: preserve-3d;\n}\n.scrollerful__sprite {\n  animation-delay: calc(var(--scrollerful-progress-outer, 0) * -100s + var(--scrollerful-delay, 0));\n  animation-duration: 100s;\n  animation-fill-mode: both;\n  animation-play-state: paused;\n  animation-timing-function: linear;\n}\n.scrollerful__tray {\n  height: 300lvh;\n}\n.scrollerful__tray--padding {\n  height: 100lvh;\n}";const SCRIPT_NAME = 'scrollerful';
+(function(){'use strict';var style = ":root{--scrollerful-delay: 0s}.scrollerful{min-height:100%}.scrollerful--snap,.scrollerful__snap-page,.scrollerful__snap-page body{scroll-snap-type:y proximity}.scrollerful--snap,.scrollerful__snap-page{overflow-y:auto}.scrollerful--snap .scrollerful__tray,.scrollerful__snap-page .scrollerful__tray{scroll-snap-align:start end}.scrollerful--snap{height:100%}.scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;perspective-origin:center;perspective:150px;position:sticky;top:0;transform-style:preserve-3d}.scrollerful__sprite{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0));animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful__tray{height:300lvh}.scrollerful__tray--padding{height:100lvh}";const SCRIPT_NAME = 'scrollerful';
 
-const CSS_CLASS_SECTION = `.${SCRIPT_NAME}__section`;
 const CSS_CLASS_SNAP = `.${SCRIPT_NAME}--snap`;
+const CSS_CLASS_TRAY = `.${SCRIPT_NAME}__tray`;
 const CSS_PROP_PROGRESS_INNER = `--${SCRIPT_NAME}-progress-inner`;
 const CSS_PROP_PROGRESS_OUTER = `--${SCRIPT_NAME}-progress-outer`;
 const EVENT_SCROLL = `${SCRIPT_NAME}scroll`;
@@ -78,13 +78,13 @@ const setStyleVars = ({
 };
 
 const scroll = event => {
-	Array.from(event.target.querySelectorAll(CSS_CLASS_SECTION)).forEach(el => {
+	Array.from(event.target.querySelectorAll(CSS_CLASS_TRAY)).forEach(el => {
 		el.addEventListener(EVENT_SCROLL, setStyleVars);
 		processSection(el);
 	});
 };
 
-const init$1 = () => {
+const scrollerful = () => {
 	addStyle();
 
 	Array.from(document.querySelectorAll(CSS_CLASS_SNAP)).forEach(target => {
@@ -96,12 +96,10 @@ const init$1 = () => {
 	window.addEventListener('resize', scroll);
 	window.addEventListener('scroll', scroll);
 	scroll({ target: document });
-};const init = () => {
+};(function init() {
 	if (document.readyState === 'interactive') {
-		init$1();
+		scrollerful();
 	} else {
-		document.addEventListener('DOMContentLoaded', init$1);
+		document.addEventListener('DOMContentLoaded', scrollerful);
 	}
-};
-
-init();})();
+}());})();
