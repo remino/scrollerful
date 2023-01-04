@@ -7,6 +7,7 @@ $script-name: scrollerful
 	min-height: 100%
 
 	&--snap, &__snap-page, &__snap-page body
+		scroll-snap-stop: always
 		scroll-snap-type: y proximity
 
 	&--snap, &__snap-page
@@ -18,6 +19,20 @@ $script-name: scrollerful
 	&--snap
 		height: 100%
 
+	&__ruler
+		background: none transparent
+		border: none
+		bottom: 0
+		display: block
+		height: 100lvh
+		left: -200%
+		pointer-events: none
+		position: absolute
+		top: 0
+		user-select: none
+		width: 1rem
+		z-index: -10
+
 	&__plate
 		align-items: center
 		display: flex
@@ -26,21 +41,25 @@ $script-name: scrollerful
 		justify-content: center
 		max-height: 100%
 		overflow: hidden
-		perspective-origin: center
-		perspective: 150px
 		position: sticky
 		top: 0
-		transform-style: preserve-3d
 
 	&__sprite
-		animation-delay: calc(var(--#{$script-name}-progress-outer, 0) * -100s + var(--#{$script-name}-delay, 0))
-		animation-duration: 100s
-		animation-fill-mode: both
-		animation-play-state: paused
-		animation-timing-function: linear
+		&, &--inner, &--outer
+			animation-duration: 100s
+			animation-fill-mode: both
+			animation-play-state: paused
+			animation-timing-function: linear
+
+		&, &--inner
+			animation-delay: calc(var(--#{$script-name}-progress-inner, 0) * -100s + var(--#{$script-name}-delay, 0))
+
+		&, &--outer
+			animation-delay: calc(var(--#{$script-name}-progress-outer, 0) * -100s + var(--#{$script-name}-delay, 0))
 
 	&__tray
 		height: 300lvh
+		position: relative
 
 		&--padding
 			height: 100lvh

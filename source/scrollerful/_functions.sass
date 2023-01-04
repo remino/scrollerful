@@ -1,0 +1,22 @@
+@function light-color($base-color)
+	@return lighten(adjust-hue(invert($base-color), 180deg), 25%)
+
+@function rainbow-gradient($base-color)
+	$args: to right, $base-color
+
+	@for $i from 1 through 4
+		$color: adjust-hue($base-color, $i * 90deg)
+		$args: append($args, $color, $separator: comma)
+
+	@return linear-gradient($args)
+
+@function shadows($base-color, $spacing)
+	$alpha-color: rgba($base-color, 0.6)
+	$output: ()
+
+	@for $i from 1 through 4
+		$shadow-spacing: $spacing * $i
+		$color: adjust-hue($alpha-color, ($i - 1) * 90deg)
+		$output: append($output, #{$shadow-spacing} #{$shadow-spacing} #{$color}, $separator: comma)
+
+	@return $output

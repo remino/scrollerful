@@ -1,0 +1,6 @@
+@mixin common-transition
+	transition: all var(--transition-duration) ease-in-out
+
+@mixin dark
+	@media (prefers-color-scheme: dark)
+		@content

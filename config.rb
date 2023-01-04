@@ -63,4 +63,5 @@ set :css_dir, prefix
 set :haml, { format: :html5 }
 set :images_dir, prefix
 set :js_dir, prefix
+set :partials_dir, prefix
 set :relative_links, false

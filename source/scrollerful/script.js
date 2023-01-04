@@ -1,7 +1,8 @@
-(function(){'use strict';var style = ":root{--scrollerful-delay: 0s}.scrollerful{min-height:100%}.scrollerful--snap,.scrollerful__snap-page,.scrollerful__snap-page body{scroll-snap-type:y proximity}.scrollerful--snap,.scrollerful__snap-page{overflow-y:auto}.scrollerful--snap .scrollerful__tray,.scrollerful__snap-page .scrollerful__tray{scroll-snap-align:start end}.scrollerful--snap{height:100%}.scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;perspective-origin:center;perspective:150px;position:sticky;top:0;transform-style:preserve-3d}.scrollerful__sprite{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0));animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful__tray{height:300lvh}.scrollerful__tray--padding{height:100lvh}";const SCRIPT_NAME = 'scrollerful';
+(function(){'use strict';var style = ":root{--scrollerful-delay: 0s}.scrollerful{min-height:100%}.scrollerful--snap,.scrollerful__snap-page,.scrollerful__snap-page body{scroll-snap-stop:always;scroll-snap-type:y proximity}.scrollerful--snap,.scrollerful__snap-page{overflow-y:auto}.scrollerful--snap .scrollerful__tray,.scrollerful__snap-page .scrollerful__tray{scroll-snap-align:start end}.scrollerful--snap{height:100%}.scrollerful__ruler{background:none rgba(0,0,0,0);border:none;bottom:0;display:block;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;user-select:none;width:1rem;z-index:-10}.scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.scrollerful__sprite,.scrollerful__sprite--inner,.scrollerful__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful__sprite,.scrollerful__sprite--inner{animation-delay:calc(var(--scrollerful-progress-inner, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__sprite,.scrollerful__sprite--outer{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__tray{height:300lvh;position:relative}.scrollerful__tray--padding{height:100lvh}";const SCRIPT_NAME = 'scrollerful';
 
 const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`;
 const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`;
+const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`;
 const CSS_PROP_PROGRESS_INNER = `--${SCRIPT_NAME}-progress-inner`;
 const CSS_PROP_PROGRESS_OUTER = `--${SCRIPT_NAME}-progress-outer`;
 const EVENT_INNER_ENTER = `${SCRIPT_NAME}innerenter`;
@@ -11,15 +12,31 @@ const EVENT_OUTER_EXIT = `${SCRIPT_NAME}outerexit`;
 const EVENT_SCROLL = `${SCRIPT_NAME}scroll`;
 const SEL_SNAP = `.${SCRIPT_NAME}--snap`;
 const SEL_TRAY = `.${SCRIPT_NAME}__tray`;
-const STYLE_EL_ID = `${SCRIPT_NAME}_style`;
+const EL_ID_RULER = `${SCRIPT_NAME}_ruler`;
+const EL_ID_STYLE = `${SCRIPT_NAME}_style`;
 
-const getStyleEl = () => document.getElementById(STYLE_EL_ID);
+const getStyleEl = () => document.getElementById(EL_ID_STYLE);
+const getViewportHeight = () => document.getElementById(EL_ID_RULER)
+	.getBoundingClientRect().height;
+const sortNums = (...nums) => nums.sort((a, b) => a - b);
+
+const isWithin = (num, a, b) => {
+	const [min, max] = sortNums(a, b);
+	return num >= min && num <= max
+};
+
+const addRuler = () => {
+	const ruler = document.createElement('div');
+	ruler.setAttribute('id', EL_ID_RULER);
+	ruler.classList.add(CSS_CLASS_RULER);
+	document.body.appendChild(ruler);
+};
 
 const addStyle = () => {
 	if (getStyleEl()) return
 
 	const styleEl = document.createElement('style');
-	styleEl.setAttribute('id', STYLE_EL_ID);
+	styleEl.setAttribute('id', EL_ID_STYLE);
 	styleEl.textContent = style;
 
 	document.head.appendChild(styleEl);
@@ -33,7 +50,7 @@ const getContainerCoords = el => {
 		return { containerTop, containerHeight, viewHeight }
 	}
 
-	const { innerHeight: viewHeight } = window;
+	const viewHeight = getViewportHeight();
 	const { height: containerHeight, top: containerTop } = el.getBoundingClientRect();
 	return { containerTop, containerHeight, viewHeight }
 };
@@ -70,7 +87,7 @@ const setStyleVars = ({
 		progress: { inner, outer },
 	},
 }) => {
-	if (outer < 0 || outer > 1) {
+	if (!isWithin(outer, 0, 1)) {
 		removeStyleProperties(
 			target,
 			CSS_PROP_PROGRESS_INNER,
@@ -84,7 +101,7 @@ const setStyleVars = ({
 };
 
 const triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
-	if (progress < 0 || progress > 1) {
+	if (!isWithin(progress, 0, 1)) {
 		if (target.classList.contains(className)) {
 			target.classList.remove(className);
 
@@ -133,6 +150,7 @@ const addSectionListeners = parent => {
 
 const scrollerful = () => {
 	addStyle();
+	addRuler();
 
 	Array.from(document.querySelectorAll(SEL_SNAP)).forEach(target => {
 		target.addEventListener('resize', scroll);

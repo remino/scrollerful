@@ -1,14 +1,12 @@
-template
-========
+scrollerful
+===========
 
-By Author <https://example.com>
+By Rémino Rem <https://remino.net>
 
-Short description of app or project.
+JavaScript library using CSS variables to animate elements while user scrolls.
 
-[Docs](https://example.com/)
-| [Demo](https://example.com/)
-| [Code](https://example.com/)
-| [Download](https://example.com/)
+[Demo](https://remino.net/scrollerful/)
+| [Code](https://github.com/remino/scrollerful/)
 
 - [About](#about)
 	- [Built With](#built-with)

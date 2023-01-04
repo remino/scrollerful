@@ -1,15 +1,22 @@
-%header#s1.scrollerful__tray
+%header.scrollerful__tray
 	.scrollerful__plate
-		%h1.scrollerful__sprite Scrollerful
-#s2.scrollerful__tray
+		.scroll-down.scrollerful__sprite
+			- (1..4).each do |i|
+				.scroll-down__arrow
+		%h1.scrollerful__sprite
+			= partial 'logo'
+%section.scrollerful__tray
 	.scrollerful__plate
-		%p.scrollerful__sprite Make your site…
-#s3.scrollerful__tray
+		%h2
+			%span.scrollerful__sprite--inner Scroll
+			%span.scrollerful__sprite--inner with
+			%span.scrollerful__sprite--inner
+				%strong.scrollerful__sprite--inner style!
+		%p
+			%strong.scrollerful__sprite--inner Yeah!
+%nav.scrollerful__tray
 	.scrollerful__plate
-		%p.scrollerful__sprite scroll
-#s4.scrollerful__tray
-	.scrollerful__plate
-		%p.scrollerful__sprite with
-#s5.scrollerful__tray
-	.scrollerful__plate
-		%p.scrollerful__sprite style!
+		.scrollerful__sprite--inner
+			%a(href="https://github.com/remino/scrollerful")
+				%span.caption Get it now!
+				%span.bg
