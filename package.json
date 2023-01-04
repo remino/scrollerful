@@ -20,12 +20,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@lopatnov/rollup-plugin-uglify": "^2.1.5",
     "concurrently": "^7.6.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-no-template-curly-in-string-fix": "^1.0.4",
+    "install": "^0.13.0",
+    "npm": "^9.2.0",
     "rollup": "^3.6.0",
-    "rollup-plugin-sass": "^1.12.17"
+    "rollup-plugin-sass": "^1.12.17",
+    "terser": "^5.16.1"
   }
 }
