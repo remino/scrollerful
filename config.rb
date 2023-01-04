@@ -41,6 +41,11 @@ configure :build do
 		builder.thor.run 'bin/build_brotli docs'
 	end
 
+	# For GitHub pages
+	after_build do |builder|
+		builder.thor.run 'mv docs docs0 && mv docs0/scrollerful docs && rm -fr docs0'
+	end
+
 	before_build do |builder|
 		builder.thor.run 'npm run js:build'
 	end
