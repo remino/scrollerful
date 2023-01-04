@@ -1,2 +1,3 @@
-description: "Plain and simple Middleman site template."
-title: mansite
+description: 'JavaScript library using CSS variables to animate elements while user scrolls.'
+title: scrollerful
+url: https://remino.github.io/scrollerful/
