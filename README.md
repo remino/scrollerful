@@ -1,4 +1,4 @@
-scrollerful
+Scrollerful
 ===========
 
 By Rémino Rem <https://remino.net>
@@ -11,72 +11,164 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 - [About](#about)
 	- [Built With](#built-with)
 - [Getting Started](#getting-started)
-	- [Prerequisites](#prerequisites)
 	- [Installation](#installation)
 - [Usage](#usage)
+	- [Add scroll snapping](#add-scroll-snapping)
+	- [Apply on full body](#apply-on-full-body)
+- [To Do](#to-do)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
-- [Acknowledgments](#acknowledgments)
 
 
 
 ## About
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+**Scrollerful** is a lightweight, dependency-free JavaScript library which uses CSS variables to help animate elements on a page as the user scrolls.
 
-Longer description of product.
-
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
 
 ### Built With
 
-- [Node.js](https://nodejs.org/)
-- etc.
+- JavaScript
+- [Sass](https://sass-lang.com)
+- [rollup.js](https://rollupjs.org/guide/en/)
+- Docs:
+	- [Middleman](https://middlemanapp.com)
+	- [mansite](https://github.com/remino/mansite)
 
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Prerequisites
-
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-    ```sh
-    git clone https://github.com/github_username/repo_name.git
-    ```
-3. Install NPM packages
-    ```sh
-    npm install
-    ```
-4. Enter your API in `config.js`
-    ```js
-    const API_KEY = 'ENTER YOUR API';
-    ```
+Grab the bundled JavaScript file from the latest [release](https://github.com/remino/scrollerful/releases).
 
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
 
 ## Usage
 
-Example usage of app or project.
+**Step 1.** Add the JavaScript bundle file to your page.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Note only adding the file will start it automatically.
 
-[Back to top](#template)
+**Step 2.** Section your page and specify sprites to animate as below:
+
+```html
+<div class="scrollerful">
+	<div class="scrollerful__tray">
+		<div class="scrollerful__plate">
+			<p class="scrollerful__sprite">Section 1</p>
+		</div>
+	</div>
+	<div class="scrollerful__tray">
+		<div class="scrollerful__plate">
+			<p class="scrollerful__sprite">Section 2</p>
+		</div>
+	</div>
+	<div class="scrollerful__tray">
+		<div class="scrollerful__plate">
+			<p class="scrollerful__sprite">Section 3</p>
+		</div>
+	</div>
+</div>
+```
+
+**Step 3.** Define CSS animations for your sprites:
+
+```css
+@keyframes section-1 {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes section-2 {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(2);
+	}
+}
+
+@keyframes section-3 {
+	from {
+		color: red;
+	}
+	to {
+		color: blue;
+	}
+}
+
+.scrollerful__tray:nth-child(1) > .scrollerful__plate > .scrollerful__sprite {
+	animation-name: section-1;
+}
+
+.scrollerful__tray:nth-child(3) > .scrollerful__plate > .scrollerful__sprite {
+	animation-name: section-2;
+}
+
+.scrollerful__tray:nth-child(3) > .scrollerful__plate > .scrollerful__sprite {
+	animation-name: section-3;
+}
+```
+
+**Step 4.** Enjoy the animations while your scroll!
+
+### Add scroll snapping
+
+On the `.scrollerful` element, adding the `.scrollerful--snap` class to it will snap scrolling to the next section.
+
+### Apply on full body
+
+If you want to add scroll snapping and use the entire page body as the main container, you can do so by adding the `.scrollerful` CSS class to `<body>` and add `.scrollerful__snap--page` to the `<html>` element. For example:
+
+```html
+<html class="scrollerful__snap--page">
+	<head>
+		<title>Scrollerful Example</title>
+		<script src="scrollerful.js"></script>
+	</head>
+	<body class="scrollerful">
+		<div class="scrollerful__tray">
+			<div class="scrollerful__plate">
+				<p class="scrollerful__sprite">Section 1</p>
+			</div>
+		</div>
+		<div class="scrollerful__tray">
+			<div class="scrollerful__plate">
+				<p class="scrollerful__sprite">Section 2</p>
+			</div>
+		</div>
+	</body>
+</html>
+```
+
+[Back to top](#scrollerful)
+
+
+
+## To Do
+
+This library is mainly for personal purposes at the moment, but I'd like to expand on it for others to enjoy its benefits until browsers adopt standards to animate elements on scroll using CSS on its own. 
+
+For others to feel more confident in using this, here are a few things to do:
+
+- Add automated tests. (Not sure how to do that yet.)
+- Add better documentation. (There are a few features this library does that is not documented here yet.)
+- Add more examples.
 
 
 
@@ -93,7 +185,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
 
@@ -101,7 +193,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the ISC License. See `LICENSE.txt` for more information.
 
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
 
@@ -110,15 +202,7 @@ Distributed under the ISC License. See `LICENSE.txt` for more information.
 Rémino Rem
 https://remino.net/
 
-[Back to top](#template)
+[Back to top](#scrollerful)
 
 
-
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-[Back to top](#template)
 
