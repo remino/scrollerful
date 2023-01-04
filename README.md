@@ -24,7 +24,7 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 
 ## About
 
-https://github.com/remino/scrollerful/raw/main/demo.mp4
+https://user-images.githubusercontent.com/29999/210556744-519eccd4-27c2-4f58-a9a3-37f2837338b8.mp4
 
 **Scrollerful** is a lightweight, dependency-free JavaScript library which uses CSS variables to help animate elements on a page as the user scrolls.
 
