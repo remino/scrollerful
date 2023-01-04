@@ -7,11 +7,16 @@ activate :autoprefixer do |prefix|
 end
 
 configure :build do
-	activate :asset_hash
 	activate :gzip
 	activate :minify_css
 	activate :minify_javascript, compressor: Terser.new
 
+	activate :asset_hash do |config|
+		config.ignore = [
+			/share-.*/,
+		]
+	end
+	
 	after_configuration do
 		use ::HtmlCompressor::Rack,
 			compress_css: true,
