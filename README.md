@@ -5,7 +5,7 @@ By Rémino Rem <https://remino.net>
 
 JavaScript library using CSS variables to animate elements while user scrolls.
 
-[Demo](https://remino.github.io/scrollerful/)
+[Demo](https://remino.net/scrollerful/)
 | [Code](https://github.com/remino/scrollerful/)
 
 - [About](#about)

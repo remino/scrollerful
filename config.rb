@@ -43,12 +43,7 @@ configure :build do
 	end
 
 	after_build do |builder|
-		builder.thor.run 'bin/build_brotli docs'
-	end
-
-	# For GitHub pages
-	after_build do |builder|
-		builder.thor.run 'mv docs docs0 && mv docs0/scrollerful docs && rm -fr docs0'
+		builder.thor.run 'bin/build_brotli build'
 	end
 
 	before_build do |builder|
@@ -68,7 +63,7 @@ page '/*.xml', layout: false
 
 prefix = '/scrollerful'
 
-set :build_dir, 'docs'
+set :build_dir, 'build'
 set :css_dir, prefix
 set :haml, { format: :html5 }
 set :images_dir, prefix
