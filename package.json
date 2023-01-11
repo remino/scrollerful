@@ -1,6 +1,6 @@
 {
 	"name": "scrollerful",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
 	"author": "Rémino Rem (https://remino.net/)",
 	"files": ["lib/*"],
