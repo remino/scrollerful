@@ -1,35 +1,35 @@
 {
-  "name": "scrollerful",
-  "version": "0.2.0",
-  "description": "",
-  "private": true,
-  "main": "lib/scrollerful.js",
-  "type": "module",
-  "scripts": {
-    "build": "npm run js:build && npm run middleman:build",
-    "js:build": "npx rollup --config rollup.config.js",
-    "js:watch": "npx rollup --config rollup.config.js --watch",
-    "lint": "npx eslint",
-    "lint:fix": "npx eslint --fix",
-    "middleman": "bundle exec middleman",
-    "middleman:build": "bundle exec middleman build --clean",
-    "start": "concurrently --kill-others \"npm:js:watch\" \"npm:middleman\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@lopatnov/rollup-plugin-uglify": "^2.1.5",
-    "concurrently": "^7.6.0",
-    "eslint": "^8.23.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-no-template-curly-in-string-fix": "^1.0.4",
-    "install": "^0.13.0",
-    "npm": "^9.2.0",
-    "rollup": "^3.6.0",
-    "rollup-plugin-sass": "^1.12.17",
-    "terser": "^5.16.1"
-  }
+	"name": "scrollerful",
+	"version": "0.2.0",
+	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
+	"author": "Rémino Rem (https://remino.net/)",
+	"files": ["lib/*"],
+	"main": "lib/scrollerful.js",
+	"type": "module",
+	"scripts": {
+		"build": "npm run js:build && npm run middleman:build",
+		"js:build": "npx rollup --config rollup.config.js",
+		"js:watch": "npx rollup --config rollup.config.js --watch",
+		"lint": "npx eslint",
+		"lint:fix": "npx eslint --fix",
+		"middleman": "bundle exec middleman",
+		"middleman:build": "bundle exec middleman build --clean",
+		"start": "concurrently --kill-others \"npm:js:watch\" \"npm:middleman\"",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": ["javascript", "css", "animation", "scroll"],
+	"license": "ISC",
+	"devDependencies": {
+		"@lopatnov/rollup-plugin-uglify": "^2.1.5",
+		"concurrently": "^7.6.0",
+		"eslint": "^8.23.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-no-template-curly-in-string-fix": "^1.0.4",
+		"install": "^0.13.0",
+		"npm": "^9.2.0",
+		"rollup": "^3.6.0",
+		"rollup-plugin-sass": "^1.12.17",
+		"terser": "^5.16.1"
+	}
 }
