@@ -9,7 +9,7 @@ const sassPlugin = sass({
 		outputStyle: 'compressed',
 	},
 	processor: css => postcss([autoprefixer, cssnano])
-		.process(css)
+		.process(css, { from: undefined })
 		.then(result => result.css),
 })
 
@@ -41,22 +41,29 @@ export default [
 	},
 	{
 		input: 'src/scrollerful.js',
-		output: {
-			compact: true,
-			file: 'dist/scrollerful.min.js',
-			format: 'umd',
-			name: 'scrollerful',
-		},
+		output: [
+			{
+				compact: true,
+				file: 'dist/scrollerful.min.js',
+				format: 'umd',
+				name: 'scrollerful',
+			},
+			{
+				compact: true,
+				file: 'dist/scrollerful.min.mjs',
+				format: 'es',
+			},
+		],
 		plugins: [sassPlugin, uglifyPlugin],
 		watch: {
 			clearScreen: false,
 		},
 	},
 	{
-		input: 'src/init.js',
+		input: 'src/auto.js',
 		output: {
 			compact: true,
-			file: 'dist/scrollerful-init.min.js',
+			file: 'dist/scrollerful-auto.min.js',
 			format: 'umd',
 			name: 'scrollerful',
 		},

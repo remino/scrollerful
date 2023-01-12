@@ -1,1 +1,1 @@
-import '../../src/init.js'
+import '../../src/auto.js'
