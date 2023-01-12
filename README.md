@@ -11,7 +11,6 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 - [About](#about)
 	- [Built With](#built-with)
 - [Getting Started](#getting-started)
-	- [Installation](#installation)
 - [Usage](#usage)
 	- [Add scroll snapping](#add-scroll-snapping)
 	- [Apply on full body](#apply-on-full-body)
@@ -48,9 +47,15 @@ https://user-images.githubusercontent.com/29999/210556744-519eccd4-27c2-4f58-a9a
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Installation
+You can either clone the repo, download the [latest release file](https://github.com/remino/scrollerful/releases), or install it using npm:
 
-Grab the bundled JavaScript file from the latest [release](https://github.com/remino/scrollerful/releases).
+```sh
+# Clone the repo
+git clone git@github.com:remino/scrollerful.git
+
+# Install using npm
+npm add scrollerful
+```
 
 [Back to top](#scrollerful)
 
@@ -58,9 +63,40 @@ Grab the bundled JavaScript file from the latest [release](https://github.com/re
 
 ## Usage
 
-**Step 1.** Add the JavaScript bundle file to your page.
+**Step 1.** Add the JavaScript file to your page.
 
-Note only adding the file will start it automatically.
+The library comes in many forms: UMD or CommonJS, ES6 module, all standard or minified.
+
+There are many ways to include the JavaScript library to your page:
+
+```js
+// Using ES6 import
+// dist/scrollerful.mjs
+import scrollerful from 'scrollerful';
+scrollerful();
+
+// Using CommonJS require
+// dist/scrollerful.cjs
+const scrollerful = require('scrollerful');
+scrollerful();
+```
+
+```html
+<!-- Using a script tag -->
+<script src="scrollerful.min.js"></script>
+<script>
+	scrollerful();
+</script>
+
+<!-- Using a script tag with a module -->
+<script type="module">
+	import scrollerful from './scrollerful.min.mjs';
+	scrollerful();
+</script>
+
+<!-- Using the auto-init file -->
+<script src="scrollerful-auto.min.js"></script>
+```
 
 **Step 2.** Section your page and specify sprites to animate as below:
 
