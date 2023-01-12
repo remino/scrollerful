@@ -1,35 +1,50 @@
 {
-	"name": "scrollerful",
-	"version": "0.3.0",
-	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
 	"author": "Rémino Rem (https://remino.net/)",
-	"files": ["lib/*"],
-	"main": "lib/scrollerful.js",
-	"type": "module",
-	"scripts": {
-		"build": "npm run js:build && npm run middleman:build",
-		"js:build": "npx rollup --config rollup.config.js",
-		"js:watch": "npx rollup --config rollup.config.js --watch",
-		"lint": "npx eslint",
-		"lint:fix": "npx eslint --fix",
-		"middleman": "bundle exec middleman",
-		"middleman:build": "bundle exec middleman build --clean",
-		"start": "concurrently --kill-others \"npm:js:watch\" \"npm:middleman\"",
-		"test": "echo \"Error: no test specified\" && exit 1"
+	"browser": "dist/scrollerful.cjs",
+	"dependencies": {
+		"@lopatnov/rollup-plugin-uglify": "^2.1.5"
 	},
-	"keywords": ["javascript", "css", "animation", "scroll"],
-	"license": "ISC",
+	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
 	"devDependencies": {
-		"@lopatnov/rollup-plugin-uglify": "^2.1.5",
+		"autoprefixer": "^10.4.13",
 		"concurrently": "^7.6.0",
+		"cssnano": "^5.1.14",
 		"eslint": "^8.23.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-no-template-curly-in-string-fix": "^1.0.4",
 		"install": "^0.13.0",
 		"npm": "^9.2.0",
+		"postcss": "^8.4.21",
 		"rollup": "^3.6.0",
 		"rollup-plugin-sass": "^1.12.17",
 		"terser": "^5.16.1"
-	}
+	},
+	"exports": {
+		"import": "./dist/scrollerful.mjs",
+		"require": "./dist/scrollerful.cjs"
+	},
+	"files": [
+		"dist/*"
+	],
+	"keywords": [
+		"javascript",
+		"css",
+		"animation",
+		"scroll"
+	],
+	"license": "ISC",
+	"main": "dist/scrollerful.cjs",
+	"name": "scrollerful",
+	"scripts": {
+		"css:build": "npx sass --load-path=node_modules/ assets/css/:.build/css/scrollerful/",
+		"css:watch": "npx sass --watch --load-path=node_modules/ assets/css/:.build/css/scrollerful/",
+		"js:build": "npx rollup --config rollup.config.js",
+		"js:watch": "npx rollup --config rollup.config.js --watch",
+		"lint": "npx eslint",
+		"lint:fix": "npx eslint --fix",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"type": "module",
+	"version": "0.3.0"
 }

@@ -1,10 +1,12 @@
-@import ../../lib/functions
-@import variables
-@import functions
-@import mixins
-@import keyframes
+@use 'sass:color'
+@use 'sass:math'
+@use '../../src/functions' as *
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
+@use 'keyframes' as *
 
-\:root
+:root
 	--color-bg: #eee
 	--color-fg: #333
 	--rainbow-gradient: #{rainbow-gradient(light-color($color-origin))}
@@ -50,7 +52,7 @@ html
 
 							@for $i from 1 through $children-count
 								&:nth-child(#{$i})
-									$fill: adjust-hue($color-origin, ($i - 1) / $children-count * 360deg)
+									$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
 									--fill-end: #{light-color($fill)}
 									--scrollerful-delay: #{$i * 2s}
 
@@ -76,7 +78,7 @@ html
 
 						@for $i from 2 through $total
 							&:nth-child(#{$i})
-								animation-delay: #{($i - 1) * ($duration / ($total * 8)) * 1s}
+								animation-delay: #{($i - 1) * math.div($duration, ($total * 8)) * 1s}
 
 		> nav.scrollerful__tray > .scrollerful__plate
 			> .scrollerful__sprite

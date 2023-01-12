@@ -1,7 +1,7 @@
 namespace :build do
 	def build(env)
 		puts "Building for #{env}"
-		system "TARGET=#{env} npm run build"
+		system "TARGET=#{env} bundle exec middleman build --clean"
 	end
 
 	desc "Build site for staging"
@@ -16,15 +16,25 @@ namespace :build do
 end
 
 namespace :deploy do
-	desc "Deploy site to production"
+	def deploy(env)
+		puts "Building for #{env}"
+		system "bin/deploy -c .env -c .env.#{env} -r"
+	end
+
+	desc "Deploy site for staging"
+	task :staging do
+		deploy :staging
+	end
+
+	desc "Deploy site for production"
 	task :production do
-		system "bin/deploy -c .env -r"
+		deploy :production
 	end
 end
 
 desc "Serve development site"
 task :serve do
-	system "npm start"
+	system "bundle exec middleman server"
 end
 
 task default: :serve

@@ -2,37 +2,44 @@
 # mansite
 # shellcheck disable=SC2317
 
-VERSION='1.1.0'
+VERSION='2.0.7'
 
 mansite_main() {
 	trap _exit INT TERM
 
-	e_args=16
-	e_failed_cd=17
-	e_no_middleman=18
-	e_exists=19
+	E_ARGS=16
+	E_FAILED_CD=17
+	E_NO_MIDDLEMAN=18
+	E_EXISTS=19
 
-	scriptinv="$( basename "$0" )"
-	scriptpath="$( readlink -f "$0" )"
-	scriptname="$( basename "$scriptpath" )"
-	scriptdir="$( dirname "$scriptpath" )"
+	SCRIPT_INV="$( basename "$0" )"
+	SCRIPT_PATH="$( readlink -f "$0" )"
+	SCRIPT_NAME="$( basename "$SCRIPT_PATH" )"
+	SCRIPT_DIR="$( dirname "$SCRIPT_PATH" )"
 
-	while getopts hv opt
+	BUILD=0
+
+	while getopts bhv opt
 	do
 		case $opt in
-			h) cmd=help ;;
-			v) cmd=version ;;
+			b) BUILD=1 ;;
+			h) CMD=help ;;
+			v) CMD=version ;;
 			*) _invalid_opt ;;
 		esac
 	done
 
 	shift "$(( OPTIND - 1 ))"
 
-	[ $# -gt 0 ] && cmd="$1" && shift
-	[ -z "$cmd" ] && cmd="serve"
+	[ $# -gt 0 ] && CMD="$1" && shift
+	[ -z "$CMD" ] && CMD="serve"
 
-	case "$cmd" in
-		build|help|middleman|new|serve|version) "mansite_$cmd" "$@" ;;
+	case "$CMD" in
+		mm) CMD=middleman ;;
+	esac
+
+	case "$CMD" in
+		build|deploy|help|middleman|new|serve|version) "mansite_$CMD" "$@" ;;
 		*) _invalid_cmd ;;
 	esac
 
@@ -41,22 +48,28 @@ mansite_main() {
 
 mansite_help() {
 cat <<USAGE
-$scriptname $VERSION
+$SCRIPT_NAME $VERSION
 
-USAGE: $scriptinv [<options>] <command> [<args>...]
+USAGE: $SCRIPT_INV [<options>] <command> [<args>...]
 
 Serve or build site using Middleman.
 
 COMMANDS:
 
-	build
-		Build site using Middleman. Pass arguments to it.
+	build [<env>]
+		Build site using Middleman. Defaults to production environment.
+
+	deploy [<env>]
+		Deploy site using Middleman. Defaults to production environment.
 
 	help
 		Show this help message.
 
 	middleman [<args>]
 		Run Middleman. Pass all arguments to it.
+
+	mm [<args>]
+		Alias for 'middleman'.
 
 	new <dir>
 		Create new mansite in <dir>.
@@ -69,6 +82,7 @@ COMMANDS:
 
 OPTIONS:
 
+	-b        Build before deploy.
 	-h        Show this help screen.
 	-v        Show script name and version number.
 
@@ -76,26 +90,36 @@ USAGE
 }
 
 mansite_build() {
-	rake build:production
+	env_name="$1"
+	[ -z "$env_name" ] && env_name=production
+	rake "build:$env_name"
+}
+
+mansite_deploy() {
+	env_name="$1"
+	[ -z "$env_name" ] && env_name=production
+	[ "$BUILD" -ne 0 ] && ( mansite_build "$env_name" || return $? )
+	rake "deploy:$env_name"
 }
 
 mansite_middleman() {
 	_find_middleman_dir
 	[ "$( pwd )" != "$middleman_dir" ] && _echo "$middleman_dir"
-	cd "$middleman_dir" || exit "$e_failed_cd"
+	cd "$middleman_dir" || exit "$E_FAILED_CD"
 	[ $# -gt 0 ] && bundle exec middleman "$@" && return
 	bundle exec middleman "$@"
 }
 
 mansite_new() {
-	[ $# -lt 1 ] && _fatal "$e_args" "Must specify directory."
+	[ $# -lt 1 ] && _fatal "$E_ARGS" "Must specify directory."
 
 	dir="$1"
-	[ -d "$dir" ] && _fatal "$e_exists" "Directory already exists: $dir"
+	[ -d "$dir" ] && _fatal "$E_EXISTS" "Directory already exists: $dir"
 
 	git clone https://github.com/remino/mansite "$dir"
-	cd "$dir" || _fatal "$e_failed_cd" "Failed to cd to: $dir"
+	cd "$dir" || _fatal "$E_FAILED_CD" "Failed to cd to: $dir"
 	[ -d .git ] && rm -rf .git
+	npm install
 	bundle install
 	git init
 	git add .
@@ -103,11 +127,11 @@ mansite_new() {
 }
 
 mansite_serve() {
-	rake serve
+	mansite_middleman "$@"
 }
 
 mansite_version() {
-	_echo "$scriptname $VERSION"
+	_echo "$SCRIPT_NAME $VERSION"
 }
 
 _echo() {
@@ -131,7 +155,7 @@ _fatal() {
 }
 
 _find_middleman_dir() {
-	for middleman_dir in "$( pwd )" "$scriptdir"
+	for middleman_dir in "$( pwd )" "$SCRIPT_DIR"
 	do
 		while [ "$middleman_dir" != '/' ]
 		do
@@ -140,21 +164,21 @@ _find_middleman_dir() {
 		done
 	done
 
-	_fatal "$e_no_middleman" "Failed to find Middleman directory"
+	_fatal "$E_NO_MIDDLEMAN" "Failed to find Middleman directory"
 }
 
 _invalid_cmd() {
-	_error "Invalid command: $cmd"
+	_error "Invalid command: $CMD"
 	_echo
 	mansite_help
-	exit $e_args
+	exit "$E_ARGS"
 }
 
 _invalid_opt() {
 	_error "Invalid option: $opt"
 	_echo
 	mansite_help
-	exit $e_args
+	exit "$E_ARGS"
 }
 
 mansite_main "$@"

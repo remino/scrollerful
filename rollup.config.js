@@ -1,3 +1,6 @@
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+import postcss from 'postcss'
 import sass from 'rollup-plugin-sass'
 import uglify from '@lopatnov/rollup-plugin-uglify'
 
@@ -5,25 +8,73 @@ const sassPlugin = sass({
 	options: {
 		outputStyle: 'compressed',
 	},
+	processor: css => postcss([autoprefixer, cssnano])
+		.process(css)
+		.then(result => result.css),
+})
+
+const uglifyPlugin = uglify({
+	compress: {
+		passes: 2,
+	},
+	toplevel: true,
 })
 
 export default [
 	{
-		input: 'lib/init.js',
-		output: {
-			compact: true,
-			file: 'dist/scrollerful.js',
-			format: 'iife',
+		input: 'src/scrollerful.js',
+		output: [
+			{
+				file: 'dist/scrollerful.cjs',
+				format: 'umd',
+				name: 'scrollerful',
+			},
+			{
+				file: 'dist/scrollerful.mjs',
+				format: 'es',
+			},
+		],
+		plugins: [sassPlugin],
+		watch: {
+			clearScreen: false,
 		},
-		plugins: [sassPlugin, uglify()],
 	},
 	{
-		input: 'source/js/index.js',
+		input: 'src/scrollerful.js',
 		output: {
 			compact: true,
-			file: 'source/scrollerful/script.js',
-			format: 'iife',
+			file: 'dist/scrollerful.min.js',
+			format: 'umd',
+			name: 'scrollerful',
 		},
-		plugins: [sassPlugin, uglify()],
+		plugins: [sassPlugin, uglifyPlugin],
+		watch: {
+			clearScreen: false,
+		},
+	},
+	{
+		input: 'src/init.js',
+		output: {
+			compact: true,
+			file: 'dist/scrollerful-init.min.js',
+			format: 'umd',
+			name: 'scrollerful',
+		},
+		plugins: [sassPlugin, uglifyPlugin],
+		watch: {
+			clearScreen: false,
+		},
+	},
+	{
+		input: 'assets/js/index.js',
+		output: {
+			file: '.build/js/scrollerful/script.js',
+			format: 'umd',
+			name: 'scrollerful',
+		},
+		plugins: [sassPlugin, uglifyPlugin],
+		watch: {
+			clearScreen: false,
+		},
 	},
 ]

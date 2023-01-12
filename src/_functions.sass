@@ -1,0 +1,16 @@
+@use 'sass:math'
+
+@function number($number)
+	@return math.div($number, ($number * 0 + 1))
+
+@function oip($pos, $height)
+	$posNum: nil
+
+	@if unit($pos) == '%'
+		$posNum: math.div(number($pos), 100)
+	@else
+		$posNum: number($pos)
+
+	$heightNum: number($height)
+
+	@return (math.div(($posNum * ($heightNum - 100)), ($heightNum + 100)) + math.div(100, ($heightNum + 100))) * 100%

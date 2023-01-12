@@ -54,8 +54,19 @@ configure :build do
 	ignore '/index.html'
 end
 
+activate :external_pipeline,
+	name: :css,
+	command: "npm run #{build? ? 'css:build' : 'css:watch'}",
+	source: ".build/css",
+	latency: 2
+
+activate :external_pipeline,
+	name: :js,
+	command: "npm run #{build? ? 'js:build' : 'js:watch'}",
+	source: ".build/js",
+	latency: 2
+
 ignore '.DS_Store'
-ignore '/js/*'
 
 page '/*.json', layout: false
 page '/*.txt', layout: false
@@ -63,6 +74,7 @@ page '/*.xml', layout: false
 
 prefix = '/scrollerful'
 
+set :source, 'pages'
 set :build_dir, 'build'
 set :css_dir, prefix
 set :haml, { format: :html5 }

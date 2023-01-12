@@ -1,3 +1,6 @@
+@use '../../src/functions' as *
+@use 'variables' as *
+
 @keyframes big-button
 	0%
 		transform: translateX(150lvw)
@@ -6,8 +9,6 @@
 		transform: translateX(0)
 
 @keyframes exclamation-fade
-	$color-origin: rgba($color-origin, 0.6)
-
 	0%, 85%
 		opacity: 0
 
@@ -18,15 +19,15 @@
 		opacity: 0
 
 @keyframes exclamation-fly
-	$color-origin: rgba($color-origin, 0.6)
+	$color-base: rgba($color-origin, 0.6)
 
 	0%, 85%
 		transform: translate(-50%, 50%) rotate(-45deg) scale(0.25)
-		text-shadow: shadows($color-origin, 0.1rem)
+		text-shadow: shadows($color-base, 0.1rem)
 
 	100%
 		transform: translate(50%, -50%) rotate(45deg) scale(2)
-		text-shadow: shadows($color-origin, 2rem)
+		text-shadow: shadows($color-base, 2rem)
 
 @keyframes logo-char-colorize
 	0%, 40%
