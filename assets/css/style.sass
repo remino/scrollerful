@@ -1,6 +1,7 @@
 @use 'sass:color'
 @use 'sass:math'
 @use '../../src/functions' as *
+@use '../../src/mixins' as *
 @use 'variables' as *
 @use 'functions' as *
 @use 'mixins' as *
@@ -30,7 +31,7 @@ html
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 		> header.scrollerful__tray
-			height: 300lvh
+			@include lvh(300)
 
 			> .scrollerful__plate
 				> h1
@@ -38,10 +39,10 @@ html
 					text-transform: uppercase
 
 					> .logo
+						@include lvw(90)
 						display: block
 						height: auto
 						max-width: 80rem
-						width: 90lvw
 
 						> path
 							$children-count: 11
@@ -60,10 +61,10 @@ html
 										--fill-end: #{$fill}
 
 				> .scroll-down
+					@include lv(right, 5, vw)
 					animation-name: scroll-down-fade-out
 					bottom: 25%
 					position: absolute
-					right: 5lvw
 
 					> .scroll-down__arrow
 						$duration: 4

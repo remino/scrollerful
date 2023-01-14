@@ -1,4 +1,5 @@
 @use 'sass:color'
+@use '../../src/functions' as *
 
 @function light-color($base-color)
 	@return lighten(color.adjust(invert($base-color), $hue: 180deg), 25%)

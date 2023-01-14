@@ -1,30 +1,34 @@
-$script-name: scrollerful
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
 
-\:root
+:root
 	--#{$script-name}-delay: 0s
 
 .#{$script-name}
 	min-height: 100%
 
 	&--snap, &__snap-page, &__snap-page body
-		scroll-snap-stop: always
-		scroll-snap-type: y proximity
+		@include supports-scroll-snap-stop
+			scroll-snap-stop: always
+			scroll-snap-type: y proximity
 
 	&--snap, &__snap-page
 		overflow-y: auto
 
 		.#{$script-name}__tray
-			scroll-snap-align: start end
+			@include supports-scroll-snap-stop
+				scroll-snap-align: start end
 
 	&--snap
 		height: 100%
 
 	&__ruler
+		@include lvh(100)
 		background: none transparent
 		border: none
 		bottom: 0
 		display: block
-		height: 100lvh
 		left: -200%
 		pointer-events: none
 		position: absolute
@@ -34,10 +38,10 @@ $script-name: scrollerful
 		z-index: -10
 
 	&__plate
+		@include lvh(100)
 		align-items: center
 		display: flex
 		flex-flow: column
-		height: 100lvh
 		justify-content: center
 		max-height: 100%
 		overflow: hidden
@@ -58,8 +62,8 @@ $script-name: scrollerful
 			animation-delay: calc(var(--#{$script-name}-progress-outer, 0) * -100s + var(--#{$script-name}-delay, 0))
 
 	&__tray
-		height: 300lvh
+		@include lvh(300)
 		position: relative
 
 		&--padding
-			height: 100lvh
+			@include lvh(100)

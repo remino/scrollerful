@@ -1,0 +1,17 @@
+@mixin lv($prop, $num, $unit)
+	@if $unit == vh
+		#{$prop}: $num * 1vh
+		#{$prop}: $num * 1lvh
+	@else if $unit == vw
+		#{$prop}: $num * 1vw
+		#{$prop}: $num * 1lvw
+
+@mixin lvh($height)
+	@include lv(height, $height, vh)
+
+@mixin lvw($width)
+	@include lv(width, $width, vw)
+
+@mixin supports-scroll-snap-stop
+	@supports (scroll-snap-stop: always)
+		@content
