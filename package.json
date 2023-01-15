@@ -1,5 +1,8 @@
 {
-	"author": "Rémino Rem (https://remino.net/)",
+	"author": {
+		"name": "Rémino Rem",
+		"url": "https://remino.net/"
+	},
 	"browser": "dist/scrollerful.cjs",
 	"dependencies": {
 		"@lopatnov/rollup-plugin-uglify": "^2.1.5"
@@ -43,8 +46,9 @@
 		"js:watch": "npx rollup --config rollup.config.js --watch",
 		"lint": "npx eslint",
 		"lint:fix": "npx eslint --fix",
+		"start": "mansite",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"type": "module",
-	"version": "0.4.2"
+	"version": "0.4.3"
 }

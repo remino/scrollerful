@@ -1,8 +1,18 @@
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
+import { readFileSync } from 'fs'
 import postcss from 'postcss'
 import sass from 'rollup-plugin-sass'
 import uglify from '@lopatnov/rollup-plugin-uglify'
+
+const {
+	author: { name: authorName, url: authorUrl }, license, name, version,
+} = JSON.parse(readFileSync('./package.json'))
+
+const currentYear = new Date().getFullYear()
+const banner = `/*! ${name} v${version} | (c) 2022-${currentYear} ${authorName} <${authorUrl}> | ${license} Licence */`
+const output = { banner }
+const outputCompact = { ...output, compact: true }
 
 const sassPlugin = sass({
 	options: {
@@ -20,68 +30,70 @@ const uglifyPlugin = uglify({
 	toplevel: true,
 })
 
+const options = {
+	plugins: [sassPlugin],
+	watch: {
+		clearScreen: false,
+	},
+}
+
+const pluginsCompact = [sassPlugin, uglifyPlugin]
+
 export default [
 	{
+		...options,
 		input: 'src/scrollerful.js',
 		output: [
 			{
+				...output,
 				file: 'dist/scrollerful.cjs',
 				format: 'umd',
 				name: 'scrollerful',
 			},
 			{
+				...output,
 				file: 'dist/scrollerful.mjs',
 				format: 'es',
 			},
 		],
-		plugins: [sassPlugin],
-		watch: {
-			clearScreen: false,
-		},
 	},
 	{
+		...options,
 		input: 'src/scrollerful.js',
 		output: [
 			{
-				compact: true,
+				...outputCompact,
 				file: 'dist/scrollerful.min.js',
 				format: 'umd',
 				name: 'scrollerful',
 			},
 			{
-				compact: true,
+				...outputCompact,
 				file: 'dist/scrollerful.min.mjs',
 				format: 'es',
 			},
 		],
-		plugins: [sassPlugin, uglifyPlugin],
-		watch: {
-			clearScreen: false,
-		},
+		plugins: pluginsCompact,
 	},
 	{
+		...options,
 		input: 'src/auto.js',
 		output: {
-			compact: true,
+			...outputCompact,
 			file: 'dist/scrollerful-auto.min.js',
 			format: 'umd',
 			name: 'scrollerful',
 		},
-		plugins: [sassPlugin, uglifyPlugin],
-		watch: {
-			clearScreen: false,
-		},
+		plugins: pluginsCompact,
 	},
 	{
+		...options,
 		input: 'assets/js/index.js',
 		output: {
 			file: '.build/js/scrollerful/script.js',
 			format: 'umd',
 			name: 'scrollerful',
 		},
-		plugins: [sassPlugin, uglifyPlugin],
-		watch: {
-			clearScreen: false,
-		},
+		plugins: pluginsCompact,
 	},
 ]
