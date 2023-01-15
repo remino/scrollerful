@@ -200,7 +200,7 @@ If you want to add scroll snapping and use the entire page body as the main cont
 
 ## To Do
 
-This library is mainly for personal purposes at the moment, but I'd like to expand on it for others to enjoy its benefits until browsers adopt standards to animate elements on scroll using CSS on its own. 
+This library is mainly for personal purposes at the moment, but I'd like to expand on it for others to enjoy its benefits until browsers adopt standards to animate elements on scroll using CSS on its own. [The CSSWG already has an idea on doing scroll animations.](https://wiki.csswg.org/ideas/timelines)
 
 For others to feel more confident in using this, here are a few things to do:
 
