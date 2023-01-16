@@ -1,6 +1,11 @@
+@use 'functions' as *
+
 @mixin common-transition
 	transition: all var(--transition-duration) ease-in-out
 
 @mixin dark
 	@media (prefers-color-scheme: dark)
 		@content
+
+@mixin text-shadows($base-color, $spacing)
+	text-shadow: #{text-shadows($base-color, $spacing)}
