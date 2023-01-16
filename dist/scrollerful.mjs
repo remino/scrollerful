@@ -13,7 +13,7 @@ const EVENT_INNER_EXIT = `${SCRIPT_NAME}innerexit`;
 const EVENT_OUTER_ENTER = `${SCRIPT_NAME}outerenter`;
 const EVENT_OUTER_EXIT = `${SCRIPT_NAME}outerexit`;
 const EVENT_SCROLL = `${SCRIPT_NAME}scroll`;
-const SEL_SNAP = `.${SCRIPT_NAME}--snap`;
+const SEL_SCROLL = `.${SCRIPT_NAME}`;
 const SEL_TRAY = `.${SCRIPT_NAME}__tray`;
 const EL_ID_RULER = `${SCRIPT_NAME}_ruler`;
 const EL_ID_STYLE = `${SCRIPT_NAME}_style`;
@@ -138,13 +138,13 @@ const triggerOuterEnterExit = ({ target, detail: { progress: { outer } } }) => {
 };
 
 const scroll = ({ target }) => {
-	Array.from(target.querySelectorAll(SEL_TRAY)).forEach(el => {
+	[target, ...target.querySelectorAll(SEL_TRAY)].forEach(el => {
 		processSection(el);
 	});
 };
 
-const addSectionListeners = parent => {
-	Array.from(parent.querySelectorAll(SEL_TRAY)).forEach(el => {
+const addScrollListeners = scrollEl => {
+	[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
 		el.addEventListener(EVENT_SCROLL, setStyleVars);
 		el.addEventListener(EVENT_SCROLL, triggerOuterEnterExit);
 		el.addEventListener(EVENT_SCROLL, triggerInnerEnterExit);
@@ -155,17 +155,17 @@ const scrollerful = () => {
 	addStyle();
 	addRuler();
 
-	Array.from(document.querySelectorAll(SEL_SNAP)).forEach(target => {
+	Array.from(document.querySelectorAll(SEL_SCROLL)).forEach(target => {
 		target.addEventListener('resize', scroll);
 		target.addEventListener('scroll', scroll);
-		addSectionListeners(target);
+		addScrollListeners(target);
 		scroll({ target });
 	});
 
-	window.addEventListener('resize', scroll);
-	window.addEventListener('scroll', scroll);
-	addSectionListeners(document);
-	scroll({ target: document });
+	window.addEventListener('resize', () => scroll({ target: document.body }));
+	window.addEventListener('scroll', () => scroll({ target: document.body }));
+	addScrollListeners(document.body);
+	scroll({ target: document.body });
 };
 
 export { scrollerful as default };

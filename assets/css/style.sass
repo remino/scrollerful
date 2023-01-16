@@ -9,26 +9,31 @@
 
 :root
 	--color-bg: #eee
+	--color-bg-strong: #fff
 	--color-fg: #333
 	--rainbow-gradient: #{rainbow-gradient(light-color($color-origin))}
 	--transition-duration: 0.1s
 
 	@include dark
 		--color-bg: #333
+		--color-bg-strong: #111
 		--color-fg: #fff
 		--rainbow-gradient: #{rainbow-gradient($color-origin)}
 
 html
+	height: 100%
+
 	&, > body
-		height: 100%
 		margin: 0
 		padding: 0
 		width: 100%
 
 	> body
+		animation-name: body-fade
 		background: var(--color-bg)
 		color: var(--color-fg)
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+		min-height: 100%
 
 		> header.scrollerful__tray
 			@include lvh(300)
