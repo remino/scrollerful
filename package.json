@@ -4,11 +4,9 @@
 		"url": "https://remino.net/"
 	},
 	"browser": "dist/scrollerful.cjs",
-	"dependencies": {
-		"@lopatnov/rollup-plugin-uglify": "^2.1.5"
-	},
 	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
 	"devDependencies": {
+		"@lopatnov/rollup-plugin-uglify": "^2.1.5",
 		"autoprefixer": "^10.4.13",
 		"concurrently": "^7.6.0",
 		"cssnano": "^5.1.14",
