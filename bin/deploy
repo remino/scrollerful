@@ -1,38 +1,37 @@
 #!/bin/sh
 # deploy
+# shellcheck disable=SC2317
 
 deploy_main() {
 	trap _exit INT TERM
 
-	e_args=16
-	e_missing_app=17
-	e_missing_env=18
-	e_no_config=19
+	E_ARGS=16
+	E_MISSING_APP=17
+	E_MISSING_ENV=18
 
-	scriptinv="$( basename "$0" )"
-	scriptpath="$( readlink -f "$0" )"
-	scriptdir="$( dirname "$scriptpath" )"
-	rootdir="$( dirname "$scriptdir" )"
+	SCRIPT_INT="$( basename "$0" )"
+	SCRIPT_PATH="$( readlink -f "$0" )"
+	SCRIPT_DIR="$( dirname "$SCRIPT_PATH" )"
+	ROOT_DIR="$( dirname "$SCRIPT_DIR" )"
 
-	dry_run_arg='-n'
-	rc=
+	DRY_RUN_ARG='-n'
 
 	while getopts c:hr opt
 	do
 		case $opt in
-			c) rc="$OPTARG" ;;
-			h) cmd=help ;;
-			r) dry_run_arg= ;;
+			c) _load_config "$OPTARG" ;;
+			h) CMD=help ;;
+			r) DRY_RUN_ARG= ;;
 			*) _invalid_opt ;;
 		esac
 	done
 
 	shift "$(( OPTIND - 1 ))"
 
-	[ -z "$cmd" ] && cmd="process"
+	[ -z "$CMD" ] && CMD="process"
 
-	case "$cmd" in
-		help|process) "deploy_$cmd" "$@" ;;
+	case "$CMD" in
+		help|process) "deploy_$CMD" "$@" ;;
 		*) _invalid_cmd ;;
 	esac
 
@@ -41,7 +40,7 @@ deploy_main() {
 
 deploy_help() {
 cat <<USAGE
-Usage: $scriptinv [-hr] -c <file> [<rsync_args>]
+Usage: $SCRIPT_INT [-hr] -c <file> [<rsync_args>]
 
 Deploy site.
 
@@ -65,9 +64,9 @@ deploy_process() {
 		--delete-after \
 		--no-perms \
 		--progress \
-		$dry_run_arg \
+		$DRY_RUN_ARG \
 		"$@" \
-		"$rootdir/$DEPLOY_SRC" \
+		"$ROOT_DIR/$DEPLOY_SRC" \
 		"$DEPLOY_DEST" \
 	;
 }
@@ -93,46 +92,45 @@ _fatal() {
 }
 
 _init() {
-	_load_config
+	missing=""
+
+	[ -z "$DEPLOY_DEST" ] && missing="${missing}DEPLOY_DEST "
+	[ -z "$DEPLOY_SRC" ] && missing="${missing}DEPLOY_SRC "
+
+	echo "DEPLOY_DEST=$DEPLOY_DEST"
+	echo "DEPLOY_SRC=$DEPLOY_SRC"
+
+	[ -n "$missing" ] && _fatal "$E_MISSING_ENV" "Missing env vars: $missing"
 }
 
 _invalid_cmd() {
-	_error "Invalid command: $cmd"
+	_error "Invalid command: $CMD"
 	_echo
 	deploy_help
-	exit $e_args
+	exit $E_ARGS
 }
 
 _invalid_opt() {
 	_error "Invalid option: $opt"
 	_echo
 	deploy_help
-	exit $e_args
+	exit $E_ARGS
 }
 
 _load_config() {
-	[ -z "$rc" ] &&
-		_fatal $e_no_config "No config file specified."
+	rc="$1"
 
-	if [ -f "$rc" ]
-	then
-		eval "$(
-			# shellcheck source=/dev/null
-			. "$rc"
-			echo "DEPLOY_DEST=$DEPLOY_DEST"
-			echo "DEPLOY_SRC=$DEPLOY_SRC"
-		)"
+	[ ! -f "$rc" ] && return
 
-		[ -n "$DEPLOY_DEST" ] && export DEPLOY_DEST
-		[ -n "$DEPLOY_SRC" ] && export DEPLOY_SRC
-	fi
+	eval "$(
+		# shellcheck source=/dev/null
+		. "$rc"
+		echo "DEPLOY_DEST=$DEPLOY_DEST"
+		echo "DEPLOY_SRC=$DEPLOY_SRC"
+	)"
 
-	missing=""
-
-	[ -z "$DEPLOY_DEST" ] && missing="$missing$DEPLOY_DEST "
-	[ -z "$DEPLOY_SRC" ] && missing="$missing$DEPLOY_SRC "
-
-	[ -n "$missing" ] && _fatal $e_missing_env "Missing env vars: $missing"
+	[ -n "$DEPLOY_DEST" ] && export DEPLOY_DEST
+	[ -n "$DEPLOY_SRC" ] && export DEPLOY_SRC
 }
 
 _require() {
@@ -147,9 +145,9 @@ _require() {
 		fi
 	done
 
-	if [ $missing_bin -ne 0 ]
+	if [ "$missing_bin" -ne 0 ]
 	then
-		_fatal $e_missing_app "One or more executables or apps are missing."
+		_fatal "$E_MISSING_APP" "One or more executables or apps are missing."
 	fi
 }
 
