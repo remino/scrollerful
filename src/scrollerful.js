@@ -30,8 +30,8 @@ const isWithin = (num, a, b) => {
 	return num >= min && num <= max
 }
 
-const addBodyClass = () => {
-	document.body.classList.add(CSS_CLASS_ENABLED)
+const addEnabledClass = () => {
+	document.documentElement.classList.add(CSS_CLASS_ENABLED)
 }
 
 const addRuler = () => {
@@ -180,7 +180,7 @@ const scrollerful = () => {
 	addScrollListeners(document.body)
 	scroll({ target: document.body })
 
-	addBodyClass()
+	addEnabledClass()
 }
 
 export default scrollerful
