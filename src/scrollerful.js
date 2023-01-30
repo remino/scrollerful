@@ -2,6 +2,7 @@ import style from './scrollerful.sass'
 
 const SCRIPT_NAME = 'scrollerful'
 
+const CSS_CLASS_ENABLED = `${SCRIPT_NAME}--enabled`
 const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`
 const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`
 const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`
@@ -27,6 +28,10 @@ const sortNums = (...nums) => nums.sort((a, b) => a - b)
 const isWithin = (num, a, b) => {
 	const [min, max] = sortNums(a, b)
 	return num >= min && num <= max
+}
+
+const addBodyClass = () => {
+	document.body.classList.add(CSS_CLASS_ENABLED)
 }
 
 const addRuler = () => {
@@ -174,6 +179,8 @@ const scrollerful = () => {
 	window.addEventListener('scroll', () => scroll({ target: document.body }))
 	addScrollListeners(document.body)
 	scroll({ target: document.body })
+
+	addBodyClass()
 }
 
 export default scrollerful
