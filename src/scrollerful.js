@@ -23,6 +23,7 @@ let requestId
 const getStyleEl = () => document.getElementById(EL_ID_STYLE)
 const getViewportHeight = () => document.getElementById(EL_ID_RULER)
 	.getBoundingClientRect().height
+const showsOverflow = el => ['auto', 'scroll'].includes(getComputedStyle(el).getPropertyValue('overflow-y'))
 const sortNums = (...nums) => nums.sort((a, b) => a - b)
 
 const isWithin = (num, a, b) => {
@@ -52,24 +53,22 @@ const addStyle = () => {
 }
 
 const getContainerCoords = el => {
-	if (['auto', 'scroll'].includes(getComputedStyle(el).getPropertyValue('overflow-y'))) {
-		const rect = el.getBoundingClientRect()
-		const { top: containerTop, height: viewHeight } = rect
-		const { scrollHeight: containerHeight } = el
-		return { containerTop, containerHeight, viewHeight }
-	}
+	const { height, top } = el.getBoundingClientRect()
+	const overflow = showsOverflow(el)
 
-	const viewHeight = getViewportHeight()
-	const { height: containerHeight, top: containerTop } = el.getBoundingClientRect()
-	return { containerTop, containerHeight, viewHeight }
+	return {
+		containerStart: top,
+		containerSize: overflow ? el.scrollHeight : height,
+		viewSize: overflow ? height : getViewportHeight(),
+	}
 }
 
 const sectionProgress = el => {
-	const { containerTop, containerHeight, viewHeight } = getContainerCoords(el)
+	const { containerStart, containerSize, viewSize } = getContainerCoords(el)
 
 	return {
-		inner: containerTop / -(containerHeight - viewHeight),
-		outer: (containerTop - viewHeight) / -(containerHeight + viewHeight),
+		inner: containerStart / -(containerSize - viewSize),
+		outer: (containerStart - viewSize) / -(containerSize + viewSize),
 	}
 }
 
