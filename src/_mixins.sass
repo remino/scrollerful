@@ -1,3 +1,5 @@
+@use 'variables' as *
+
 @mixin lv($prop, $num, $unit)
 	@if $unit == vh
 		#{$prop}: $num * 1vh
@@ -11,6 +13,12 @@
 
 @mixin lvw($width)
 	@include lv(width, $width, vw)
+
+@mixin scrollerful-enabled
+	.#{$script-name}--enabled
+		@media screen
+			.#{$script-name}
+				@content
 
 @mixin supports-scroll-snap-stop
 	@supports (scroll-snap-stop: always)
