@@ -1,4 +1,4 @@
-/*! scrollerful v0.4.6 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
+/*! scrollerful v0.4.7 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
 var style = ":root{--scrollerful-delay:0s}.scrollerful{min-height:100%}@supports(scroll-snap-stop:always){.scrollerful--snap,.scrollerful__snap-page,.scrollerful__snap-page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.scrollerful--snap,.scrollerful__snap-page{overflow-y:auto}@supports(scroll-snap-stop:always){.scrollerful--snap .scrollerful__tray,.scrollerful__snap-page .scrollerful__tray{scroll-snap-align:start end}}.scrollerful--snap{height:100%}.scrollerful__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1rem;z-index:-10}.scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.scrollerful__sprite,.scrollerful__sprite--inner,.scrollerful__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful__sprite,.scrollerful__sprite--inner{animation-delay:calc(var(--scrollerful-progress-inner, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__sprite,.scrollerful__sprite--outer{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__tray{height:300vh;height:300lvh;position:relative}.scrollerful__tray--padding{height:100vh;height:100lvh}";
 
 const SCRIPT_NAME = 'scrollerful';
@@ -17,6 +17,8 @@ const SEL_SCROLL = `.${SCRIPT_NAME}`;
 const SEL_TRAY = `.${SCRIPT_NAME}__tray`;
 const EL_ID_RULER = `${SCRIPT_NAME}_ruler`;
 const EL_ID_STYLE = `${SCRIPT_NAME}_style`;
+
+let requestId;
 
 const getStyleEl = () => document.getElementById(EL_ID_STYLE);
 const getViewportHeight = () => document.getElementById(EL_ID_RULER)
@@ -67,7 +69,7 @@ const sectionProgress = el => {
 	}
 };
 
-const processSection = el => {
+const processSection = async el => {
 	const progress = sectionProgress(el);
 
 	el.dispatchEvent(
@@ -137,9 +139,16 @@ const triggerOuterEnterExit = ({ target, detail: { progress: { outer } } }) => {
 	triggerEnterExit(target, outer, EVENT_OUTER_ENTER, EVENT_OUTER_EXIT, CSS_CLASS_INSIDE_OUTER);
 };
 
+const scrollFrame = async target => {
+	Promise.all([target, ...target.querySelectorAll(SEL_TRAY)].map(processSection));
+};
+
 const scroll = ({ target }) => {
-	[target, ...target.querySelectorAll(SEL_TRAY)].forEach(el => {
-		processSection(el);
+	if (requestId) cancelAnimationFrame(requestId);
+
+	requestId = requestAnimationFrame(() => {
+		scrollFrame(target);
+		requestId = null;
 	});
 };
 

@@ -1,4 +1,4 @@
-/*! scrollerful v0.4.6 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
+/*! scrollerful v0.4.7 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -23,6 +23,8 @@
 	const SEL_TRAY = `.${SCRIPT_NAME}__tray`;
 	const EL_ID_RULER = `${SCRIPT_NAME}_ruler`;
 	const EL_ID_STYLE = `${SCRIPT_NAME}_style`;
+
+	let requestId;
 
 	const getStyleEl = () => document.getElementById(EL_ID_STYLE);
 	const getViewportHeight = () => document.getElementById(EL_ID_RULER)
@@ -73,7 +75,7 @@
 		}
 	};
 
-	const processSection = el => {
+	const processSection = async el => {
 		const progress = sectionProgress(el);
 
 		el.dispatchEvent(
@@ -143,9 +145,16 @@
 		triggerEnterExit(target, outer, EVENT_OUTER_ENTER, EVENT_OUTER_EXIT, CSS_CLASS_INSIDE_OUTER);
 	};
 
+	const scrollFrame = async target => {
+		Promise.all([target, ...target.querySelectorAll(SEL_TRAY)].map(processSection));
+	};
+
 	const scroll = ({ target }) => {
-		[target, ...target.querySelectorAll(SEL_TRAY)].forEach(el => {
-			processSection(el);
+		if (requestId) cancelAnimationFrame(requestId);
+
+		requestId = requestAnimationFrame(() => {
+			scrollFrame(target);
+			requestId = null;
 		});
 	};
 
