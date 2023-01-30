@@ -171,10 +171,10 @@ On the `.scrollerful` element, adding the `.scrollerful--snap` class to it will 
 
 ### Apply on full body
 
-If you want to add scroll snapping and use the entire page body as the main container, you can do so by adding the `.scrollerful` CSS class to `<body>` and add `.scrollerful__snap--page` to the `<html>` element. For example:
+If you want to add scroll snapping and use the entire page body as the main container, you can do so by adding the `.scrollerful` CSS class to `<body>` and add `.scrollerful--snap--page` to the `<html>` element. For example:
 
 ```html
-<html class="scrollerful__snap--page">
+<html class="scrollerful--snap--page">
 	<head>
 		<title>Scrollerful Example</title>
 		<script src="scrollerful.js"></script>

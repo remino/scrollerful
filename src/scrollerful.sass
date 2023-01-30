@@ -8,12 +8,12 @@
 .#{$script-name}
 	min-height: 100%
 
-	&--snap, &__snap-page, &__snap-page body
+	&--snap, &--snap--page, &--snap--page body
 		@include supports-scroll-snap-stop
 			scroll-snap-stop: always
 			scroll-snap-type: y proximity
 
-	&--snap, &__snap-page
+	&--snap, &--snap--page
 		overflow-y: auto
 
 		.#{$script-name}__tray
