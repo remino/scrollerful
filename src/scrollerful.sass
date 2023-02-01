@@ -23,8 +23,37 @@
 	&--snap
 		height: 100%
 
+	&--x
+		display: flex
+		flex-flow: row nowrap
+
+		&.#{$script__name}--snap
+			overflow-x: auto
+			overflow-y: hidden
+
+			@include supports-scroll-snap-stop
+				scroll-snap-type: x proximity
+
+		.#{$script_name}
+			&__plate
+				@include lvw(100)
+				left: 0
+				max-height: none
+				max-width: 100%
+				top: auto
+
+			&__tray
+				@include lvw(300)
+				flex-shrink: 0
+				height: auto
+
+				&--padding
+					@include lvw(100)
+					height: auto
+
 	&__ruler
 		@include lvh(100)
+		@include lvw(100)
 		background: none transparent
 		border: none
 		bottom: 0
@@ -34,7 +63,6 @@
 		position: absolute
 		top: 0
 		user-select: none
-		width: 1rem
 		z-index: -10
 
 	&__plate

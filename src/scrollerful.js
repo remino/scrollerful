@@ -3,6 +3,7 @@ import style from './scrollerful.sass'
 const SCRIPT_NAME = 'scrollerful'
 
 const CSS_CLASS_ENABLED = `${SCRIPT_NAME}--enabled`
+const CSS_CLASS_HORIZONTAL = `${SCRIPT_NAME}--x`
 const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`
 const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`
 const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`
@@ -20,10 +21,12 @@ const EL_ID_STYLE = `${SCRIPT_NAME}_style`
 
 let requestId
 
+const getElScrollSize = (el, horizontal = false) => (horizontal ? el.scrollWidth : el.scrollHeight)
 const getStyleEl = () => document.getElementById(EL_ID_STYLE)
-const getViewportHeight = () => document.getElementById(EL_ID_RULER)
-	.getBoundingClientRect().height
-const showsOverflow = el => ['auto', 'scroll'].includes(getComputedStyle(el).getPropertyValue('overflow-y'))
+const getViewportRect = () => document.getElementById(EL_ID_RULER).getBoundingClientRect()
+const getViewportSize = horizontal => getViewportRect()[horizontal ? 'width' : 'height']
+const showsOverflow = (el, horizontal) => ['auto', 'scroll']
+	.includes(getComputedStyle(el).getPropertyValue(`overflow-${horizontal ? 'x' : 'y'}`))
 const sortNums = (...nums) => nums.sort((a, b) => a - b)
 
 const isWithin = (num, a, b) => {
@@ -52,19 +55,30 @@ const addStyle = () => {
 	document.head.appendChild(styleEl)
 }
 
-const getContainerCoords = el => {
+const getElAxisCoords = (el, horizontal = false) => {
+	if (horizontal) {
+		const { left, width } = el.getBoundingClientRect()
+		console.log(left, width)
+		return { size: width, start: left }
+	}
+
 	const { height, top } = el.getBoundingClientRect()
-	const overflow = showsOverflow(el)
+	return { size: height, start: top }
+}
+
+const getContainerCoords = (el, horizontal) => {
+	const { size, start } = getElAxisCoords(el, horizontal)
+	const overflow = showsOverflow(el, horizontal)
 
 	return {
-		containerStart: top,
-		containerSize: overflow ? el.scrollHeight : height,
-		viewSize: overflow ? height : getViewportHeight(),
+		containerStart: start,
+		containerSize: overflow ? getElScrollSize(el, horizontal) : size,
+		viewSize: overflow ? size : getViewportSize(horizontal),
 	}
 }
 
-const sectionProgress = el => {
-	const { containerStart, containerSize, viewSize } = getContainerCoords(el)
+const sectionProgress = (el, horizontal) => {
+	const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal)
 
 	return {
 		inner: containerStart / -(containerSize - viewSize),
@@ -72,8 +86,8 @@ const sectionProgress = el => {
 	}
 }
 
-const processSection = async el => {
-	const progress = sectionProgress(el)
+const processSection = async (el, horizontal) => {
+	const progress = sectionProgress(el, horizontal)
 
 	el.dispatchEvent(
 		new CustomEvent(EVENT_SCROLL, {
@@ -143,7 +157,12 @@ const triggerOuterEnterExit = ({ target, detail: { progress: { outer } } }) => {
 }
 
 const scrollFrame = async target => {
-	Promise.all([target, ...target.querySelectorAll(SEL_TRAY)].map(processSection))
+	const horizontal = target.classList.contains(CSS_CLASS_HORIZONTAL)
+
+	Promise.all([
+		target,
+		...target.querySelectorAll(SEL_TRAY),
+	].map(el => processSection(el, horizontal)))
 }
 
 const scroll = ({ target }) => {
