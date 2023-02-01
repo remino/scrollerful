@@ -1,5 +1,6 @@
 require 'terser'
 
+activate :directory_indexes
 activate :livereload
 
 activate :autoprefixer do |prefix|
