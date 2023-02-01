@@ -1,14 +1,16 @@
-/*! scrollerful v0.4.7 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
+/*! scrollerful v0.5.0 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.scrollerful = factory());
 })(this, (function () { 'use strict';
 
-	var style = ":root{--scrollerful-delay:0s}.scrollerful{min-height:100%}@supports(scroll-snap-stop:always){.scrollerful--snap,.scrollerful__snap-page,.scrollerful__snap-page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.scrollerful--snap,.scrollerful__snap-page{overflow-y:auto}@supports(scroll-snap-stop:always){.scrollerful--snap .scrollerful__tray,.scrollerful__snap-page .scrollerful__tray{scroll-snap-align:start end}}.scrollerful--snap{height:100%}.scrollerful__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:1rem;z-index:-10}.scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.scrollerful__sprite,.scrollerful__sprite--inner,.scrollerful__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful__sprite,.scrollerful__sprite--inner{animation-delay:calc(var(--scrollerful-progress-inner, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__sprite,.scrollerful__sprite--outer{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful__tray{height:300vh;height:300lvh;position:relative}.scrollerful__tray--padding{height:100vh;height:100lvh}";
+	var style = ":root{--scrollerful-delay:0s}@media screen{.scrollerful--enabled .scrollerful{min-height:100%}@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--snap,.scrollerful--enabled .scrollerful--snap--page,.scrollerful--enabled .scrollerful--snap--page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.scrollerful--enabled .scrollerful--snap,.scrollerful--enabled .scrollerful--snap--page{overflow-y:auto}@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--snap .scrollerful__tray,.scrollerful--enabled .scrollerful--snap--page .scrollerful__tray{scroll-snap-align:start end}}.scrollerful--enabled .scrollerful--snap{height:100%}.scrollerful--enabled .scrollerful--x{display:flex;flex-flow:row nowrap}.scrollerful--enabled .scrollerful--x.scrollerful--snap{overflow-x:auto;overflow-y:hidden}@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--x.scrollerful--snap{scroll-snap-type:x proximity}}.scrollerful--enabled .scrollerful--x .scrollerful__plate{left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.scrollerful--enabled .scrollerful--x .scrollerful__tray{flex-shrink:0;height:auto;width:300vw;width:300lvw}.scrollerful--enabled .scrollerful--x .scrollerful__tray--padding{height:auto;width:100vw;width:100lvw}.scrollerful--enabled .scrollerful__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.scrollerful--enabled .scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--inner,.scrollerful--enabled .scrollerful__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--inner{animation-delay:calc(var(--scrollerful-progress-inner, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--outer{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful--enabled .scrollerful__tray{height:300vh;height:300lvh;position:relative}.scrollerful--enabled .scrollerful__tray--padding{height:100vh;height:100lvh}}";
 
 	const SCRIPT_NAME = 'scrollerful';
 
+	const CSS_CLASS_ENABLED = `${SCRIPT_NAME}--enabled`;
+	const CSS_CLASS_HORIZONTAL = `${SCRIPT_NAME}--x`;
 	const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`;
 	const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`;
 	const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`;
@@ -26,14 +28,21 @@
 
 	let requestId;
 
+	const getElScrollSize = (el, horizontal = false) => (horizontal ? el.scrollWidth : el.scrollHeight);
 	const getStyleEl = () => document.getElementById(EL_ID_STYLE);
-	const getViewportHeight = () => document.getElementById(EL_ID_RULER)
-		.getBoundingClientRect().height;
+	const getViewportRect = () => document.getElementById(EL_ID_RULER).getBoundingClientRect();
+	const getViewportSize = horizontal => getViewportRect()[horizontal ? 'width' : 'height'];
+	const showsOverflow = (el, horizontal) => ['auto', 'scroll']
+		.includes(getComputedStyle(el).getPropertyValue(`overflow-${horizontal ? 'x' : 'y'}`));
 	const sortNums = (...nums) => nums.sort((a, b) => a - b);
 
 	const isWithin = (num, a, b) => {
 		const [min, max] = sortNums(a, b);
 		return num >= min && num <= max
+	};
+
+	const addEnabledClass = () => {
+		document.documentElement.classList.add(CSS_CLASS_ENABLED);
 	};
 
 	const addRuler = () => {
@@ -53,30 +62,39 @@
 		document.head.appendChild(styleEl);
 	};
 
-	const getContainerCoords = el => {
-		if (['auto', 'scroll'].includes(getComputedStyle(el).getPropertyValue('overflow-y'))) {
-			const rect = el.getBoundingClientRect();
-			const { top: containerTop, height: viewHeight } = rect;
-			const { scrollHeight: containerHeight } = el;
-			return { containerTop, containerHeight, viewHeight }
+	const getElAxisCoords = (el, horizontal = false) => {
+		if (horizontal) {
+			const { left, width } = el.getBoundingClientRect();
+			console.log(left, width);
+			return { size: width, start: left }
 		}
 
-		const viewHeight = getViewportHeight();
-		const { height: containerHeight, top: containerTop } = el.getBoundingClientRect();
-		return { containerTop, containerHeight, viewHeight }
+		const { height, top } = el.getBoundingClientRect();
+		return { size: height, start: top }
 	};
 
-	const sectionProgress = el => {
-		const { containerTop, containerHeight, viewHeight } = getContainerCoords(el);
+	const getContainerCoords = (el, horizontal) => {
+		const { size, start } = getElAxisCoords(el, horizontal);
+		const overflow = showsOverflow(el, horizontal);
 
 		return {
-			inner: containerTop / -(containerHeight - viewHeight),
-			outer: (containerTop - viewHeight) / -(containerHeight + viewHeight),
+			containerStart: start,
+			containerSize: overflow ? getElScrollSize(el, horizontal) : size,
+			viewSize: overflow ? size : getViewportSize(horizontal),
 		}
 	};
 
-	const processSection = async el => {
-		const progress = sectionProgress(el);
+	const sectionProgress = (el, horizontal) => {
+		const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal);
+
+		return {
+			inner: containerStart / -(containerSize - viewSize),
+			outer: (containerStart - viewSize) / -(containerSize + viewSize),
+		}
+	};
+
+	const processSection = async (el, horizontal) => {
+		const progress = sectionProgress(el, horizontal);
 
 		el.dispatchEvent(
 			new CustomEvent(EVENT_SCROLL, {
@@ -146,7 +164,12 @@
 	};
 
 	const scrollFrame = async target => {
-		Promise.all([target, ...target.querySelectorAll(SEL_TRAY)].map(processSection));
+		const horizontal = target.classList.contains(CSS_CLASS_HORIZONTAL);
+
+		Promise.all([
+			target,
+			...target.querySelectorAll(SEL_TRAY),
+		].map(el => processSection(el, horizontal)));
 	};
 
 	const scroll = ({ target }) => {
@@ -181,6 +204,8 @@
 		window.addEventListener('scroll', () => scroll({ target: document.body }));
 		addScrollListeners(document.body);
 		scroll({ target: document.body });
+
+		addEnabledClass();
 	};
 
 	return scrollerful;
