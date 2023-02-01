@@ -1,5 +1,5 @@
 !!!
-%html.scrollerful__snap-page(lang="en")
+%html.scrollerful--snap-page(lang="en")
 	%head
 		%meta(charset="UTF-8")/
 		%title= data.site.title
@@ -22,6 +22,6 @@
 		%meta(content="@remino" name="twitter:creator")/
 		%meta{content: data.site.url, name: "twitter:url"}/
 		= stylesheet_link_tag 'style'
-	%body.scrollerful.scrollerful__sprite
+	%body(class="#{ current_page.data.body_class || 'scrollerful scrollerful__sprite' }")
 		= yield
 		= javascript_include_tag 'script'
