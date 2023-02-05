@@ -28,6 +28,7 @@
 	"files": [
 		"dist/*"
 	],
+	"homepage": "https://remino.net/scrollerful/",
 	"keywords": [
 		"javascript",
 		"css",
