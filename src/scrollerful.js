@@ -34,6 +34,14 @@ const isWithin = (num, a, b) => {
 	return num >= min && num <= max
 }
 
+export const calcInnerProgress = (containerStart, containerSize, viewSize) => (
+	containerStart / -(containerSize - viewSize)
+)
+
+export const calcOuterProgress = (containerStart, containerSize, viewSize) => (
+	(containerStart - viewSize) / -(containerSize + viewSize)
+)
+
 const addEnabledClass = () => {
 	document.documentElement.classList.add(CSS_CLASS_ENABLED)
 }
@@ -80,8 +88,8 @@ const sectionProgress = (el, horizontal) => {
 	const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal)
 
 	return {
-		inner: containerStart / -(containerSize - viewSize),
-		outer: (containerStart - viewSize) / -(containerSize + viewSize),
+		inner: calcInnerProgress(containerStart, containerSize, viewSize),
+		outer: calcOuterProgress(containerStart, containerSize, viewSize),
 	}
 }
 
