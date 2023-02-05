@@ -1,6 +1,7 @@
 {
 	"env": {
 		"browser": true,
+		"jasmine": true,
 		"node": true
 	},
 	"extends": ["airbnb-base", "plugin:no-template-curly-in-string-fix/recommended"],
@@ -12,15 +13,22 @@
 			}
 		}
 	],
+	"plugins": ["jasmine"],
 	"root": true,
 	"rules": {
 		"arrow-parens": ["error", "as-needed"],
 		"import/extensions": [
 			"error",
 			{
+				"mjs": "always",
 				"js": "always"
 			}
 		],
+		"import/resolver": {
+			"node": {
+				"extensions": [".mjs", ".js"]
+			}
+		},
 		"indent": [
 			"error",
 			"tab",
