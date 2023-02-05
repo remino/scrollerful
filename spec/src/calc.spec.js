@@ -1,6 +1,6 @@
-import { calcInnerProgress, calcOuterProgress } from '../../dist/scrollerful.mjs'
+import { calcInnerProgress, calcOuterProgress } from '../../src/calc.js'
 
-describe('dist/scrollerful.mjs', () => {
+describe('src/calc.js', () => {
 	describe('calcInnerProgress()', () => {
 		const cases = [
 			// containerStart, containerSize, viewSize, expected
