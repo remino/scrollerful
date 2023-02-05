@@ -58,7 +58,6 @@ const addStyle = () => {
 const getElAxisCoords = (el, horizontal = false) => {
 	if (horizontal) {
 		const { left, width } = el.getBoundingClientRect()
-		console.log(left, width)
 		return { size: width, start: left }
 	}
 
