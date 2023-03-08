@@ -1,0 +1,27 @@
+doctype html
+html.scrollerful--snap-page(lang="en")
+	head
+		meta(charset="UTF-8")/
+		title= data.site.title
+		meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")/
+		meta(content="IE=edge" http-equiv="X-UA-Compatible")/
+		meta(content="viewport-fit=cover, width=device-width, initial-scale=1.0" name="viewport")/
+		meta(content=data.site.description name="description")/
+		meta(content=data.site.title property="og:title")/
+		meta(content=data.site.description property="og:description")/
+		meta(content="https://remino.net/scrollerful/share-fb.png" property="og:image")/
+		meta(content="630" property="og:image:height")/
+		meta(content="1200" property="og:image:width")/
+		meta(content=data.site.url property="og:url")/
+		meta(content="website" property="og:type")/
+		meta(content="summary_large_image" name="twitter:card")/
+		meta(content=data.site.title name="twitter:title")/
+		meta(content=data.site.description name="twitter:description")/
+		meta(content="https://remino.net/scrollerful/share-tw.png" name="twitter:image")/
+		meta(content="@remino" name="twitter:site")/
+		meta(content="@remino" name="twitter:creator")/
+		meta(content=data.site.url name="twitter:url")/
+		= stylesheet_link_tag 'style'
+	body(class="#{current_page.data.body_class || 'scrollerful scrollerful__sprite'}")
+		= yield
+		= javascript_include_tag 'script'

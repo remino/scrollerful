@@ -106,6 +106,9 @@ GEM
     sassc (2.4.0)
       ffi (~> 1.9)
     servolux (0.13.0)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
     temple (0.8.2)
     terser (1.1.13)
       execjs (>= 0.3.0, < 3)
@@ -132,6 +135,7 @@ DEPENDENCIES
   middleman-autoprefixer (~> 3.0)
   middleman-livereload
   middleman-minify-html (~> 3.4)
+  slim (~> 4)
   terser
   tzinfo-data
   wdm (~> 0.1)
