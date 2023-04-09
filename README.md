@@ -13,6 +13,7 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 	- [Add scroll snapping](#add-scroll-snapping)
+	- [Scroll horizontally](#scroll-horizontally)
 	- [Apply on full body](#apply-on-full-body)
 - [To Do](#to-do)
 - [Contributing](#contributing)
@@ -168,6 +169,10 @@ scrollerful();
 ### Add scroll snapping
 
 On the `.scrollerful` element, adding the `.scrollerful--snap` class to it will snap scrolling to the next section.
+
+### Scroll horizontally
+
+On the `.scrollerful` element, adding the `.scrollerful--x` class to will change the scrolling from vertical to horizontal.
 
 ### Apply on full body
 
