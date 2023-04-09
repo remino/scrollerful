@@ -1,4 +1,4 @@
-/*! scrollerful v0.5.1 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
+/*! scrollerful v0.6.1 | (c) 2022-2023 Rémino Rem <https://remino.net/> | ISC Licence */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
