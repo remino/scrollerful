@@ -23,3 +23,14 @@
 @mixin supports-scroll-snap-stop
 	@supports (scroll-snap-stop: always)
 		@content
+
+@mixin sv($prop, $num, $unit)
+	@if $unit == vh
+		#{$prop}: $num * 1vh
+		#{$prop}: $num * 1svh
+	@else if $unit == vw
+		#{$prop}: $num * 1vw
+		#{$prop}: $num * 1svw
+
+@mixin svh($height)
+	@include sv(height, $height, vh)
