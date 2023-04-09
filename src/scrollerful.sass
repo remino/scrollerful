@@ -22,6 +22,12 @@
 				@include supports-scroll-snap-stop
 					scroll-snap-align: start end
 
+		.#{$script-name}--x.#{$script-name}--snap,
+		&.#{$script-name}--snap--page:has(.#{$script-name}--x),
+		&.#{$script-name}--snap--page .#{$script-name}--x
+			@include supports-scroll-snap-stop
+				scroll-snap-type: x proximity
+
 @include scrollerful-enabled
 	min-height: 100%
 	min-height: 100vh
@@ -37,9 +43,6 @@
 		&.#{$script-name}--snap
 			overflow-x: auto
 			overflow-y: hidden
-
-			@include supports-scroll-snap-stop
-				scroll-snap-type: x proximity
 
 		.#{$script_name}
 			&__plate
