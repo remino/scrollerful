@@ -17,6 +17,8 @@ const EVENT_OUTER_EXIT = `${SCRIPT_NAME}outerexit`
 const EVENT_SCROLL = `${SCRIPT_NAME}scroll`
 const SEL_SCROLL = `.${SCRIPT_NAME}`
 const SEL_TRAY = `.${SCRIPT_NAME}__tray`
+// TODO Predict internia to smoothen animations
+const SMOOTHING_FACTOR = 50
 const EL_ID_RULER = `${SCRIPT_NAME}_ruler`
 const EL_ID_STYLE = `${SCRIPT_NAME}_style`
 
