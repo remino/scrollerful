@@ -23,25 +23,29 @@
 		transform: scale(5)
 
 .scrollerful--enabled
-	.scrollerful__plate > .scrollerful__sprite
-		animation-name: bg-rotate
-		align-items: center
-		background-color: #333
-		display: flex
-		flex-flow: column
-		height: 100lvh
-		justify-content: center
-		overflow: hidden
-		width: 100vw
-
+	.scrollerful__plate
 		>
-			h1, .piechart
-				&.scrollerful__sprite
-					animation-name: fade-in-out
+			.scrollerful__sprite,
+			.scrollerful__sprite--inner
+				animation-name: bg-rotate
+				align-items: center
+				background-color: #333
+				display: flex
+				flex-flow: column
+				height: 100lvh
+				justify-content: center
+				overflow: hidden
+				width: 100vw
+
+				>
+					h1, .piechart
+						&.scrollerful__sprite,
+						&.scrollerful__sprite--inner
+							animation-name: fade-in-out
 
 	.piechart
 		$size: 10rem
-		background-image: conic-gradient(#fff 0%, #fff calc(var(--scrollerful-progress-inner, 0) * 100%), rgba(100%,100%,100%,0) calc(var(--scrollerful-progress-inner, 0) * 100%), rgba(100%,100%,100%,0) 100%)
+		background-image: conic-gradient(#fff 0%, #fff calc(var(--progress) * 100%), rgba(100%,100%,100%,0) calc(var(--progress) * 100%), rgba(100%,100%,100%,0) 100%)
 		border-radius: 100%
 		border: solid 0.2rem #fff
 		display: block
@@ -49,6 +53,14 @@
 		width: $size
 
 	.demo
+		&--inner
+			.piechart
+				--progress: var(--scrollerful-progress-inner, 0)
+
+		&--outer
+			.piechart
+				--progress: var(--scrollerful-progress-outer, 0)
+
 		&--large
 			.scrollerful__tray
 				height: 300vh

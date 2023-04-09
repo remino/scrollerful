@@ -1,0 +1,13 @@
+h1 Demo
+
+menu
+	- %w(inner outer).each do |scope|
+		li
+			span = scope
+			menu
+				- %w(vertical horizontal).each do |direction|
+					li
+						span = direction
+						menu
+							- %w(small medium large).each do |size|
+								li = link_to size, "#{scope}/#{direction}/#{size}"

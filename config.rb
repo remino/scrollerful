@@ -67,11 +67,13 @@ activate :external_pipeline,
 	source: ".build/js",
 	latency: 2
 
-%w(vertical horizontal).each do |direction|
-	%w(small medium large).each do |size|
-		proxy "/scrollerful/demo/#{direction}/#{size}.html",
-			'/scrollerful/demo/demo.html',
-			locals: { direction: direction, size: size }
+%w(inner outer).each do |scope|
+	%w(vertical horizontal).each do |direction|
+		%w(small medium large).each do |size|
+			proxy "/scrollerful/demo/#{scope}/#{direction}/#{size}.html",
+				'/scrollerful/demo/demo.html',
+				locals: { direction: direction, scope: scope, size: size }
+		end
 	end
 end
 
