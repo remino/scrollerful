@@ -5,20 +5,27 @@
 :root
 	--#{$script-name}-delay: 0s
 
+@media screen
+	.#{$script-name}--enabled
+		.#{$script-name}--snap,
+		&.#{$script-name}--snap--page,
+		&.#{$script-name}--snap--page body
+			@include supports-scroll-snap-stop
+				scroll-snap-stop: always
+				scroll-snap-type: y proximity
+
+		.#{$script-name}--snap,
+		&.#{$script-name}--snap--page
+			overflow-y: auto
+
+			.#{$script-name}__tray
+				@include supports-scroll-snap-stop
+					scroll-snap-align: start end
+
 @include scrollerful-enabled
 	min-height: 100%
-
-	&--snap, &--snap--page, &--snap--page body
-		@include supports-scroll-snap-stop
-			scroll-snap-stop: always
-			scroll-snap-type: y proximity
-
-	&--snap, &--snap--page
-		overflow-y: auto
-
-		.#{$script-name}__tray
-			@include supports-scroll-snap-stop
-				scroll-snap-align: start end
+	min-height: 100vh
+	min-height: 100svh
 
 	&--snap
 		height: 100%
