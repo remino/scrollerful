@@ -24,11 +24,14 @@
 				"js": "always"
 			}
 		],
-		"import/resolver": {
-			"node": {
-				"extensions": [".mjs", ".js"]
+		"import/resolver": [
+			"error",
+			{
+				"node": {
+					"extensions": [".mjs", ".js"]
+				}
 			}
-		},
+		],
 		"indent": [
 			"error",
 			"tab",
