@@ -67,7 +67,16 @@ activate :external_pipeline,
 	source: ".build/js",
 	latency: 2
 
+%w(vertical horizontal).each do |direction|
+	%w(small medium large).each do |size|
+		proxy "/scrollerful/demo/#{direction}/#{size}.html",
+			'/scrollerful/demo/demo.html',
+			locals: { direction: direction, size: size }
+	end
+end
+
 ignore '.DS_Store'
+ignore '/scrollerful/demo/demo.html'
 
 page '/*.json', layout: false
 page '/*.txt', layout: false

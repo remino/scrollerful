@@ -1,0 +1,20 @@
+- classes = %W(scrollerful scrollerful__sprite demo--#{direction} demo--#{size})
+- classes.push 'scrollerful--x' if direction == 'horizontal'
+- current_page.data.body_class = classes.join ' '
+
+- content_for :head
+	= stylesheet_link_tag 'demo'
+
+- 5.times do |i|
+	.scrollerful__tray
+		.scrollerful__plate
+			.scrollerful__sprite
+				h1.scrollerful__sprite
+					output
+					'%
+	.scrollerful__tray
+		.scrollerful__plate
+			.scrollerful__sprite
+				.piechart.scrollerful__sprite
+
+= javascript_include_tag 'demo'

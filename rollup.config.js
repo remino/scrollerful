@@ -96,4 +96,14 @@ export default [
 		},
 		plugins: pluginsCompact,
 	},
+	{
+		...options,
+		input: 'assets/js/demo.js',
+		output: {
+			file: '.build/js/scrollerful/demo.js',
+			format: 'umd',
+			name: 'scrollerful',
+		},
+		plugins: pluginsCompact,
+	},
 ]

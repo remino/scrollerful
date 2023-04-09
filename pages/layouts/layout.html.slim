@@ -22,6 +22,7 @@ html.scrollerful--snap-page(lang="en")
 		meta(content="@remino" name="twitter:creator")/
 		meta(content=data.site.url name="twitter:url")/
 		= stylesheet_link_tag 'style'
+		= yield_content :head
 	body(class="#{current_page.data.body_class || 'scrollerful scrollerful__sprite'}")
 		= yield
 		= javascript_include_tag 'script'
