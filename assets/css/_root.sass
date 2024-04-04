@@ -1,0 +1,16 @@
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
+
+:root
+	--color-bg: #eee
+	--color-bg-strong: #fff
+	--color-fg: #333
+	--rainbow-gradient: #{rainbow-gradient(light-color($color-origin))}
+	--transition-duration: 0.1s
+
+	@include dark
+		--color-bg: #333
+		--color-bg-strong: #111
+		--color-fg: #fff
+		--rainbow-gradient: #{rainbow-gradient($color-origin)}

@@ -17,8 +17,6 @@
 	$alpha-color: rgba($base-color, 0.6)
 	$output: ()
 
-	@debug test
-
 	@for $i from 1 through 4
 		$shadow-spacing: $spacing * $i
 		$color: color.adjust($alpha-color, $hue: ($i - 1) * 90deg)

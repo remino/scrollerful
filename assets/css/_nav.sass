@@ -1,0 +1,74 @@
+@use 'sass:color'
+@use 'sass:math'
+@use '../../src/functions' as *
+@use '../../src/mixins' as *
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
+
+nav.scrollerful__tray
+	> .scrollerful__plate
+		> .scrollerful__sprite
+			animation-name: big-button
+
+			> a
+				@include common-transition
+				display: block
+				padding: 1.5rem 4rem
+				position: relative
+				text-decoration: none
+
+				> .bg
+					@include common-transition
+					animation-name: big-button-color
+					background-image: var(--rainbow-gradient)
+					background-position-x: 0%
+					background-size: 150% 150%
+					bottom: 0
+					box-shadow: 0.4rem 0.4rem rgba(0,0,0,0.8)
+					display: block
+					height: 100%
+					left: 0
+					position: absolute
+					right: 0
+					top: 0
+					transform: skew(-10deg)
+					width: 100%
+					z-index: 50
+
+				> .caption
+					@include common-transition
+					-webkit-text-stroke: 0.05rem #000
+					color: #fff
+					font-size: 2rem
+					font-style: italic
+					font-weight: 500
+					letter-spacing: 0.1rem
+					position: relative
+					text-shadow: 0.1rem 0.1rem #000
+					text-transform: uppercase
+					z-index: 100
+
+				&:focus,
+				&:hover
+					> .bg
+						background-position-x: 150%
+						box-shadow: 0.8rem 0.8rem rgba(0,0,0,0.4)
+
+					> .caption
+						font-weight: 700
+						letter-spacing: 0.2rem
+
+				&:focus
+					outline: none
+					transform: scale(1.2)
+
+				&:hover
+					outline: none
+					transform: scale(1.1)
+
+				&:active
+					transform: scale(1) translateY(0.1rem)
+
+					> .bg
+						box-shadow: 0.05rem 0.05rem #000

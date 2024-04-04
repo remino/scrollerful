@@ -4,12 +4,13 @@
 		"url": "https://remino.net/"
 	},
 	"browser": "dist/scrollerful.cjs",
-	"description": "JavaScript library using CSS variables to animate elements while user scrolls.",
+	"description": "Small JS & CSS library for scroll animations.",
 	"devDependencies": {
 		"@lopatnov/rollup-plugin-uglify": "^2.1.5",
-		"autoprefixer": "^10.4.13",
-		"concurrently": "^7.6.0",
-		"cssnano": "^5.1.14",
+		"autoprefixer": "^10.4.14",
+		"concurrently": "^8.2.0",
+		"cssnano": "^6.0.1",
+		"cssnano-preset-default": "^6.0.1",
 		"eslint": "^8.23.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.26.0",
@@ -18,10 +19,15 @@
 		"install": "^0.13.0",
 		"jasmine": "^4.5.0",
 		"npm": "^9.2.0",
-		"postcss": "^8.4.21",
+		"npm-watch": "^0.11.0",
+		"postcss": "^8.4.25",
+		"postcss-cli": "^10.1.0",
+		"postcss-load-config": "^4.0.1",
+		"postcss-value-parser": "^4.2.0",
 		"rollup": "^3.6.0",
 		"rollup-plugin-sass": "^1.12.17",
-		"terser": "^5.16.1"
+		"sass": "^1.57.1",
+		"terser": "^5.19.2"
 	},
 	"exports": {
 		"import": "./dist/scrollerful.mjs",
@@ -41,8 +47,10 @@
 	"main": "dist/scrollerful.cjs",
 	"name": "scrollerful",
 	"scripts": {
-		"css:build": "npx sass --load-path=node_modules/ assets/css/:.build/css/scrollerful/",
-		"css:watch": "npx sass --watch --load-path=node_modules/ assets/css/:.build/css/scrollerful/",
+		"css:build": "npm run css:sass && npm run css:postcss",
+		"css:postcss": "npm exec -- postcss .build/sass-css/ --dir .build/css/scrollerful/",
+		"css:sass": "npm exec -- sass --no-source-map --load-path=node_modules/ assets/css/:.build/sass-css/",
+		"css:watch": "npm-watch css:build",
 		"js:build": "npx rollup --config rollup.config.js",
 		"js:watch": "npx rollup --config rollup.config.js --watch",
 		"lint": "npx eslint",
@@ -51,5 +59,14 @@
 		"test": "npx jasmine"
 	},
 	"type": "module",
-	"version": "0.6.4"
+	"version": "0.6.4",
+	"watch": {
+		"css:build": {
+			"extensions": "css,sass,scss",
+			"patterns": [
+				"assets/css"
+			],
+			"quiet": false
+		}
+	}
 }

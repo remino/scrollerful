@@ -1,0 +1,38 @@
+@use 'sass:color'
+@use 'sass:math'
+@use '../../src/functions' as *
+@use '../../src/mixins' as *
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
+
+body, html
+	margin: 0
+	padding: 0
+	width: 100%
+
+body
+	animation-name: body-fade
+	background: var(--color-bg)
+	color: var(--color-fg)
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+	min-height: 100%
+
+	&.scrollerful--x
+		> .scrollerful__tray
+			$children-count: 10
+
+			> .scrollerful__plate
+				&.scrollerful__sprite--inner
+					animation-name: number-plate
+
+				h1
+					font-size: 20vmin
+
+			@for $i from 1 through $children-count
+				&:nth-child(#{$i}) > .scrollerful__plate
+					$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
+					--plate-bg: #{light-color($fill)}
+
+html
+	height: 100%
