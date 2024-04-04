@@ -102,20 +102,20 @@ scrollerful();
 **Step 2.** Section your page and specify sprites to animate as below:
 
 ```html
-<div class="scrollerful">
-	<div class="scrollerful__tray">
-		<div class="scrollerful__plate">
-			<p class="scrollerful__sprite">Section 1</p>
+<div class="sclf">
+	<div class="sclf__tray">
+		<div class="sclf__plate">
+			<p class="sclf__sprite">Section 1</p>
 		</div>
 	</div>
-	<div class="scrollerful__tray">
-		<div class="scrollerful__plate">
-			<p class="scrollerful__sprite">Section 2</p>
+	<div class="sclf__tray">
+		<div class="sclf__plate">
+			<p class="sclf__sprite">Section 2</p>
 		</div>
 	</div>
-	<div class="scrollerful__tray">
-		<div class="scrollerful__plate">
-			<p class="scrollerful__sprite">Section 3</p>
+	<div class="sclf__tray">
+		<div class="sclf__plate">
+			<p class="sclf__sprite">Section 3</p>
 		</div>
 	</div>
 </div>
@@ -151,15 +151,15 @@ scrollerful();
 	}
 }
 
-.scrollerful__tray:nth-child(1) > .scrollerful__plate > .scrollerful__sprite {
+.sclf__tray:nth-child(1) > .sclf__plate > .sclf__sprite {
 	animation-name: section-1;
 }
 
-.scrollerful__tray:nth-child(3) > .scrollerful__plate > .scrollerful__sprite {
+.sclf__tray:nth-child(3) > .sclf__plate > .sclf__sprite {
 	animation-name: section-2;
 }
 
-.scrollerful__tray:nth-child(3) > .scrollerful__plate > .scrollerful__sprite {
+.sclf__tray:nth-child(3) > .sclf__plate > .sclf__sprite {
 	animation-name: section-3;
 }
 ```
@@ -179,20 +179,20 @@ On the `.scrollerful` element, adding the `.scrollerful--x` class to will change
 If you want to add scroll snapping and use the entire page body as the main container, you can do so by adding the `.scrollerful` CSS class to `<body>` and add `.scrollerful--snap--page` to the `<html>` element. For example:
 
 ```html
-<html class="scrollerful--snap--page">
+<html class="sclf--snap--page">
 	<head>
 		<title>Scrollerful Example</title>
 		<script src="scrollerful.js"></script>
 	</head>
-	<body class="scrollerful">
-		<div class="scrollerful__tray">
-			<div class="scrollerful__plate">
-				<p class="scrollerful__sprite">Section 1</p>
+	<body class="sclf">
+		<div class="sclf__tray">
+			<div class="sclf__plate">
+				<p class="sclf__sprite">Section 1</p>
 			</div>
 		</div>
-		<div class="scrollerful__tray">
-			<div class="scrollerful__plate">
-				<p class="scrollerful__sprite">Section 2</p>
+		<div class="sclf__tray">
+			<div class="sclf__plate">
+				<p class="sclf__sprite">Section 2</p>
 			</div>
 		</div>
 	</body>
