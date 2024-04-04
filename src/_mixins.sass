@@ -15,9 +15,9 @@
 	@include lv(width, $width, vw)
 
 @mixin scrollerful-enabled
-	.#{$script-name}--enabled
+	.#{$prefix}--enabled
 		@media screen
-			.#{$script-name}
+			.#{$prefix}
 				@content
 
 @mixin supports-scroll-snap-stop

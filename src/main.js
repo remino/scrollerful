@@ -1,26 +1,26 @@
 import style from './scrollerful.sass'
 import { calcInnerProgress, calcOuterProgress } from './calc.js'
 
-const SCRIPT_NAME = 'scrollerful'
+const PREFIX = 'sclf'
 
-const CSS_CLASS_ENABLED = `${SCRIPT_NAME}--enabled`
-const CSS_CLASS_HORIZONTAL = `${SCRIPT_NAME}--x`
-const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`
-const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`
-const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`
-const CSS_PROP_PROGRESS_INNER = `--${SCRIPT_NAME}-progress-inner`
-const CSS_PROP_PROGRESS_OUTER = `--${SCRIPT_NAME}-progress-outer`
-const EVENT_INNER_ENTER = `${SCRIPT_NAME}innerenter`
-const EVENT_INNER_EXIT = `${SCRIPT_NAME}innerexit`
-const EVENT_OUTER_ENTER = `${SCRIPT_NAME}outerenter`
-const EVENT_OUTER_EXIT = `${SCRIPT_NAME}outerexit`
-const EVENT_SCROLL = `${SCRIPT_NAME}scroll`
-const SEL_SCROLL = `.${SCRIPT_NAME}`
-const SEL_TRAY = `.${SCRIPT_NAME}__tray`
+const CSS_CLASS_ENABLED = `${PREFIX}--enabled`
+const CSS_CLASS_HORIZONTAL = `${PREFIX}--x`
+const CSS_CLASS_INSIDE_INNER = `${PREFIX}--inside--inner`
+const CSS_CLASS_INSIDE_OUTER = `${PREFIX}--inside--outer`
+const CSS_CLASS_RULER = `${PREFIX}__ruler`
+const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`
+const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`
+const EVENT_INNER_ENTER = `${PREFIX}innerenter`
+const EVENT_INNER_EXIT = `${PREFIX}innerexit`
+const EVENT_OUTER_ENTER = `${PREFIX}outerenter`
+const EVENT_OUTER_EXIT = `${PREFIX}outerexit`
+const EVENT_SCROLL = `${PREFIX}scroll`
+const SEL_SCROLL = `.${PREFIX}`
+const SEL_TRAY = `.${PREFIX}__tray`
 // TODO Predict internia to smoothen animations
-const SMOOTHING_FACTOR = 50
-const EL_ID_RULER = `${SCRIPT_NAME}_ruler`
-const EL_ID_STYLE = `${SCRIPT_NAME}_style`
+// const SMOOTHING_FACTOR = 50
+const EL_ID_RULER = `${PREFIX}_ruler`
+const EL_ID_STYLE = `${PREFIX}_style`
 
 let requestId
 

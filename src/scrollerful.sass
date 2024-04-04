@@ -3,28 +3,28 @@
 @use 'mixins' as *
 
 :root
-	--#{$script-name}-delay: 0s
+	--#{$prefix}-delay: 0s
 
 @media screen
-	.#{$script-name}--enabled
-		.#{$script-name}--snap,
-		&.#{$script-name}--snap--page,
-		&.#{$script-name}--snap--page body
+	.#{$prefix}--enabled
+		.#{$prefix}--snap,
+		&.#{$prefix}--snap--page,
+		&.#{$prefix}--snap--page body
 			@include supports-scroll-snap-stop
 				scroll-snap-stop: always
 				scroll-snap-type: y proximity
 
-		.#{$script-name}--snap,
-		&.#{$script-name}--snap--page
+		.#{$prefix}--snap,
+		&.#{$prefix}--snap--page
 			overflow-y: auto
 
-			.#{$script-name}__tray
+			.#{$prefix}__tray
 				@include supports-scroll-snap-stop
 					scroll-snap-align: start end
 
-		.#{$script-name}--x.#{$script-name}--snap,
-		&.#{$script-name}--snap--page:has(.#{$script-name}--x),
-		&.#{$script-name}--snap--page .#{$script-name}--x
+		.#{$prefix}--x.#{$prefix}--snap,
+		&.#{$prefix}--snap--page:has(.#{$prefix}--x),
+		&.#{$prefix}--snap--page .#{$prefix}--x
 			@include supports-scroll-snap-stop
 				scroll-snap-type: x proximity
 
@@ -40,11 +40,11 @@
 		display: flex
 		flex-flow: row nowrap
 
-		&.#{$script-name}--snap
+		&.#{$prefix}--snap
 			overflow-x: auto
 			overflow-y: hidden
 
-		.#{$script_name}
+		.#{$prefix}
 			&__plate
 				@include lvw(100)
 				@include svh(100)
@@ -95,10 +95,10 @@
 			animation-timing-function: linear
 
 		&, &--inner
-			animation-delay: calc(var(--#{$script-name}-progress-inner, 0) * -100s + var(--#{$script-name}-delay, 0))
+			animation-delay: calc(var(--#{$prefix}-progress-inner, 0) * -100s + var(--#{$prefix}-delay, 0))
 
 		&, &--outer
-			animation-delay: calc(var(--#{$script-name}-progress-outer, 0) * -100s + var(--#{$script-name}-delay, 0))
+			animation-delay: calc(var(--#{$prefix}-progress-outer, 0) * -100s + var(--#{$prefix}-delay, 0))
 
 	&__tray
 		@include lvh(300)

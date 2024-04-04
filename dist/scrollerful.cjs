@@ -5,7 +5,7 @@
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.scrollerful = factory());
 })(this, (function () { 'use strict';
 
-	var style = ":root{--scrollerful-delay:0s}@media screen{@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--snap,.scrollerful--enabled.scrollerful--snap--page,.scrollerful--enabled.scrollerful--snap--page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.scrollerful--enabled .scrollerful--snap,.scrollerful--enabled.scrollerful--snap--page{overflow-y:auto}@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--snap .scrollerful__tray,.scrollerful--enabled.scrollerful--snap--page .scrollerful__tray{scroll-snap-align:start end}}@supports(scroll-snap-stop:always){.scrollerful--enabled .scrollerful--x.scrollerful--snap,.scrollerful--enabled.scrollerful--snap--page .scrollerful--x,.scrollerful--enabled.scrollerful--snap--page:has(.scrollerful--x){scroll-snap-type:x proximity}}}@media screen{.scrollerful--enabled .scrollerful{min-height:100%;min-height:100vh;min-height:100svh}.scrollerful--enabled .scrollerful--snap{height:100%}.scrollerful--enabled .scrollerful--x{display:flex;flex-flow:row nowrap}.scrollerful--enabled .scrollerful--x.scrollerful--snap{overflow-x:auto;overflow-y:hidden}.scrollerful--enabled .scrollerful--x .scrollerful__plate{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.scrollerful--enabled .scrollerful--x .scrollerful__tray{flex-shrink:0;height:auto;width:300vw;width:300lvw}.scrollerful--enabled .scrollerful--x .scrollerful__tray--padding{height:auto;width:100vw;width:100lvw}.scrollerful--enabled .scrollerful__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.scrollerful--enabled .scrollerful__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--inner,.scrollerful--enabled .scrollerful__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--inner{animation-delay:calc(var(--scrollerful-progress-inner, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful--enabled .scrollerful__sprite,.scrollerful--enabled .scrollerful__sprite--outer{animation-delay:calc(var(--scrollerful-progress-outer, 0)*-100s + var(--scrollerful-delay, 0))}.scrollerful--enabled .scrollerful__tray{height:300vh;height:300lvh;position:relative}.scrollerful--enabled .scrollerful__tray--padding{height:100vh;height:100lvh}}";
+	var style = ":root{--sclf-delay:0s}@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap--page,.sclf--enabled.sclf--snap--page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap--page{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf__tray,.sclf--enabled.sclf--snap--page .sclf__tray{scroll-snap-align:start end}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap--page .sclf--x,.sclf--enabled.sclf--snap--page:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf{min-height:100%;min-height:100vh;min-height:100svh}.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__plate{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf__tray{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf__tray--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner,.sclf--enabled .sclf__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner{animation-delay:calc(var(--sclf-progress-inner, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--outer{animation-delay:calc(var(--sclf-progress-outer, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf__tray{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf__tray--padding{height:100vh;height:100lvh}}";
 
 	const calcInnerProgress = (containerStart, containerSize, viewSize) => {
 		if (containerSize === viewSize) {
@@ -30,24 +30,26 @@
 		((containerStart - viewSize) / (viewSize + containerSize)) * -1
 	);
 
-	const SCRIPT_NAME = 'scrollerful';
+	const PREFIX = 'sclf';
 
-	const CSS_CLASS_ENABLED = `${SCRIPT_NAME}--enabled`;
-	const CSS_CLASS_HORIZONTAL = `${SCRIPT_NAME}--x`;
-	const CSS_CLASS_INSIDE_INNER = `${SCRIPT_NAME}--inside--inner`;
-	const CSS_CLASS_INSIDE_OUTER = `${SCRIPT_NAME}--inside--outer`;
-	const CSS_CLASS_RULER = `${SCRIPT_NAME}__ruler`;
-	const CSS_PROP_PROGRESS_INNER = `--${SCRIPT_NAME}-progress-inner`;
-	const CSS_PROP_PROGRESS_OUTER = `--${SCRIPT_NAME}-progress-outer`;
-	const EVENT_INNER_ENTER = `${SCRIPT_NAME}innerenter`;
-	const EVENT_INNER_EXIT = `${SCRIPT_NAME}innerexit`;
-	const EVENT_OUTER_ENTER = `${SCRIPT_NAME}outerenter`;
-	const EVENT_OUTER_EXIT = `${SCRIPT_NAME}outerexit`;
-	const EVENT_SCROLL = `${SCRIPT_NAME}scroll`;
-	const SEL_SCROLL = `.${SCRIPT_NAME}`;
-	const SEL_TRAY = `.${SCRIPT_NAME}__tray`;
-	const EL_ID_RULER = `${SCRIPT_NAME}_ruler`;
-	const EL_ID_STYLE = `${SCRIPT_NAME}_style`;
+	const CSS_CLASS_ENABLED = `${PREFIX}--enabled`;
+	const CSS_CLASS_HORIZONTAL = `${PREFIX}--x`;
+	const CSS_CLASS_INSIDE_INNER = `${PREFIX}--inside--inner`;
+	const CSS_CLASS_INSIDE_OUTER = `${PREFIX}--inside--outer`;
+	const CSS_CLASS_RULER = `${PREFIX}__ruler`;
+	const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`;
+	const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`;
+	const EVENT_INNER_ENTER = `${PREFIX}innerenter`;
+	const EVENT_INNER_EXIT = `${PREFIX}innerexit`;
+	const EVENT_OUTER_ENTER = `${PREFIX}outerenter`;
+	const EVENT_OUTER_EXIT = `${PREFIX}outerexit`;
+	const EVENT_SCROLL = `${PREFIX}scroll`;
+	const SEL_SCROLL = `.${PREFIX}`;
+	const SEL_TRAY = `.${PREFIX}__tray`;
+	// TODO Predict internia to smoothen animations
+	// const SMOOTHING_FACTOR = 50
+	const EL_ID_RULER = `${PREFIX}_ruler`;
+	const EL_ID_STYLE = `${PREFIX}_style`;
 
 	let requestId;
 

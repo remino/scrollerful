@@ -18,19 +18,19 @@ body
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
 	min-height: 100%
 
-	&.scrollerful--x
-		> .scrollerful__tray
+	&.sclf--x
+		> .sclf__tray
 			$children-count: 10
 
-			> .scrollerful__plate
-				&.scrollerful__sprite--inner
+			> .sclf__plate
+				&.sclf__sprite--inner
 					animation-name: number-plate
 
 				h1
 					font-size: 20vmin
 
 			@for $i from 1 through $children-count
-				&:nth-child(#{$i}) > .scrollerful__plate
+				&:nth-child(#{$i}) > .sclf__plate
 					$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
 					--plate-bg: #{light-color($fill)}
 

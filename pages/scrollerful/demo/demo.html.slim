@@ -1,21 +1,21 @@
-- classes = %W(scrollerful scrollerful__sprite demo--#{direction} demo--#{size})
-- classes.push 'scrollerful--x' if direction == 'horizontal'
+- classes = %W(sclf sclf__sprite demo--#{direction} demo--#{size})
+- classes.push 'sclf--x' if direction == 'horizontal'
 - classes.push scope == 'inner' ? 'demo--inner' : 'demo--outer'
 - current_page.data.body_class = classes.join ' '
-- sprite_class = scope == 'inner' ? 'scrollerful__sprite--inner' : 'scrollerful__sprite'
+- sprite_class = scope == 'inner' ? 'sclf__sprite--inner' : 'sclf__sprite'
 
 - content_for :head
 	= stylesheet_link_tag 'demo'
 
 - 5.times do |i|
-	.scrollerful__tray
-		.scrollerful__plate
+	.sclf__tray
+		.sclf__plate
 			div class=sprite_class
 				h1 class=sprite_class
 					output
 					'%
-	.scrollerful__tray
-		.scrollerful__plate
+	.sclf__tray
+		.sclf__plate
 			div class=sprite_class
 				.piechart class=sprite_class
 

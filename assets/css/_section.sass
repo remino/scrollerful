@@ -6,15 +6,15 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-section.scrollerful__tray
-	> .scrollerful__plate
+section.sclf__tray
+	> .sclf__plate
 		font-weight: bold
 		text-align: center
 
 		> h2, > p
 			margin: 0
 
-			> .scrollerful__sprite--inner
+			> .sclf__sprite--inner
 				top: 50%
 				left: 0
 				margin-top: -0.5em
@@ -27,7 +27,7 @@ section.scrollerful__tray
 			> span
 				display: block
 
-			> .scrollerful__sprite--inner
+			> .sclf__sprite--inner
 				$names: start, middle, end
 
 				@for $i from 1 through length($names)
@@ -54,7 +54,7 @@ section.scrollerful__tray
 			font-style: italic
 			text-transform: uppercase
 
-			> .scrollerful__sprite--inner
+			> .sclf__sprite--inner
 				animation-name: exclamation-fade, exclamation-fly
 				display: block
 				transform-origin: center center

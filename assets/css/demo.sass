@@ -22,11 +22,11 @@
 		opacity: 0.5
 		transform: scale(5)
 
-.scrollerful--enabled
-	.scrollerful__plate
+.sclf--enabled
+	.sclf__plate
 		>
-			.scrollerful__sprite,
-			.scrollerful__sprite--inner
+			.sclf__sprite,
+			.sclf__sprite--inner
 				animation-name: bg-rotate
 				align-items: center
 				background-color: #333
@@ -39,8 +39,8 @@
 
 				>
 					h1, .piechart
-						&.scrollerful__sprite,
-						&.scrollerful__sprite--inner
+						&.sclf__sprite,
+						&.sclf__sprite--inner
 							animation-name: fade-in-out
 
 	.piechart
@@ -55,40 +55,40 @@
 	.demo
 		&--inner
 			.piechart
-				--progress: var(--scrollerful-progress-inner, 0)
+				--progress: var(--sclf-progress-inner, 0)
 
 		&--outer
 			.piechart
-				--progress: var(--scrollerful-progress-outer, 0)
+				--progress: var(--sclf-progress-outer, 0)
 
 		&--large
-			.scrollerful__tray
+			.sclf__tray
 				height: 300vh
 				height: 300lvh
 
 		&--medium
-			.scrollerful__tray
+			.sclf__tray
 				height: 100vh
 				height: 100lvh
 
 		&--small
-			.scrollerful__tray
+			.sclf__tray
 				height: 50vh
 				height: 50lvh
 
-	.scrollerful--x
+	.sclf--x
 		&.demo
 			&--large
-				.scrollerful__tray
+				.sclf__tray
 					width: 300vw
 					width: 300lvw
 
 			&--medium
-				.scrollerful__tray
+				.sclf__tray
 					width: 100vw
 					width: 100lvw
 
 			&--small
-				.scrollerful__tray
+				.sclf__tray
 					width: 50vw
 					width: 50lvw

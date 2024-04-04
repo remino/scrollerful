@@ -6,10 +6,10 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-header.scrollerful__tray
+header.sclf__tray
 	@include lvh(300)
 
-	> .scrollerful__plate
+	> .sclf__plate
 		> h1
 			font-size: 6rem
 			text-transform: uppercase
@@ -31,7 +31,7 @@ header.scrollerful__tray
 						&:nth-child(#{$i})
 							$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
 							--fill-end: #{light-color($fill)}
-							--scrollerful-delay: #{$i * 2s}
+							--sclf-delay: #{$i * 2s}
 
 							@include dark
 								--fill-end: #{$fill}
