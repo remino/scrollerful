@@ -23,15 +23,20 @@ header.sclf__tray
 				> path
 					$children-count: 11
 					--fill-start: var(--color-fg)
+					animation-duration: 100s, 50s, 100s
 					animation-name: logo-char-zoom-in, logo-char-colorize, logo-char-fade-in
 					animation-timing-function: ease-in-out, steps(1, end), ease-in-out
-					transform-origin: center right
+					transform-origin: center center
+
+					$child-center: math.ceil(math.div($children-count, 2))
+					@for $i from 1 through $child-center
+						&:nth-child(#{$child-center - $i}), &:nth-child(#{$child-center + $i})
+							--sclf-delay: #{$i * 4s}
 
 					@for $i from 1 through $children-count
 						&:nth-child(#{$i})
 							$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
 							--fill-end: #{light-color($fill)}
-							--sclf-delay: #{$i * 2s}
 
 							@include dark
 								--fill-end: #{$fill}
