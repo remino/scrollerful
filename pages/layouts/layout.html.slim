@@ -1,5 +1,5 @@
 doctype html
-html.scrollerful--snap--page(lang="en")
+html.sclf--snap(lang="en")
 	head
 		title= data.site.title
 		meta(content="viewport-fit=cover, width=device-width, initial-scale=1.0" name="viewport")/
@@ -20,6 +20,6 @@ html.scrollerful--snap--page(lang="en")
 		meta(content=data.site.url name="twitter:url")/
 		= stylesheet_link_tag 'style'
 		= yield_content :head
-	body(class="#{current_page.data.body_class || 'sclf sclf__sprite'}")
+	body(class="#{current_page.data.body_class || 'sclf__sprite'}")
 		= yield
 		= javascript_include_tag 'script'

@@ -5,7 +5,7 @@
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.scrollerful = factory());
 })(this, (function () { 'use strict';
 
-	var style = ":root{--sclf-delay:0s}@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap--page,.sclf--enabled.sclf--snap--page body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap--page{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf__tray,.sclf--enabled.sclf--snap--page .sclf__tray{scroll-snap-align:start end}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap--page .sclf--x,.sclf--enabled.sclf--snap--page:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf{min-height:100%;min-height:100vh;min-height:100svh}.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__plate{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf__tray{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf__tray--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__plate{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner,.sclf--enabled .sclf__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner{animation-delay:calc(var(--sclf-progress-inner, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--outer{animation-delay:calc(var(--sclf-progress-outer, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf__tray{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf__tray--padding{height:100vh;height:100lvh}}";
+	var style = ":root{--sclf-delay:0s}@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap,.sclf--enabled.sclf--snap body{scroll-snap-stop:always;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start end}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner,.sclf--enabled .sclf__sprite--outer{animation-duration:100s;animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner{animation-delay:calc(var(--sclf-progress-inner, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--outer{animation-delay:calc(var(--sclf-progress-outer, 0)*-100s + var(--sclf-delay, 0))}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}";
 
 	const calcInnerProgress = (containerStart, containerSize, viewSize) => {
 		if (containerSize === viewSize) {
@@ -39,13 +39,13 @@
 	const CSS_CLASS_RULER = `${PREFIX}__ruler`;
 	const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`;
 	const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`;
-	const EVENT_INNER_ENTER = `${PREFIX}innerenter`;
-	const EVENT_INNER_EXIT = `${PREFIX}innerexit`;
-	const EVENT_OUTER_ENTER = `${PREFIX}outerenter`;
-	const EVENT_OUTER_EXIT = `${PREFIX}outerexit`;
-	const EVENT_SCROLL = `${PREFIX}scroll`;
+	const EVENT_INNER_ENTER = `${PREFIX}:inner:enter`;
+	const EVENT_INNER_EXIT = `${PREFIX}:inner:exit`;
+	const EVENT_OUTER_ENTER = `${PREFIX}:outer:enter`;
+	const EVENT_OUTER_EXIT = `${PREFIX}:outer:exit`;
+	const EVENT_SCROLL = `${PREFIX}:scroll`;
 	const SEL_SCROLL = `.${PREFIX}`;
-	const SEL_TRAY = `.${PREFIX}__tray`;
+	const SEL_TRAY = `.${PREFIX}`;
 	// TODO Predict internia to smoothen animations
 	// const SMOOTHING_FACTOR = 50
 	const EL_ID_RULER = `${PREFIX}_ruler`;
@@ -84,7 +84,12 @@
 		styleEl.setAttribute('id', EL_ID_STYLE);
 		styleEl.textContent = style;
 
-		document.head.appendChild(styleEl);
+		if (!document.head.firstChild) {
+			document.head.appendChild(styleEl);
+			return
+		}
+
+		document.head.insertBefore(styleEl, document.head.firstChild);
 	};
 
 	const getElAxisCoords = (el, horizontal = false) => {

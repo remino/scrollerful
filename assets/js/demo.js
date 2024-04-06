@@ -15,9 +15,9 @@ const main = () => {
 	const eventFunc = document.body.classList.contains('demo--inner')
 		? showInnerProgress : showOuterProgress
 
-	Array.from(document.querySelectorAll('.scrollerful__tray')).forEach(el => {
+	Array.from(document.querySelectorAll('.sclf')).forEach(el => {
 		if (!el.querySelector('output')) return
-		el.addEventListener('scrollerfulscroll', eventFunc)
+		el.addEventListener('sclf:scroll', eventFunc)
 	})
 }
 

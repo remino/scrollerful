@@ -6,10 +6,10 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-header.sclf__tray
+header.sclf
 	@include lvh(300)
 
-	> .sclf__plate
+	> .sclf__float
 		> h1
 			font-size: 6rem
 			text-transform: uppercase
@@ -42,9 +42,9 @@ header.sclf__tray
 								--fill-end: #{$fill}
 
 		> .scroll-down
-			@include lv(right, 5, vw)
 			animation-name: scroll-down-fade-out
 			bottom: 25%
+			margin: auto 0
 			position: absolute
 
 			> .scroll-down__arrow

@@ -10,13 +10,13 @@ const CSS_CLASS_INSIDE_OUTER = `${PREFIX}--inside--outer`
 const CSS_CLASS_RULER = `${PREFIX}__ruler`
 const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`
 const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`
-const EVENT_INNER_ENTER = `${PREFIX}innerenter`
-const EVENT_INNER_EXIT = `${PREFIX}innerexit`
-const EVENT_OUTER_ENTER = `${PREFIX}outerenter`
-const EVENT_OUTER_EXIT = `${PREFIX}outerexit`
-const EVENT_SCROLL = `${PREFIX}scroll`
+const EVENT_INNER_ENTER = `${PREFIX}:inner:enter`
+const EVENT_INNER_EXIT = `${PREFIX}:inner:exit`
+const EVENT_OUTER_ENTER = `${PREFIX}:outer:enter`
+const EVENT_OUTER_EXIT = `${PREFIX}:outer:exit`
+const EVENT_SCROLL = `${PREFIX}:scroll`
 const SEL_SCROLL = `.${PREFIX}`
-const SEL_TRAY = `.${PREFIX}__tray`
+const SEL_TRAY = `.${PREFIX}`
 // TODO Predict internia to smoothen animations
 // const SMOOTHING_FACTOR = 50
 const EL_ID_RULER = `${PREFIX}_ruler`
@@ -55,7 +55,12 @@ const addStyle = () => {
 	styleEl.setAttribute('id', EL_ID_STYLE)
 	styleEl.textContent = style
 
-	document.head.appendChild(styleEl)
+	if (!document.head.firstChild) {
+		document.head.appendChild(styleEl)
+		return
+	}
+
+	document.head.insertBefore(styleEl, document.head.firstChild)
 }
 
 const getElAxisCoords = (el, horizontal = false) => {

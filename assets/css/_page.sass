@@ -19,10 +19,10 @@ body
 	min-height: 100%
 
 	&.sclf--x
-		> .sclf__tray
+		> .sclf
 			$children-count: 10
 
-			> .sclf__plate
+			> .sclf__float
 				&.sclf__sprite--inner
 					animation-name: number-plate
 
@@ -30,9 +30,10 @@ body
 					font-size: 20vmin
 
 			@for $i from 1 through $children-count
-				&:nth-child(#{$i}) > .sclf__plate
+				&:nth-child(#{$i}) > .sclf__float
 					$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
 					--plate-bg: #{light-color($fill)}
 
 html
+	font-size: clamp(16px, 2.5vw, 32px)
 	height: 100%

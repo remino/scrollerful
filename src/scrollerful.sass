@@ -8,31 +8,27 @@
 @media screen
 	.#{$prefix}--enabled
 		.#{$prefix}--snap,
-		&.#{$prefix}--snap--page,
-		&.#{$prefix}--snap--page body
+		&.#{$prefix}--snap,
+		&.#{$prefix}--snap body
 			@include supports-scroll-snap-stop
 				scroll-snap-stop: always
 				scroll-snap-type: y proximity
 
 		.#{$prefix}--snap,
-		&.#{$prefix}--snap--page
+		&.#{$prefix}--snap
 			overflow-y: auto
 
-			.#{$prefix}__tray
+			.#{$prefix}
 				@include supports-scroll-snap-stop
 					scroll-snap-align: start end
 
 		.#{$prefix}--x.#{$prefix}--snap,
-		&.#{$prefix}--snap--page:has(.#{$prefix}--x),
-		&.#{$prefix}--snap--page .#{$prefix}--x
+		&.#{$prefix}--snap:has(.#{$prefix}--x),
+		&.#{$prefix}--snap .#{$prefix}--x
 			@include supports-scroll-snap-stop
 				scroll-snap-type: x proximity
 
 @include scrollerful-enabled
-	min-height: 100%
-	min-height: 100vh
-	min-height: 100svh
-
 	&--snap
 		height: 100%
 
@@ -45,7 +41,7 @@
 			overflow-y: hidden
 
 		.#{$prefix}
-			&__plate
+			&__float
 				@include lvw(100)
 				@include svh(100)
 				left: 0
@@ -53,7 +49,7 @@
 				max-width: 100%
 				top: auto
 
-			&__tray
+			&
 				@include lvw(300)
 				flex-shrink: 0
 				height: auto
@@ -76,7 +72,7 @@
 		user-select: none
 		z-index: -10
 
-	&__plate
+	&__float
 		@include lvh(100)
 		align-items: center
 		display: flex
@@ -100,7 +96,7 @@
 		&, &--outer
 			animation-delay: calc(var(--#{$prefix}-progress-outer, 0) * -100s + var(--#{$prefix}-delay, 0))
 
-	&__tray
+	&
 		@include lvh(300)
 		position: relative
 
