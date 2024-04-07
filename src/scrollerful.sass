@@ -85,7 +85,7 @@
 
 	&__sprite
 		&, &--inner, &--outer
-			animation-duration: 100s
+			animation-duration: calc(var(--sclf-duration, 100) * 1s)
 			animation-fill-mode: both
 			animation-play-state: paused
 			animation-timing-function: linear
@@ -102,3 +102,10 @@
 
 		&--padding
 			@include lvh(100)
+
+	// @supports (animation-timeline: scroll())
+	// 	&__sprite
+	// 		&, &--inner, &--outer
+	// 			animation-delay: 0
+	// 			animation-play-state: running
+	// 			animation-timeline: scroll()
