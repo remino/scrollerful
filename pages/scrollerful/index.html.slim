@@ -2,8 +2,8 @@ header.sclf
 	.sclf__float
 		h1.sclf__sprite
 			= partial 'logo'
-		h2 Small JS & CSS library for scroll animations
-		p Scroll down to start
+		h2.sclf__sprite--inner Small JS & CSS library for scroll animations
+		p.sclf__sprite--inner Scroll down to start
 		.scroll-down.sclf__sprite
 			- (1..4).each do |i|
 				.scroll-down__arrow
@@ -22,3 +22,9 @@ nav.sclf
 			a(href="https://github.com/remino/scrollerful")
 				span.caption Get it now!
 				span.bg.sclf__sprite
+
+.bg
+	.bg__color-1.sclf__sprite--inner
+	.bg__color-2.sclf__sprite--inner
+	.bg__center
+	.bg__cover.sclf__sprite--inner

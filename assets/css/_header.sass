@@ -16,6 +16,8 @@ header.sclf
 
 			> .logo
 				@include lvw(90)
+				--sclf-duration: 50
+				animation-name: drop-shadow
 				display: block
 				height: auto
 				max-width: 80rem
@@ -29,15 +31,16 @@ header.sclf
 					transform-origin: center center
 
 					@supports (animation-timeline: scroll())
-						animation-range: contain 0% contain 100%, contain 0% contain 50%, contain 0% contain 100%
+						animation-range: contain 0% contain 100%, contain 0% contain 30%, contain 0% contain 100%
 
 					$child-center: math.ceil(math.div($children-count, 2))
+					$factor: 2
 					@for $i from 1 through $child-center
 						&:nth-child(#{$child-center + 1 - $i}), &:nth-child(#{$child-center - 1 + $i})
-							--sclf-delay: #{$i * 4}
+							--sclf-delay: #{$i * $factor}
 
 							@supports (animation-timeline: scroll())
-								animation-range: contain #{$i * 4%} contain 100%, contain #{0 + $i * 4%} contain #{50 + $i * 4%}, contain #{$i * 4%} contain 100%
+								animation-range: contain #{$i * $factor * 1%} contain 100%, contain #{0 + $i * $factor * 1%} contain #{30 + $i * $factor * 1%}, contain #{$i * $factor} contain 100%
 
 					@for $i from 1 through $children-count
 						&:nth-child(#{$i})
@@ -47,9 +50,23 @@ header.sclf
 							@include dark
 								--fill-end: #{$fill}
 
+		> h2
+			--sclf-delay: 60
+			--sclf-duration: 20
+			animation-direction: normal, normal
+			animation-name: fade, move-up-in
+
+		> p
+			--sclf-duration: 20
+			animation-direction: reverse, normal
+			animation-name: fade, move-up-out
+			bottom: 44vh
+			margin: auto 0
+			position: absolute
+
 		> .scroll-down
 			animation-name: scroll-down-fade-out
-			bottom: 25%
+			bottom: 4vh
 			margin: auto 0
 			position: absolute
 

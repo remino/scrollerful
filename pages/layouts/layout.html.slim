@@ -20,6 +20,6 @@ html(lang="en")
 		meta(content=data.site.url name="twitter:url")/
 		= stylesheet_link_tag 'style'
 		= yield_content :head
-	body(class="#{current_page.data.body_class || 'sclf__sprite'}")
+	body(class=current_page.data.body_class)
 		= yield
 		= javascript_include_tag 'script'

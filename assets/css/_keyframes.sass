@@ -4,13 +4,6 @@
 @use 'mixins' as *
 @use 'variables' as *
 
-@keyframes body-fade
-	0%
-		background: var(--color-bg-strong)
-
-	100%
-		background: var(--color-bg)
-
 @keyframes big-button
 	0%
 		transform: translateX(150lvw)
@@ -24,6 +17,13 @@
 
 	#{oip(1, 300)}, 100%
 		background-position-x: 400%
+
+@keyframes drop-shadow
+	0%
+		filter: drop-shadow(0 0 0 rgba(0,0,0,0))
+
+	100%
+		filter: drop-shadow(0 0 2rem rgba(0,0,0,0.6))
 
 @keyframes exclamation-fade
 	0%, 85%
@@ -45,6 +45,20 @@
 	100%
 		@include text-shadows($color-base, 2rem)
 		transform: translate(50%, -50%) rotate(45deg) scale(2)
+
+@keyframes fade
+	0%
+		opacity: 0
+
+	100%
+		opacity: 1
+
+@keyframes hue-rotate
+	0%
+		filter: hue-rotate(0deg)
+
+	100%
+		filter: hue-rotate(360deg)
 
 @keyframes logo-char-colorize
 	0%
@@ -117,6 +131,20 @@
 		letter-spacing: 2rem
 		padding-left: 2rem
 		transform: scale(4)
+
+@keyframes move-up-in
+	0%
+		transform: translateY(100%)
+
+	100%
+		transform: translateY(0)
+
+@keyframes move-up-out
+	0%
+		transform: translateY(0)
+
+	100%
+		transform: translateY(-100%)
 
 @keyframes number-plate
 	0%

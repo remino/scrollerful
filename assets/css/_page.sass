@@ -12,10 +12,10 @@ body, html
 	width: 100%
 
 body
-	animation-name: body-fade
 	background: var(--color-bg)
+	animation: bg 10s infinite
 	color: var(--color-fg)
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+	font-family: 'Inter var', 'Helvetica Neue', Helvetica, Arial, sans-serif
 	min-height: 100%
 
 	&.sclf--x
@@ -37,3 +37,34 @@ body
 html
 	font-size: clamp(16px, 2.5vw, 32px)
 	min-height: 100%
+
+.bg
+	inset: 0
+	position: fixed
+	z-index: -1
+
+	> [class^=bg__]
+		inset: 0
+		position: fixed
+
+	// &__center
+	// 	background-image: linear-gradient(45deg, rgba(10,10,10,0) -30%, rgba(10,10,10,1) 30%, rgba(10,10,10,1) 70%, rgba(10,10,10,0) 130%)
+
+	&__color-1
+		--sclf-delay: -50
+		animation-iteration-count: infinite
+		animation-name: hue-rotate
+		background-image: radial-gradient(circle at top, hsl(315deg, 100%, 50%), hsl(315deg, 100%, 50%, 0))
+		opacity: 0.5
+
+	&__color-2
+		animation-iteration-count: infinite
+		animation-name: hue-rotate
+		background-image: radial-gradient(circle at bottom, hsl(45deg, 100%, 50%), hsl(45deg, 100%, 50%, 0))
+		opacity: 0.5
+
+	&__cover
+		--sclf-duration: 10
+		animation-direction: reverse
+		animation-name: fade
+		background: var(--color-bg-strong)
