@@ -2,16 +2,12 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-:root
-	--#{$prefix}-delay: 0s
-
 @media screen
 	.#{$prefix}--enabled
 		.#{$prefix}--snap,
-		&.#{$prefix}--snap,
-		&.#{$prefix}--snap body
+		&.#{$prefix}--snap
 			@include supports-scroll-snap-stop
-				scroll-snap-stop: always
+				scroll-snap-stop: normal
 				scroll-snap-type: y proximity
 
 		.#{$prefix}--snap,
@@ -20,7 +16,7 @@
 
 			.#{$prefix}
 				@include supports-scroll-snap-stop
-					scroll-snap-align: start end
+					scroll-snap-align: start
 
 		.#{$prefix}--x.#{$prefix}--snap,
 		&.#{$prefix}--snap:has(.#{$prefix}--x),
@@ -85,16 +81,16 @@
 
 	&__sprite
 		&, &--inner, &--outer
-			animation-duration: calc(var(--sclf-duration, 100) * 1s)
+			animation-duration: calc(var(--#{$prefix}-duration, 100) * 1s)
 			animation-fill-mode: both
 			animation-play-state: paused
 			animation-timing-function: linear
 
-		&, &--inner
-			animation-delay: calc(var(--#{$prefix}-progress-inner, 0) * -100s + var(--#{$prefix}-delay, 0))
-
 		&, &--outer
-			animation-delay: calc(var(--#{$prefix}-progress-outer, 0) * -100s + var(--#{$prefix}-delay, 0))
+			animation-delay: calc(var(--#{$prefix}-progress-outer, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
+
+		&--inner
+			animation-delay: calc(var(--#{$prefix}-progress-inner, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
 
 	&
 		@include lvh(300)
@@ -103,9 +99,22 @@
 		&--padding
 			@include lvh(100)
 
-	// @supports (animation-timeline: scroll())
-	// 	&__sprite
-	// 		&, &--inner, &--outer
-	// 			animation-delay: 0
-	// 			animation-play-state: running
-	// 			animation-timeline: scroll()
+	@supports (animation-timeline: scroll())
+		view-timeline: --sclf-float y
+
+		&__sprite
+			&, &--inner, &--outer
+				animation-delay: 0s
+				animation-play-state: running
+				animation-timeline: --sclf-float
+
+			&, &--outer
+				animation-range: cover calc(var(--#{$prefix}-delay, 0) * 1%) cover calc(var(--#{$prefix}-duration, 100) * 1%)
+
+			&--inner
+				animation-range: contain calc(var(--#{$prefix}-delay, 0) * 1%) contain calc(var(--#{$prefix}-duration, 100) * 1%)
+
+@supports (animation-timeline: scroll())
+	.#{$prefix}--enabled
+		&, .#{$prefix}--enabled
+			view-timeline: --sclf-float y
