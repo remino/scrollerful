@@ -20,6 +20,10 @@
 			.#{$prefix}
 				@content
 
+@mixin supports-animation-timeline
+	@supports (animation-timeline: scroll())
+		@content
+
 @mixin supports-scroll-snap-stop
 	@supports (scroll-snap-stop: always)
 		@content
@@ -34,3 +38,8 @@
 
 @mixin svh($height)
 	@include sv(height, $height, vh)
+
+@mixin use-animation-timeline
+	.slcf--timeline
+		@include supports-animation-timeline
+			@content
