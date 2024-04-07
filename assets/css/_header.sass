@@ -29,7 +29,7 @@ header.sclf
 					transform-origin: center center
 
 					@supports (animation-timeline: scroll())
-						animation-range: contain 0% cover 100%, contain 30% contain 70%, contain 0% cover 100%
+						animation-range: contain 0% contain 100%, contain 30% contain 70%, contain 0% contain 100%
 
 					$child-center: math.ceil(math.div($children-count, 2))
 					@for $i from 1 through $child-center
@@ -37,7 +37,7 @@ header.sclf
 							--sclf-delay: #{$i * 4}
 
 							@supports (animation-timeline: scroll())
-								animation-range: contain #{$i * 4%} cover 100%, contain #{30 + $i * 4%} contain #{70 + $i * 4%}, contain #{$i * 4%} cover 100%
+								animation-range: contain #{$i * 4%} cover 100%, contain #{30 + $i * 4%} contain #{70 + $i * 8%}, contain #{$i * 4%} cover 100%
 
 					@for $i from 1 through $children-count
 						&:nth-child(#{$i})
