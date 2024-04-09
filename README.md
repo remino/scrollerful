@@ -9,13 +9,23 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 | [Code](https://github.com/remino/scrollerful/)
 
 - [About](#about)
+	- [What is it?](#what-is-it)
+	- [How does it work?](#how-does-it-work)
 	- [Built With](#built-with)
 - [Getting Started](#getting-started)
+	- [Via CDN](#via-cdn)
+	- [Via npm](#via-npm)
+	- [Download](#download)
 - [Usage](#usage)
-	- [Add scroll snapping](#add-scroll-snapping)
-	- [Scroll horizontally](#scroll-horizontally)
-	- [Apply on full body](#apply-on-full-body)
-- [To Do](#to-do)
+- [Tips](#tips)
+	- [Control when the animation starts and ends](#control-when-the-animation-starts-and-ends)
+	- [Applying multiple animations with different timings](#applying-multiple-animations-with-different-timings)
+	- [Animating only when the container covers the viewport](#animating-only-when-the-container-covers-the-viewport)
+	- [Limited support for the new `animation-timeline`](#limited-support-for-the-new-animation-timeline)
+	- [Horizontal scrolling](#horizontal-scrolling)
+	- [Snapping](#snapping)
+	- [Make the whole page the container](#make-the-whole-page-the-container)
+	- [Make sprites animate but without the floater](#make-sprites-animate-but-without-the-floater)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -26,11 +36,17 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 
 https://user-images.githubusercontent.com/29999/210556744-519eccd4-27c2-4f58-a9a3-37f2837338b8.mp4
 
-**Scrollerful** is a lightweight, dependency-free JavaScript library which uses CSS variables to help animate elements on a page as the user scrolls.
+### What is it?
+
+**Scrollerful** is a tiny JavaScript library of around 1 KB brotlied that works with some stylesheet it inserts in the HTML to control CSS animations while scrolling.
+
+### How does it work?
+
+1. You set a *floater* in a *container* with *sprites* (or elements) to animate.
+2. When you scroll, the library checks to see how much of the container has been scrolled in and out the viewport, while the floater with its sprites remains entirely visible.
+3. The library sets some CSS variables to indicate how much as been scrolled and what point of the animation should be displayed, effectively animating sprites will scrolling.
 
 [Back to top](#scrollerful)
-
-
 
 ### Built With
 
@@ -48,170 +64,244 @@ https://user-images.githubusercontent.com/29999/210556744-519eccd4-27c2-4f58-a9a
 <!-- GETTING STARTED -->
 ## Getting Started
 
-You can either clone the repo, download the [latest release file](https://github.com/remino/scrollerful/releases), or install it using npm:
+There are some ways to get **Scrollerful**:
+
+### Via CDN
+
+Link its auto-start script via `unpkg.org`:
+
+```html
+<script defer src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
+```
+
+### Via npm
+
+Get it via `npm`:
 
 ```sh
-# Clone the repo
-git clone git@github.com:remino/scrollerful.git
-
-# Install using npm
 npm add scrollerful
 ```
 
+The package comes with ES and CommonJS modules, which you can import in your code:
+
+```js
+// Using ES6 import
+import scrollerful from 'scrollerful'
+
+// Using CommonJS require
+const scrollerful = require('scrollerful')
+
+// Start it
+scrollerful()
+```
+
+### Download
+
+You can simply [get the package on GitHub](https://github.com/remino/scrollerful) or clone the repo from there. The script is bundled as modules both in CommonJS and ES formats.
 [Back to top](#scrollerful)
 
 
 
 ## Usage
 
-**Step 1.** Add the JavaScript file to your page.
-
-The library comes in many forms: UMD or CommonJS, ES6 module, all standard or minified.
-
-There are many ways to include the JavaScript library to your page:
-
-```js
-// Using ES6 import
-// dist/scrollerful.mjs
-import scrollerful from 'scrollerful';
-scrollerful();
-
-// Using CommonJS require
-// dist/scrollerful.cjs
-const scrollerful = require('scrollerful');
-scrollerful();
-```
-
-```html
-<!-- Using a script tag -->
-<script src="scrollerful.min.js"></script>
-<script>
-	scrollerful();
-</script>
-
-<!-- Using a script tag with a module -->
-<script type="module">
-	import scrollerful from './scrollerful.min.mjs';
-	scrollerful();
-</script>
-
-<!-- Using the auto-init file -->
-<script src="scrollerful-auto.min.js"></script>
-```
-
-**Step 2.** Section your page and specify sprites to animate as below:
+**Step 1.** Define your HTML:
 
 ```html
 <div class="sclf">
-	<div class="sclf__tray">
-		<div class="sclf__plate">
-			<p class="sclf__sprite">Section 1</p>
-		</div>
-	</div>
-	<div class="sclf__tray">
-		<div class="sclf__plate">
-			<p class="sclf__sprite">Section 2</p>
-		</div>
-	</div>
-	<div class="sclf__tray">
-		<div class="sclf__plate">
-			<p class="sclf__sprite">Section 3</p>
-		</div>
-	</div>
+    <div class="sclf__float">
+        <div class="bg sclf__sprite"></div>
+        <div class="toy sclf__sprite--inner"></div>
+    </div>
 </div>
 ```
 
-**Step 3.** Define CSS animations for your sprites:
+**Step 2.** Define your CSS with animation keyframes:
 
 ```css
-@keyframes section-1 {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+@keyframes bg {
+    from {
+        background-color: #000;
+    }
+
+    to {
+        background-color: #fff;
+    }
 }
 
-@keyframes section-2 {
-	from {
-		transform: scale(0);
-	}
-	to {
-		transform: scale(2);
-	}
+@keyframes toy {
+    from {
+        border-radius: 100%;
+        color: #fff;
+        transform: rotate(0) scale(1);
+    }
+
+    to {
+        border-radius: 0;
+        color: #000;
+        transform: rotate(1turn) scale(1.4);
+    }
 }
 
-@keyframes section-3 {
-	from {
-		color: red;
-	}
-	to {
-		color: blue;
-	}
+.sclf--enabled .bg {
+    animation-name: bg;
+    inset: 0;
+    position: absolute;
+    z-index: -1;
 }
 
-.sclf__tray:nth-child(1) > .sclf__plate > .sclf__sprite {
-	animation-name: section-1;
-}
-
-.sclf__tray:nth-child(3) > .sclf__plate > .sclf__sprite {
-	animation-name: section-2;
-}
-
-.sclf__tray:nth-child(3) > .sclf__plate > .sclf__sprite {
-	animation-name: section-3;
+.sclf--enabled .toy {
+    animation-name: toy;
+    height: 6rem;
+    width: 6rem;
 }
 ```
 
-**Step 4.** Enjoy the animations while your scroll!
+**Step 3.** Define your JavaScript to respond to events and start **Scrollerful**:
 
-### Add scroll snapping
+```js
+import scrollerful from 'scrollerful'
 
-On the `.scrollerful` element, adding the `.scrollerful--snap` class to it will snap scrolling to the next section.
+const SYMBOLS = '🛑✋😳🔶⌛🏃🤔💭😃👍✅'
+const symbol = percentage => SYMBOLS[Math
+    .round(percentage / SYMBOLS.length)]
+const clamp = (val, min, max) = Math
+    .max(min, Math.min(max, val))
 
-### Scroll horizontally
+// Show emoji based on how much has been scrolled:
+const showInnerProgress = ({
+    detail: { progress: { inner: progress } }
+}) => {
+    document.querySelector('.toy').textContent =
+        symbol(clamp(Math.round(progress * 100), 0, 100))
+}
 
-On the `.scrollerful` element, adding the `.scrollerful--x` class to will change the scrolling from vertical to horizontal.
+const main = () => {
+    document.querySelector('.sclf')
+        .addEventListener('sclf:scroll', showProgress)
 
-### Apply on full body
+    scrollerful()
+}
 
-If you want to add scroll snapping and use the entire page body as the main container, you can do so by adding the `.scrollerful` CSS class to `<body>` and add `.scrollerful--snap--page` to the `<html>` element. For example:
-
-```html
-<html class="sclf--snap--page">
-	<head>
-		<title>Scrollerful Example</title>
-		<script src="scrollerful.js"></script>
-	</head>
-	<body class="sclf">
-		<div class="sclf__tray">
-			<div class="sclf__plate">
-				<p class="sclf__sprite">Section 1</p>
-			</div>
-		</div>
-		<div class="sclf__tray">
-			<div class="sclf__plate">
-				<p class="sclf__sprite">Section 2</p>
-			</div>
-		</div>
-	</body>
-</html>
+main()
 ```
+
+**Step 4.** Try it!
+
+[See the above in action](demo/example/)
 
 [Back to top](#scrollerful)
 
 
 
-## To Do
 
-This library is mainly for personal purposes at the moment, but I'd like to expand on it for others to enjoy its benefits until browsers adopt standards to animate elements on scroll using CSS on its own. [The CSSWG already has an idea on doing scroll animations.](https://wiki.csswg.org/ideas/timelines)
+[Back to top](#scrollerful)
 
-For others to feel more confident in using this, here are a few things to do:
 
-- Add automated tests. (Not sure how to do that yet.)
-- Add better documentation. (There are a few features this library does that is not documented here yet.)
-- Add more examples.
+
+## Tips
+
+### Control when the animation starts and ends
+
+You can set some CSS variables to begin an animation far after scrolling into the container, or finish it before reaching the end.
+
+```css
+.sclf--enabled .toy {
+    /* Start animation when scrolling at a quarter: */
+    --sclf-delay: 25;
+
+    /* End animation when scrolling at three quarters: */
+    --sclf-duration: 75;
+}
+```
+
+### Applying multiple animations with different timings
+
+It’s doable, but tricky and reserved for the pros. The variables used to control single animations cannot work with multiple ones. You will also have to manage the `animation-range` for the `animation-timeline` yourself.
+
+```css
+.sclf--enabled .toy {
+    animation-delay:
+        calc(var(--sclf-progress-inner, 0) * -100s + 25s),
+        calc(var(--sclf-progress-inner, 0) * -100s + 50s),
+        calc(var(--sclf-progress-inner, 0) * -100s + 0s);
+
+    animation-duration: 50s, 50s, 25s;
+
+    animation-range:
+        contain 25% contain 75%,
+        contain 50% contain 100%,
+        contain 0% contain 25%;
+}
+```
+
+Let’s take the values for the first animation above for example:
+
+1. Every second here is a percent of scrolling of the sprite’s container.
+2. Its delay is set to 25 seconds, so starts when scrolling at 25%.
+3. Its duration is set to 50 seconds, so plus the delay, ends when reaching 75%.
+4. As an `inner` sprite is animated only when the container fills the viewport, its matching `animation-range` should be when the sprite’s container is `contain`ed within the viewport, from 25% to 75%. Thus `contain 25% contain 75%`. (For `outer` sprites, it would be `cover` instead of `contain`.)
+
+Note: if you only set one animation, or all your animations have the same delay and duration, this library takes care of that for you.
+
+### Animating only when the container covers the viewport
+
+There are two kinds of sprites: `outer` and `inner`. For `outer`, the default, animate the moment we see any glimpse of its container. As for `inner`, the animation only begins when the container covers the whole viewport, i.e. when its top reaches the top of the browser’s window.
+
+### Limited support for the new `animation-timeline`
+
+CSS scroll animations are coming with `animation-timeline` and a handful of other properties.
+
+To improve animation performance, this library automatically works with then if the browser supports it.
+
+However, keep in mind that the specs for [CSS scroll animations](https://wiki.csswg.org/ideas/timelines) may change. At the moment, only Chrome support them by default, and Firefox as well when its `layout.css.scroll-driven-animations.enabled` flag is enabled.
+
+That said, `animation-timeline` cannot emit events like **Scrollerful** does—that’s exclusive to JavaScript.
+
+### Horizontal scrolling
+
+You can achieve horizontal scrolling (scrolling along the X axis) by wrapping containers in an element with the  `sclf--x` CSS, or simply adding that class in the `<body>`:
+
+```html
+<body class="sclf--x">
+    <div class="sclf">
+        <div class="sclf__float">
+            <div class="bg sclf__sprite"></div>
+            <div class="toy sclf__sprite--inner"></div>
+        </div>
+    </div>
+</body>
+```
+
+### Snapping
+
+You can enable snapping to the edges of containers by adding the `sclf--snap`  class to `<html>`:
+
+```html
+<html class="sclf--snap">
+```
+
+However, while it works fine in Firefox and Safari, that looks broken in Chrome. (Yeah, I know that’s not good.)
+
+### Make the whole page the container
+
+You can! Just set the `sclf` class on `<body>`:
+
+```html
+<body class="sclf">
+```
+
+### Make sprites animate but without the floater
+
+The floater is optional. If you want to put sprites all over the page and just have them animate in place, just omit it. For example:
+
+```html
+<div class="sclf">
+    <div class="bg sclf__sprite"></div>
+    <div class="toy sclf__sprite--inner"></div>
+</div>
+```
+
+[Back to top](#scrollerful)
 
 
 
@@ -246,6 +336,4 @@ Rémino Rem
 https://remino.net/
 
 [Back to top](#scrollerful)
-
-
 
