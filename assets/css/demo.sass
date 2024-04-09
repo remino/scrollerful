@@ -26,7 +26,7 @@
 	.sclf__float
 		>
 			.sclf__sprite,
-			.sclf__sprite--inner
+			.sclf__sprite--contain
 				animation-name: bg-rotate
 				align-items: center
 				background-color: #333
@@ -40,7 +40,7 @@
 				>
 					h1, .piechart
 						&.sclf__sprite,
-						&.sclf__sprite--inner
+						&.sclf__sprite--contain
 							animation-name: fade-in-out
 
 	.piechart
@@ -53,13 +53,13 @@
 		width: $size
 
 	.demo
-		&--inner
+		&--contain
 			.piechart
-				--progress: var(--sclf-progress-inner, 0)
+				--progress: var(--sclf-progress-contain, 0)
 
-		&--outer
+		&--cover
 			.piechart
-				--progress: var(--sclf-progress-outer, 0)
+				--progress: var(--sclf-progress-cover, 0)
 
 		&--large
 			.sclf

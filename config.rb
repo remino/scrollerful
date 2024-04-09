@@ -67,7 +67,7 @@ activate :external_pipeline,
 	source: ".build/js",
 	latency: 2
 
-%w(inner outer).each do |scope|
+%w(contain cover).each do |scope|
 	%w(vertical horizontal).each do |direction|
 		%w(small medium large).each do |size|
 			proxy "/scrollerful/demo/#{scope}/#{direction}/#{size}.html",

@@ -5,9 +5,9 @@
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.scrollerful = factory());
 })(this, (function () { 'use strict';
 
-	var style = "@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner,.sclf--enabled .sclf__sprite--outer{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--outer{animation-delay:calc(var(--sclf-progress-outer, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--inner{animation-delay:calc(var(--sclf-progress-inner, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}@supports(animation-timeline:scroll()){.sclf--enabled .sclf{view-timeline:--sclf-float y}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--inner,.sclf--enabled .sclf__sprite--outer{animation-delay:0s;animation-play-state:running;animation-timeline:--sclf-float}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--outer{animation-range:cover calc(var(--sclf-delay, 0)*1%) cover calc(var(--sclf-duration, 100)*1%)}.sclf--enabled .sclf__sprite--inner{animation-range:contain calc(var(--sclf-delay, 0)*1%) contain calc(var(--sclf-duration, 100)*1%)}}}@supports(animation-timeline:scroll()){.sclf--enabled,.sclf--enabled .sclf--enabled{view-timeline:--sclf-float y}}";
+	var style = "@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-progress-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-progress-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}@supports(animation-timeline:scroll()){.sclf--enabled .sclf{view-timeline:--sclf-float y}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-delay:0s;animation-play-state:running;animation-timeline:--sclf-float}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-range:cover calc(var(--sclf-delay, 0)*1%) cover calc(var(--sclf-duration, 100)*1%)}.sclf--enabled .sclf__sprite--contain{animation-range:contain calc(var(--sclf-delay, 0)*1%) contain calc(var(--sclf-duration, 100)*1%)}}}@supports(animation-timeline:scroll()){.sclf--enabled,.sclf--enabled .sclf--enabled{view-timeline:--sclf-float y}}";
 
-	const calcInnerProgress = (containerStart, containerSize, viewSize) => {
+	const calcContainProgress = (containerStart, containerSize, viewSize) => {
 		if (containerSize === viewSize) {
 			const progress = (((containerStart - viewSize) / (viewSize)) * -1);
 
@@ -26,7 +26,7 @@
 		}
 	};
 
-	const calcOuterProgress = (containerStart, containerSize, viewSize) => (
+	const calcCoverProgress = (containerStart, containerSize, viewSize) => (
 		((containerStart - viewSize) / (viewSize + containerSize)) * -1
 	);
 
@@ -34,15 +34,15 @@
 
 	const CSS_CLASS_ENABLED = `${PREFIX}--enabled`;
 	const CSS_CLASS_HORIZONTAL = `${PREFIX}--x`;
-	const CSS_CLASS_INSIDE_INNER = `${PREFIX}--inside--inner`;
-	const CSS_CLASS_INSIDE_OUTER = `${PREFIX}--inside--outer`;
+	const CSS_CLASS_INSIDE_CONTAIN = `${PREFIX}--inside--contain`;
+	const CSS_CLASS_INSIDE_COVER = `${PREFIX}--inside--cover`;
 	const CSS_CLASS_RULER = `${PREFIX}__ruler`;
-	const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`;
-	const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`;
-	const EVENT_INNER_ENTER = `${PREFIX}:inner:enter`;
-	const EVENT_INNER_EXIT = `${PREFIX}:inner:exit`;
-	const EVENT_OUTER_ENTER = `${PREFIX}:outer:enter`;
-	const EVENT_OUTER_EXIT = `${PREFIX}:outer:exit`;
+	const CSS_PROP_PROGRESS_CONTAIN = `--${PREFIX}-progress-contain`;
+	const CSS_PROP_PROGRESS_COVER = `--${PREFIX}-progress-cover`;
+	const EVENT_CONTAIN_ENTER = `${PREFIX}:contain:enter`;
+	const EVENT_CONTAIN_EXIT = `${PREFIX}:contain:exit`;
+	const EVENT_COVER_ENTER = `${PREFIX}:cover:enter`;
+	const EVENT_COVER_EXIT = `${PREFIX}:cover:exit`;
 	const EVENT_SCROLL = `${PREFIX}:scroll`;
 	const SEL_SCROLL = `.${PREFIX}`;
 	const SEL_TRAY = `.${PREFIX}`;
@@ -117,8 +117,8 @@
 		const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal);
 
 		return {
-			inner: calcInnerProgress(containerStart, containerSize, viewSize),
-			outer: calcOuterProgress(containerStart, containerSize, viewSize),
+			contain: calcContainProgress(containerStart, containerSize, viewSize),
+			cover: calcCoverProgress(containerStart, containerSize, viewSize),
 		}
 	};
 
@@ -142,20 +142,20 @@
 	const setStyleVars = ({
 		target,
 		detail: {
-			progress: { inner, outer },
+			progress: { contain, cover },
 		},
 	}) => {
-		if (!isWithin(outer, 0, 1)) {
+		if (!isWithin(cover, 0, 1)) {
 			removeStyleProperties(
 				target,
-				CSS_PROP_PROGRESS_INNER,
-				CSS_PROP_PROGRESS_OUTER,
+				CSS_PROP_PROGRESS_CONTAIN,
+				CSS_PROP_PROGRESS_COVER,
 			);
 			return
 		}
 
-		target.style.setProperty(CSS_PROP_PROGRESS_INNER, inner);
-		target.style.setProperty(CSS_PROP_PROGRESS_OUTER, outer);
+		target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, contain);
+		target.style.setProperty(CSS_PROP_PROGRESS_COVER, cover);
 	};
 
 	const triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
@@ -184,12 +184,24 @@
 		}
 	};
 
-	const triggerInnerEnterExit = ({ target, detail: { progress: { inner } } }) => {
-		triggerEnterExit(target, inner, EVENT_INNER_ENTER, EVENT_INNER_EXIT, CSS_CLASS_INSIDE_INNER);
+	const triggerContainEnterExit = ({ target, detail: { progress: { contain } } }) => {
+		triggerEnterExit(
+			target,
+			contain,
+			EVENT_CONTAIN_ENTER,
+			EVENT_CONTAIN_EXIT,
+			CSS_CLASS_INSIDE_CONTAIN,
+		);
 	};
 
-	const triggerOuterEnterExit = ({ target, detail: { progress: { outer } } }) => {
-		triggerEnterExit(target, outer, EVENT_OUTER_ENTER, EVENT_OUTER_EXIT, CSS_CLASS_INSIDE_OUTER);
+	const triggerCoverEnterExit = ({ target, detail: { progress: { cover } } }) => {
+		triggerEnterExit(
+			target,
+			cover,
+			EVENT_COVER_ENTER,
+			EVENT_COVER_EXIT,
+			CSS_CLASS_INSIDE_COVER,
+		);
 	};
 
 	const scrollFrame = async target => {
@@ -213,8 +225,8 @@
 	const addScrollListeners = scrollEl => {
 		[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
 			el.addEventListener(EVENT_SCROLL, setStyleVars);
-			el.addEventListener(EVENT_SCROLL, triggerOuterEnterExit);
-			el.addEventListener(EVENT_SCROLL, triggerInnerEnterExit);
+			el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit);
+			el.addEventListener(EVENT_SCROLL, triggerContainEnterExit);
 		});
 	};
 

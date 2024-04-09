@@ -1,21 +1,34 @@
+nav
+	= partial 'logo'
+	menu
+		li
+			a(href="#about") About
+		li
+			a(href="#setup") Setup
+		li
+			a(href="#usage") Usage
+		li
+			a(href="#demos") Demos
+		li
+			a(href="#tips") Tips
 header.sclf
 	.sclf__float
 		h1.sclf__sprite
 			= partial 'logo'
-		h2.sclf__sprite--inner Small JS & CSS library for scroll animations
-		p.sclf__sprite--inner Scroll down to start
+		h2.sclf__sprite--contain Small JS & CSS library for scroll animations
+		p.sclf__sprite--contain Scroll down to start
 		.scroll-down.sclf__sprite
 			- (1..4).each do |i|
 				.scroll-down__arrow
 section.sclf
 	.sclf__float
 		h2
-			span.sclf__sprite--inner Scroll
-			span.sclf__sprite--inner with
-			span.sclf__sprite--inner
+			span.sclf__sprite--contain Scroll
+			span.sclf__sprite--contain with
+			span.sclf__sprite--contain
 				strong.sclf__sprite style!
 		p
-			strong.sclf__sprite--inner Yeah!
+			strong.sclf__sprite--contain Yeah!
 nav.sclf
 	.sclf__float
 		.sclf__sprite
@@ -24,7 +37,7 @@ nav.sclf
 				span.bg.sclf__sprite
 
 .bg
-	.bg__color-1.sclf__sprite--inner
-	.bg__color-2.sclf__sprite--inner
+	.bg__color-1.sclf__sprite--contain
+	.bg__color-2.sclf__sprite--contain
 	.bg__center
-	.bg__cover.sclf__sprite--inner
+	.bg__cover.sclf__sprite--contain

@@ -1,8 +1,8 @@
 - classes = %W(sclf__sprite demo--#{direction} demo--#{size})
 - classes.push 'sclf--x' if direction == 'horizontal'
-- classes.push scope == 'inner' ? 'demo--inner' : 'demo--outer'
+- classes.push scope == 'contain' ? 'demo--contain' : 'demo--cover'
 - current_page.data.body_class = classes.join ' '
-- sprite_class = scope == 'inner' ? 'sclf__sprite--inner' : 'sclf__sprite'
+- sprite_class = scope == 'contain' ? 'sclf__sprite--contain' : 'sclf__sprite'
 
 - content_for :head
 	= stylesheet_link_tag 'demo'

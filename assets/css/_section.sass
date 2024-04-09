@@ -14,7 +14,7 @@ section.sclf
 		> h2, > p
 			margin: 0
 
-			> .sclf__sprite--inner
+			> .sclf__sprite--contain
 				top: 50%
 				left: 0
 				margin-top: -0.5em
@@ -27,7 +27,7 @@ section.sclf
 			> span
 				display: block
 
-			> .sclf__sprite--inner
+			> .sclf__sprite--contain
 				$names: start, middle, end
 
 				@for $i from 1 through length($names)
@@ -54,7 +54,7 @@ section.sclf
 			font-style: italic
 			text-transform: uppercase
 
-			> .sclf__sprite--inner
+			> .sclf__sprite--contain
 				animation-name: exclamation-fade, exclamation-fly
 				display: block
 				transform-origin: center center

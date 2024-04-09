@@ -110,7 +110,7 @@ You can simply [get the package on GitHub](https://github.com/remino/scrollerful
 <div class="sclf">
     <div class="sclf__float">
         <div class="bg sclf__sprite"></div>
-        <div class="toy sclf__sprite--inner"></div>
+        <div class="toy sclf__sprite--contain"></div>
     </div>
 </div>
 ```
@@ -168,8 +168,8 @@ const clamp = (val, min, max) = Math
     .max(min, Math.min(max, val))
 
 // Show emoji based on how much has been scrolled:
-const showInnerProgress = ({
-    detail: { progress: { inner: progress } }
+const showContainProgress = ({
+    detail: { progress: { contain: progress } }
 }) => {
     document.querySelector('.toy').textContent =
         symbol(clamp(Math.round(progress * 100), 0, 100))
@@ -177,7 +177,7 @@ const showInnerProgress = ({
 
 const main = () => {
     document.querySelector('.sclf')
-        .addEventListener('sclf:scroll', showProgress)
+        .addEventListener('sclf:scroll', showContainProgress)
 
     scrollerful()
 }
@@ -221,9 +221,9 @@ It’s doable, but tricky and reserved for the pros. The variables used to contr
 ```css
 .sclf--enabled .toy {
     animation-delay:
-        calc(var(--sclf-progress-inner, 0) * -100s + 25s),
-        calc(var(--sclf-progress-inner, 0) * -100s + 50s),
-        calc(var(--sclf-progress-inner, 0) * -100s + 0s);
+        calc(var(--sclf-progress-contain, 0) * -100s + 25s),
+        calc(var(--sclf-progress-contain, 0) * -100s + 50s),
+        calc(var(--sclf-progress-contain, 0) * -100s + 0s);
 
     animation-duration: 50s, 50s, 25s;
 
@@ -239,13 +239,13 @@ Let’s take the values for the first animation above for example:
 1. Every second here is a percent of scrolling of the sprite’s container.
 2. Its delay is set to 25 seconds, so starts when scrolling at 25%.
 3. Its duration is set to 50 seconds, so plus the delay, ends when reaching 75%.
-4. As an `inner` sprite is animated only when the container fills the viewport, its matching `animation-range` should be when the sprite’s container is `contain`ed within the viewport, from 25% to 75%. Thus `contain 25% contain 75%`. (For `outer` sprites, it would be `cover` instead of `contain`.)
+4. As a `contain` sprite is animated only when the container fills the viewport, its matching `animation-range` should be when the sprite’s container is `contain`ed within the viewport, from 25% to 75%. Thus `contain 25% contain 75%`. (For `cover` sprites, it would be `cover` instead of `contain`.)
 
 Note: if you only set one animation, or all your animations have the same delay and duration, this library takes care of that for you.
 
 ### Animating only when the container covers the viewport
 
-There are two kinds of sprites: `outer` and `inner`. For `outer`, the default, animate the moment we see any glimpse of its container. As for `inner`, the animation only begins when the container covers the whole viewport, i.e. when its top reaches the top of the browser’s window.
+There are two kinds of sprites: `cover` and `contain`. For `cover`, the default, animate the moment we see any glimpse of its container. As for `contain`, the animation only begins when the container covers the whole viewport, i.e. when its top reaches the top of the browser’s window.
 
 ### Limited support for the new `animation-timeline`
 
@@ -266,7 +266,7 @@ You can achieve horizontal scrolling (scrolling along the X axis) by wrapping co
     <div class="sclf">
         <div class="sclf__float">
             <div class="bg sclf__sprite"></div>
-            <div class="toy sclf__sprite--inner"></div>
+            <div class="toy sclf__sprite--contain"></div>
         </div>
     </div>
 </body>
@@ -297,7 +297,7 @@ The floater is optional. If you want to put sprites all over the page and just h
 ```html
 <div class="sclf">
     <div class="bg sclf__sprite"></div>
-    <div class="toy sclf__sprite--inner"></div>
+    <div class="toy sclf__sprite--contain"></div>
 </div>
 ```
 

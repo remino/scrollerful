@@ -80,17 +80,17 @@
 		top: 0
 
 	&__sprite
-		&, &--inner, &--outer
+		&, &--contain, &--cover
 			animation-duration: calc(var(--#{$prefix}-duration, 100) * 1s)
 			animation-fill-mode: both
 			animation-play-state: paused
 			animation-timing-function: linear
 
-		&, &--outer
-			animation-delay: calc(var(--#{$prefix}-progress-outer, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
+		&, &--cover
+			animation-delay: calc(var(--#{$prefix}-progress-cover, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
 
-		&--inner
-			animation-delay: calc(var(--#{$prefix}-progress-inner, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
+		&--contain
+			animation-delay: calc(var(--#{$prefix}-progress-contain, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
 
 	&
 		@include lvh(300)
@@ -103,15 +103,15 @@
 		view-timeline: --sclf-float y
 
 		&__sprite
-			&, &--inner, &--outer
+			&, &--contain, &--cover
 				animation-delay: 0s
 				animation-play-state: running
 				animation-timeline: --sclf-float
 
-			&, &--outer
+			&, &--cover
 				animation-range: cover calc(var(--#{$prefix}-delay, 0) * 1%) cover calc(var(--#{$prefix}-duration, 100) * 1%)
 
-			&--inner
+			&--contain
 				animation-range: contain calc(var(--#{$prefix}-delay, 0) * 1%) contain calc(var(--#{$prefix}-duration, 100) * 1%)
 
 @supports (animation-timeline: scroll())

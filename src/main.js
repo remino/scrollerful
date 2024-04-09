@@ -1,19 +1,19 @@
 import style from './scrollerful.sass'
-import { calcInnerProgress, calcOuterProgress } from './calc.js'
+import { calcContainProgress, calcCoverProgress } from './calc.js'
 
 const PREFIX = 'sclf'
 
 const CSS_CLASS_ENABLED = `${PREFIX}--enabled`
 const CSS_CLASS_HORIZONTAL = `${PREFIX}--x`
-const CSS_CLASS_INSIDE_INNER = `${PREFIX}--inside--inner`
-const CSS_CLASS_INSIDE_OUTER = `${PREFIX}--inside--outer`
+const CSS_CLASS_INSIDE_CONTAIN = `${PREFIX}--inside--contain`
+const CSS_CLASS_INSIDE_COVER = `${PREFIX}--inside--cover`
 const CSS_CLASS_RULER = `${PREFIX}__ruler`
-const CSS_PROP_PROGRESS_INNER = `--${PREFIX}-progress-inner`
-const CSS_PROP_PROGRESS_OUTER = `--${PREFIX}-progress-outer`
-const EVENT_INNER_ENTER = `${PREFIX}:inner:enter`
-const EVENT_INNER_EXIT = `${PREFIX}:inner:exit`
-const EVENT_OUTER_ENTER = `${PREFIX}:outer:enter`
-const EVENT_OUTER_EXIT = `${PREFIX}:outer:exit`
+const CSS_PROP_PROGRESS_CONTAIN = `--${PREFIX}-progress-contain`
+const CSS_PROP_PROGRESS_COVER = `--${PREFIX}-progress-cover`
+const EVENT_CONTAIN_ENTER = `${PREFIX}:contain:enter`
+const EVENT_CONTAIN_EXIT = `${PREFIX}:contain:exit`
+const EVENT_COVER_ENTER = `${PREFIX}:cover:enter`
+const EVENT_COVER_EXIT = `${PREFIX}:cover:exit`
 const EVENT_SCROLL = `${PREFIX}:scroll`
 const SEL_SCROLL = `.${PREFIX}`
 const SEL_TRAY = `.${PREFIX}`
@@ -88,8 +88,8 @@ const sectionProgress = (el, horizontal) => {
 	const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal)
 
 	return {
-		inner: calcInnerProgress(containerStart, containerSize, viewSize),
-		outer: calcOuterProgress(containerStart, containerSize, viewSize),
+		contain: calcContainProgress(containerStart, containerSize, viewSize),
+		cover: calcCoverProgress(containerStart, containerSize, viewSize),
 	}
 }
 
@@ -113,20 +113,20 @@ const removeStyleProperties = (el, ...names) => {
 const setStyleVars = ({
 	target,
 	detail: {
-		progress: { inner, outer },
+		progress: { contain, cover },
 	},
 }) => {
-	if (!isWithin(outer, 0, 1)) {
+	if (!isWithin(cover, 0, 1)) {
 		removeStyleProperties(
 			target,
-			CSS_PROP_PROGRESS_INNER,
-			CSS_PROP_PROGRESS_OUTER,
+			CSS_PROP_PROGRESS_CONTAIN,
+			CSS_PROP_PROGRESS_COVER,
 		)
 		return
 	}
 
-	target.style.setProperty(CSS_PROP_PROGRESS_INNER, inner)
-	target.style.setProperty(CSS_PROP_PROGRESS_OUTER, outer)
+	target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, contain)
+	target.style.setProperty(CSS_PROP_PROGRESS_COVER, cover)
 }
 
 const triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
@@ -155,12 +155,24 @@ const triggerEnterExit = (target, progress, eventEnter, eventExit, className) =>
 	}
 }
 
-const triggerInnerEnterExit = ({ target, detail: { progress: { inner } } }) => {
-	triggerEnterExit(target, inner, EVENT_INNER_ENTER, EVENT_INNER_EXIT, CSS_CLASS_INSIDE_INNER)
+const triggerContainEnterExit = ({ target, detail: { progress: { contain } } }) => {
+	triggerEnterExit(
+		target,
+		contain,
+		EVENT_CONTAIN_ENTER,
+		EVENT_CONTAIN_EXIT,
+		CSS_CLASS_INSIDE_CONTAIN,
+	)
 }
 
-const triggerOuterEnterExit = ({ target, detail: { progress: { outer } } }) => {
-	triggerEnterExit(target, outer, EVENT_OUTER_ENTER, EVENT_OUTER_EXIT, CSS_CLASS_INSIDE_OUTER)
+const triggerCoverEnterExit = ({ target, detail: { progress: { cover } } }) => {
+	triggerEnterExit(
+		target,
+		cover,
+		EVENT_COVER_ENTER,
+		EVENT_COVER_EXIT,
+		CSS_CLASS_INSIDE_COVER,
+	)
 }
 
 const scrollFrame = async target => {
@@ -184,8 +196,8 @@ const scroll = ({ target }) => {
 const addScrollListeners = scrollEl => {
 	[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
 		el.addEventListener(EVENT_SCROLL, setStyleVars)
-		el.addEventListener(EVENT_SCROLL, triggerOuterEnterExit)
-		el.addEventListener(EVENT_SCROLL, triggerInnerEnterExit)
+		el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
+		el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
 	})
 }
 
