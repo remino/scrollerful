@@ -26,6 +26,7 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 	- [Snapping](#snapping)
 	- [Make the whole page the container](#make-the-whole-page-the-container)
 	- [Make sprites animate but without the floater](#make-sprites-animate-but-without-the-floater)
+	- [Animating the `<body>` itself.](#animating-the-body-itself)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -294,6 +295,25 @@ The floater is optional. If you want to put sprites all over the page and just h
     <div class="bg sclf__sprite"></div>
     <div class="toy sclf__sprite--contain"></div>
 </div>
+```
+
+### Animating the `<body>` itself.
+
+You can animate the `<body>` itself by adding the `sclf__sprite` class thus turning it into a sprite:
+
+```html
+<body class="sclf__sprite">
+```
+
+```css
+.sclf--enabled body {
+	animation-name: bg;
+}
+
+/* Ensure the <html> has a proper flexible height. */
+html {
+	min-height: 100%;
+}
 ```
 
 [Back to top](#scrollerful)
