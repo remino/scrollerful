@@ -6,28 +6,10 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-section.sclf
-	> .sclf__float
-		font-weight: bold
-		text-align: center
-
-		> h2, > p
-			margin: 0
-
-			> .sclf__sprite--contain
-				top: 50%
-				left: 0
-				margin-top: -0.5em
-				position: absolute
-				width: 100%
-
-		> h2
-			font-size: 4rem
-
-			> span
-				display: block
-
-			> .sclf__sprite--contain
+.sclf--enabled
+	section
+		.motto
+			> .motto__text
 				$names: start, middle, end
 
 				@for $i from 1 through length($names)
@@ -35,26 +17,33 @@ section.sclf
 					&:nth-child(#{$i})
 						animation-name: motto-#{$name}
 
-				&:last-child
-					font-size: 6rem
+					&--style
+						> strong
+							animation-name: motto-end-gradient, text-tilt
 
-					> strong
-						animation-name: motto-end-gradient
-						-webkit-text-fill-color: transparent
-						-webkit-background-clip: text
-						background-clip: text
-						background-image: var(--rainbow-gradient)
-						background-size: 200% 200%
-						display: inline-block
+section
+	font-weight: bold
+	text-align: center
 
-		> p
-			-webkit-text-stroke: 0.1rem #000
-			color: #fff
-			font-size: 8rem
-			font-style: italic
-			text-transform: uppercase
+	.motto
+		font-size: 4rem
+		margin: 0
 
-			> .sclf__sprite--contain
-				animation-name: exclamation-fade, exclamation-fly
-				display: block
-				transform-origin: center center
+		> .motto__text
+			display: block
+			top: 50%
+			left: 0
+			margin-top: -0.5em
+			position: absolute
+			width: 100%
+
+			&:last-child
+				font-size: 6rem
+
+				> strong
+					-webkit-text-fill-color: transparent
+					-webkit-background-clip: text
+					background-clip: text
+					background-image: var(--rainbow-gradient)
+					background-size: 200% 200%
+					display: inline-block

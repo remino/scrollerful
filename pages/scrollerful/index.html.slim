@@ -1,16 +1,6 @@
-nav
-	= partial 'logo'
-	menu
-		li
-			a(href="#about") About
-		li
-			a(href="#setup") Setup
-		li
-			a(href="#usage") Usage
-		li
-			a(href="#demos") Demos
-		li
-			a(href="#tips") Tips
+- content_for :head
+	= stylesheet_link_tag 'index'
+
 header.sclf
 	.sclf__float
 		h1.sclf__sprite
@@ -20,21 +10,26 @@ header.sclf
 		.scroll-down.sclf__sprite
 			- (1..4).each do |i|
 				.scroll-down__arrow
-section.sclf
+
+section#motto.sclf
 	.sclf__float
-		h2
-			span.sclf__sprite--contain Scroll
-			span.sclf__sprite--contain with
-			span.sclf__sprite--contain
+		h2.motto
+			span.motto__text.motto__text--scroll.sclf__sprite--contain Scroll
+			span.motto__text.motto__text--with.sclf__sprite--contain with
+			span.motto__text.motto__text--style.sclf__sprite--contain
 				strong.sclf__sprite style!
-		p
-			strong.sclf__sprite--contain Yeah!
-nav.sclf
+
+nav#get.sclf
 	.sclf__float
-		.sclf__sprite
-			a(href="https://github.com/remino/scrollerful")
-				span.caption Get it now!
-				span.bg.sclf__sprite
+			menu
+				li.sclf__sprite
+					a(href="/scrollerful/demo/")
+						span.btn__caption.sclf__sprite Try it!
+						span.btn__description Demos
+				li.sclf__sprite
+					a(href="https://github.com/remino/scrollerful")
+						span.btn__caption.sclf__sprite Use it!
+						span.btn__description README & Downloads
 
 .bg
 	.bg__color-1.sclf__sprite--contain

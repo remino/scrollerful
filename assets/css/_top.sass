@@ -1,0 +1,56 @@
+@use 'sass:color'
+@use 'sass:math'
+@use '../../src/functions' as *
+@use '../../src/mixins' as *
+@use 'variables' as *
+@use 'functions' as *
+@use 'mixins' as *
+
+body
+	&.sclf--x
+		> .sclf
+			$children-count: 10
+
+			> .sclf__float
+				&.sclf__sprite--contain
+					animation-name: number-plate
+
+				h1
+					font-size: 20vmin
+
+			@for $i from 1 through $children-count
+				&:nth-child(#{$i}) > .sclf__float
+					$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
+					--plate-bg: #{light-color($fill)}
+
+.bg
+	inset: 0
+	position: fixed
+	z-index: -1
+
+	> [class^=bg__]
+		inset: 0
+		position: fixed
+
+	&__center
+		background-image: radial-gradient(150% 75%, rgb(10,10,10) 50%, rgba(10,10,10,0))
+
+	&__color-1
+		--sclf-delay: -75
+		animation-iteration-count: infinite
+		animation-name: hue-rotate
+		background-image: radial-gradient(circle at -40% 60%, hsl(315deg, 100%, 50%), hsl(315deg, 100%, 50%, 0))
+		opacity: 1
+
+	&__color-2
+		--sclf-delay: -25
+		animation-iteration-count: infinite
+		animation-name: hue-rotate
+		background-image: radial-gradient(circle at 140% 40%, hsl(45deg, 100%, 50%), hsl(45deg, 100%, 50%, 0))
+		opacity: 1
+
+	&__cover
+		--sclf-duration: 10
+		animation-direction: reverse
+		animation-name: fade
+		background: var(--color-bg-strong)

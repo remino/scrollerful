@@ -8,8 +8,8 @@ const CSS_CLASS_HORIZONTAL = `${PREFIX}--x`
 const CSS_CLASS_INSIDE_CONTAIN = `${PREFIX}--inside--contain`
 const CSS_CLASS_INSIDE_COVER = `${PREFIX}--inside--cover`
 const CSS_CLASS_RULER = `${PREFIX}__ruler`
-const CSS_PROP_PROGRESS_CONTAIN = `--${PREFIX}-progress-contain`
-const CSS_PROP_PROGRESS_COVER = `--${PREFIX}-progress-cover`
+const CSS_PROP_PROGRESS_CONTAIN = `--${PREFIX}-contain`
+const CSS_PROP_PROGRESS_COVER = `--${PREFIX}-cover`
 const EVENT_CONTAIN_ENTER = `${PREFIX}:contain:enter`
 const EVENT_CONTAIN_EXIT = `${PREFIX}:contain:exit`
 const EVENT_COVER_ENTER = `${PREFIX}:cover:enter`
@@ -42,7 +42,10 @@ const addEnabledClass = () => {
 }
 
 const addRuler = () => {
+	if (document.getElementById(EL_ID_RULER)) return
+
 	const ruler = document.createElement('div')
+
 	ruler.setAttribute('id', EL_ID_RULER)
 	ruler.classList.add(CSS_CLASS_RULER)
 	document.body.appendChild(ruler)

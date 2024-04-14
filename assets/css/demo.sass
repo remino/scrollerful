@@ -1,9 +1,22 @@
 @keyframes bg-rotate
 	0%, 25%
-		filter: invert(0)
+		background: var(--bg-rotate-from, #333)
+
+	37.5%, 62.5%
+		background: var(--bg-rotate-mid, #666)
 
 	75%, 100%
-		filter: invert(1)
+		background: var(--bg-rotate-to, #ccc)
+
+@keyframes color-rotate
+	0%, 25%
+		color: var(--color-rotate-from, #333)
+
+	37.5%, 62.5%
+		color: var(--color-rotate-mid, #666)
+
+	75%, 100%
+		color: var(--color-rotate-to, #ccc)
 
 @keyframes fade-in-out
 	0%
@@ -22,73 +35,258 @@
 		opacity: 0.5
 		transform: scale(5)
 
+@keyframes grow
+	0%
+		transform: scale(0.6)
+
+	25%
+		transform: scale(1)
+
+	75%
+		transform: scale(2)
+
+	100%
+		transform: scale(5)
+
+@keyframes scroll-scroll
+	0%
+		border-color: var(--piechart-border-from, #000)
+	100%
+		border-color: var(--piechart-border-to, #fff)
+
+@keyframes scroll-scroll
+	0%
+		color: red
+		text-shadow: 0 0 0 var(--ss-1), 0 0 0 var(--ss-2), 0 0 0 var(--ss-3), 0 0 0 var(--ss-4), 0 0 0 var(--ss-5), 0 0 0 var(--ss-6)
+
+	100%
+		color: blue
+		text-shadow: 0 1.4em 0 var(--ss-1), 0 2.8em 0 var(--ss-2), 0 4.2em 0 var(--ss-3), 0 -1.4em 0 var(--ss-4), 0 -2.8em 0 var(--ss-5), 0 -4.2em 0 var(--ss-6)
+
+.controls
+	align-items: stretch
+	backdrop-filter: blur(0.4rem)
+	background: rgba(0,0,0,0.6)
+	border-radius: 0.5em
+	display: flex
+	flex-flow: column
+	font-size: max(14px, 0.4rem)
+	inset: auto 0.4em 0.4em auto
+	justify-content: center
+	margin: 0
+	padding: 0.6em
+	position: fixed
+	z-index: 100
+
+	fieldset
+		align-items: stretch
+		border: none
+		display: flex
+		flex-flow: row
+		justify-content: center
+		margin: 0.6em 0 0 0
+		padding: 0.6em
+
+		label
+			flex: 1
+
+			&:first-of-type
+				span
+					border-top-left-radius: 0.5em
+					border-bottom-left-radius: 0.5em
+
+			&:last-of-type
+				span
+					border-top-right-radius: 0.5em
+					border-bottom-right-radius: 0.5em
+
+			&:not(:first-of-type)
+				input[type="radio"] + span
+					border-left: 0
+
+		legend
+			text-align: left
+			text-transform: uppercase
+			width: 100%
+
+		input[type="radio"]
+			appearance: none
+			clip: rect(0 0 0 0)
+			height: 1px
+			overflow: hidden
+			position: absolute
+			width: 1px
+
+			&:checked + span
+				background: #fff
+				color: #000
+
+			&:focus:checked + span
+				background: #ccc
+				color: #000
+
+			&:focus + span
+				background: #666
+				color: #fff
+
+			+ span
+				background: #000
+				border: solid 0.1em #fff
+				color: #fff
+				cursor: pointer
+				display: block
+				padding: 0.4em 0.6em
+				text-align: center
+
+				&:active
+					background: #666
+					color: #fff
+
+				&:hover
+					background: #333
+					color: #fff
+
+	nav
+		align-self: center
+		flex-grow: 0
+		flex-shrink: 1
+
+		a
+			color: inherit
+			display: block
+			text-decoration: none
+			width: 100%
+
+			span
+				text-align: center
+				text-transform: uppercase
+				padding: 0.6em
+				display: block
+
+	.logo
+		filter: drop-shadow(0.1em 0.1em #000)
+		width: 13em
+
+.sclf
+	&, &__float
+		transition: 0.6s ease-in-out
+		transition-property: height, width
+
 .sclf--enabled
-	.sclf__float
-		>
-			.sclf__sprite,
-			.sclf__sprite--contain
-				animation-name: bg-rotate
-				align-items: center
-				background-color: #333
-				display: flex
-				flex-flow: column
-				height: 100%
-				justify-content: center
-				overflow: hidden
-				width: 100%
+	.bg
+		align-items: center
+		animation-name: bg-rotate
+		background-color: #333
+		display: flex
+		flex-flow: column
+		height: 100%
+		inset: 0
+		justify-content: center
+		overflow: hidden
+		position: absolute
+		width: 100%
+		z-index: -1
 
-				>
-					h1, .piechart
-						&.sclf__sprite,
-						&.sclf__sprite--contain
-							animation-name: fade-in-out
+	.demo--contain
+		.item--piechart
+			--progress: var(--sclf-contain, 0)
 
-	.piechart
-		$size: 10rem
-		background-image: conic-gradient(#fff 0%, #fff calc(var(--progress) * 100%), rgba(100%,100%,100%,0) calc(var(--progress) * 100%), rgba(100%,100%,100%,0) 100%)
-		border-radius: 100%
-		border: solid 0.2rem #fff
-		display: block
-		height: $size
-		width: $size
+	.demo--cover
+		.item--piechart
+			--progress: var(--sclf-cover, 0)
 
-	.demo
-		&--contain
-			.piechart
-				--progress: var(--sclf-progress-contain, 0)
-
-		&--cover
-			.piechart
-				--progress: var(--sclf-progress-cover, 0)
-
-		&--large
+	.demo--vertical
+		&.demo--large
 			.sclf
 				height: 300vh
 				height: 300lvh
 
-		&--medium
+		&.demo--medium
 			.sclf
 				height: 100vh
 				height: 100lvh
 
-		&--small
+		&.demo--small
 			.sclf
 				height: 50vh
 				height: 50lvh
 
-	.sclf--x
-		&.demo
-			&--large
-				.sclf
-					width: 300vw
-					width: 300lvw
+	.demo--horizontal
+		&.demo--large
+			.sclf
+				width: 300vw
+				width: 300lvw
 
-			&--medium
-				.sclf
-					width: 100vw
-					width: 100lvw
+		&.demo--medium
+			.sclf
+				width: 100vw
+				width: 100lvw
 
-			&--small
-				.sclf
-					width: 50vw
-					width: 50lvw
+		&.demo--small
+			.sclf
+				width: 50vw
+				width: 50lvw
+
+	.section--percentage
+		--color-1: #B2456E
+		--color-2: #FBEAE7
+		--color-3: #552619
+
+		--bg-rotate-from: var(--color-1)
+		--bg-rotate-mid: var(--color-2)
+		--bg-rotate-to: var(--color-3)
+
+		--color-rotate-from: var(--color-2)
+		--color-rotate-mid: var(--color-3)
+		--color-rotate-to: var(--color-1)
+
+		.item--percentage
+			animation-name: color-rotate, grow
+
+	.section--piechart
+		--color-1: #678CEC
+		--color-2: #D49BAE
+		--color-3: #BBCB50
+
+		// darker colours for brackground
+		--bg-rotate-from: #374977
+		--bg-rotate-mid: #5a5e44
+		--bg-rotate-to: #5e454d
+		--piechart-border-from: var(--color-1)
+		--piechart-border-to: var(--color-3)
+
+		.item--piechart
+			$size: 8rem
+			animation-name: grow, piechart
+			background-image: conic-gradient(var(--color-2), var(--color-1), var(--color-3) calc(var(--progress) * 100%), rgba(100%,100%,100%,0) calc(var(--progress) * 100%), rgba(100%,100%,100%,0) 100%)
+			border-radius: 100%
+			border: solid 0.2rem var(--piechart-border-from, #000)
+			display: block
+			height: $size
+			width: $size
+
+	.section--scroll-scroll
+		--ss-1: color-mix(in oklab, hsl(122deg, 100%, 50%) 0%, hsl(238deg, 100%, 50%))
+		--ss-2: color-mix(in oklab, hsl(122deg, 100%, 50%) 20%, hsl(238deg, 100%, 50%))
+		--ss-3: color-mix(in oklab, hsl(122deg, 100%, 50%) 40%, hsl(238deg, 100%, 50%))
+		--ss-4: color-mix(in oklab, hsl(122deg, 100%, 50%) 60%, hsl(238deg, 100%, 50%))
+		--ss-5: color-mix(in oklab, hsl(122deg, 100%, 50%) 80%, hsl(238deg, 100%, 50%))
+		--ss-6: color-mix(in oklab, hsl(122deg, 100%, 50%) 100%, hsl(238deg, 100%, 50%))
+
+		.item--scroll-scroll
+			--sclf-delay: 25
+			--sclf-duration: 50
+			animation-name: grow, scroll-scroll
+			font-size: 2rem
+
+	.section--video
+		--bg-rotate-from: #91278a
+		--bg-rotate-mid: #000
+		--bg-rotate-to: #0f9d8c
+
+.video
+	video
+		aspect-ratio: 16 / 9
+		max-height: 100%
+		min-width: 640px
+		width: 75%

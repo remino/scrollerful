@@ -54,6 +54,9 @@
 					@include lvw(100)
 					height: auto
 
+			@supports (animation-timeline: scroll())
+				view-timeline: --sclf-float x
+
 	&__ruler
 		@include lvh(100)
 		@include lvw(100)
@@ -87,10 +90,10 @@
 			animation-timing-function: linear
 
 		&, &--cover
-			animation-delay: calc(var(--#{$prefix}-progress-cover, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
+			animation-delay: calc(var(--#{$prefix}-cover, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
 
 		&--contain
-			animation-delay: calc(var(--#{$prefix}-progress-contain, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
+			animation-delay: calc(var(--#{$prefix}-contain, 0) * -100s + var(--#{$prefix}-delay, 0) * 1s)
 
 	&
 		@include lvh(300)

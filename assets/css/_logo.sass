@@ -1,0 +1,12 @@
+@use 'sass:color'
+@use 'sass:math'
+@use 'functions' as *
+@use 'variables' as *
+
+.logo
+	> path
+		$children-count: 11
+		@for $i from 1 through $children-count
+			&:nth-child(#{$i})
+				$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
+				fill: #{light-color($fill)}

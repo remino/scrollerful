@@ -6,79 +6,86 @@
 @use 'functions' as *
 @use 'mixins' as *
 
-header.sclf
-	@include lvh(300)
+.sclf--enabled
+	header
 
-	> .sclf__float
-		> h1
-			font-size: 6rem
-			text-transform: uppercase
+		.logo
+			> path
+				$children-count: 11
+				--fill-start: var(--color-fg)
+				animation-duration: 100s, 50s, 100s
+				animation-name: logo-char-zoom-in, logo-char-colorize, logo-char-fade-in
+				animation-timing-function: ease-in-out, steps(1, end), ease-in-out
+				transform-origin: center center
 
-			> .logo
-				@include lvw(90)
-				display: block
-				height: auto
-				max-width: 80rem
+				@supports (animation-timeline: scroll())
+					animation-range: contain 0% contain 100%, contain 0% contain 30%, contain 0% contain 100%
 
-				> path
-					$children-count: 11
-					--fill-start: var(--color-fg)
-					animation-duration: 100s, 50s, 100s
-					animation-name: logo-char-zoom-in, logo-char-colorize, logo-char-fade-in
-					animation-timing-function: ease-in-out, steps(1, end), ease-in-out
-					transform-origin: center center
+				$child-center: math.ceil(math.div($children-count, 2))
+				$factor: 2
+				@for $i from 1 through $child-center
+					&:nth-child(#{$child-center + 1 - $i}), &:nth-child(#{$child-center - 1 + $i})
+						--sclf-delay: #{$i * $factor}
 
-					@supports (animation-timeline: scroll())
-						animation-range: contain 0% contain 100%, contain 0% contain 30%, contain 0% contain 100%
+						@supports (animation-timeline: scroll())
+							animation-range: contain #{$i * $factor * 1%} contain 100%, contain #{0 + $i * $factor * 1%} contain #{30 + $i * $factor * 1%}, contain #{$i * $factor} contain 100%
 
-					$child-center: math.ceil(math.div($children-count, 2))
-					$factor: 2
-					@for $i from 1 through $child-center
-						&:nth-child(#{$child-center + 1 - $i}), &:nth-child(#{$child-center - 1 + $i})
-							--sclf-delay: #{$i * $factor}
+				@for $i from 1 through $children-count
+					&:nth-child(#{$i})
+						$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
+						--fill-end: #{light-color($fill)}
 
-							@supports (animation-timeline: scroll())
-								animation-range: contain #{$i * $factor * 1%} contain 100%, contain #{0 + $i * $factor * 1%} contain #{30 + $i * $factor * 1%}, contain #{$i * $factor} contain 100%
+						@include dark
+							--fill-end: #{$fill}
 
-					@for $i from 1 through $children-count
-						&:nth-child(#{$i})
-							$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
-							--fill-end: #{light-color($fill)}
-
-							@include dark
-								--fill-end: #{$fill}
-
-		> h2
+		h2
 			--sclf-delay: 60
 			--sclf-duration: 20
 			animation-direction: normal, normal
 			animation-name: fade, move-up-in
 
-		> p
+		p
 			--sclf-duration: 20
 			animation-direction: reverse, normal
 			animation-name: fade, move-up-out
-			bottom: 44vh
-			margin: auto 0
-			position: absolute
 
-		> .scroll-down
+		.scroll-down
 			animation-name: scroll-down-fade-out
-			bottom: 4vh
-			margin: auto 0
-			position: absolute
 
-			> .scroll-down__arrow
-				$duration: 4
-				$total: 4
-				--size: 1rem
-				animation: scroll-down-arrow-blink #{$duration * 1s} infinite ease-in-out both
-				background: var(--color-fg)
-				clip-path: polygon(0% 0%, 100% 0%, 50% 100%)
-				margin: var(--size) 0 var(--size) 0
-				height: var(--size)
-				width: var(--size)
+header
+	@include lvh(300)
 
-				@for $i from 2 through $total
-					&:nth-child(#{$i})
-						animation-delay: #{($i - 1) * math.div($duration, ($total * 8)) * 1s}
+	h1
+		font-size: 6rem
+		text-transform: uppercase
+
+		.logo
+			@include lvw(90)
+			display: block
+			height: auto
+			max-width: 80rem
+
+	p
+		bottom: 44vh
+		margin: auto 0
+		position: absolute
+
+	.scroll-down
+		bottom: 4vh
+		margin: auto 0
+		position: absolute
+
+		.scroll-down__arrow
+			$duration: 4
+			$total: 4
+			--size: 1rem
+			animation: scroll-down-arrow-blink #{$duration * 1s} infinite ease-in-out both
+			background: var(--color-fg)
+			clip-path: polygon(0% 0%, 100% 0%, 50% 100%)
+			margin: var(--size) 0 var(--size) 0
+			height: var(--size)
+			width: var(--size)
+
+			@for $i from 2 through $total
+				&:nth-child(#{$i})
+					animation-delay: #{($i - 1) * math.div($duration, ($total * 8)) * 1s}

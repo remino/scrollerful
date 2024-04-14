@@ -5,11 +5,11 @@
 @use 'variables' as *
 
 @keyframes big-button
-	0%
-		transform: translateX(150lvw)
+	0%, 24%
+		transform: translate(var(--pos-start, -70vw))
 
-	#{oip(0, 300)}, 100%
-		transform: translateX(0)
+	40%, 100%
+		transform: translate(0)
 
 @keyframes big-button-color
 	0%, #{oip(0, 300)}
@@ -17,27 +17,6 @@
 
 	#{oip(1, 300)}, 100%
 		background-position-x: 400%
-
-@keyframes exclamation-fade
-	0%, 85%
-		opacity: 0
-
-	90%, 95%
-		opacity: 1
-
-	100%
-		opacity: 0
-
-@keyframes exclamation-fly
-	$color-base: rgba($color-origin, 0.6)
-
-	0%, 85%
-		@include text-shadows($color-base, 0.1rem)
-		transform: translate(-50%, 50%) rotate(-45deg) scale(0.25)
-
-	100%
-		@include text-shadows($color-base, 2rem)
-		transform: translate(50%, -50%) rotate(45deg) scale(2)
 
 @keyframes fade
 	0%
@@ -167,3 +146,10 @@
 	#{oip(0.1, 300)}, 100%
 		@include lv(transform, -50, vh)
 		opacity: 0
+
+@keyframes text-tilt
+	0%, 60%
+		transform: rotate(0deg)
+
+	100%
+		transform: rotate(-20deg)

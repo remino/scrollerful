@@ -67,22 +67,12 @@ activate :external_pipeline,
 	source: ".build/js",
 	latency: 2
 
-%w(contain cover).each do |scope|
-	%w(vertical horizontal).each do |direction|
-		%w(small medium large).each do |size|
-			proxy "/scrollerful/demo/#{scope}/#{direction}/#{size}.html",
-				'/scrollerful/demo/demo.html',
-				locals: { direction: direction, scope: scope, size: size }
-		end
-	end
-end
-
 ignore '.DS_Store'
-ignore '/scrollerful/demo/demo.html'
 
 page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/*.xml', layout: false
+page '/scrollerful/demo/readme.html', layout: false
 
 prefix = '/scrollerful'
 

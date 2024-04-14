@@ -1,0 +1,67 @@
+---
+body_class: demo--vertical demo--large demo--cover
+---
+
+- content_for :head
+	= stylesheet_link_tag 'demo'
+
+form.controls
+	fieldset
+		legend Direction
+
+		label
+			input(type="radio" name="direction" value="vertical" checked)
+			span Vertical
+		label
+			input(type="radio" name="direction" value="horizontal")
+			span Horizontal
+
+	fieldset
+		legend Container Size
+
+		label
+			input(type="radio" name="size" value="large" checked)
+			span Large
+		label
+			input(type="radio" name="size" value="medium")
+			span Medium
+		label
+			input(type="radio" name="size" value="small")
+			span Small
+
+	fieldset
+		legend Sprite Scope
+
+		label
+			input(type="radio" name="scope" value="cover" checked)
+			span Cover
+		label
+			input(type="radio" name="scope" value="contain")
+			span Contain
+
+	nav
+		= link_to '/scrollerful/'
+			span Back to
+			= partial 'logo'
+
+.section--scroll-scroll.sclf
+	.sclf__float
+		.bg.sclf__sprite
+			p.item--scroll-scroll.sclf__sprite Scroll!
+.section--percentage.sclf
+	.sclf__float
+		.bg.sclf__sprite
+		h1.item--percentage.sclf__sprite
+			output
+			'%
+.section--piechart.sclf
+	.sclf__float
+		.bg.sclf__sprite
+		.item--piechart.sclf__sprite
+.section--video.sclf
+	.sclf__float
+		.bg.sclf__sprite
+		video(autoplay controls muted playsinline)
+			source(src="/scrollerful/demo.mp4" type="video/mp4")
+
+= javascript_include_tag 'demo'
