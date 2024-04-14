@@ -34,7 +34,7 @@ JavaScript library using CSS variables to animate elements while user scrolls.
 
 ## About
 
-https://raw.githubusercontent.com/remino/scrollerful/main/pages/scrollerful/demo.mp4
+https://github.com/remino/scrollerful/assets/29999/9dba06bb-6cc7-434c-8ad0-a56101809890
 
 ### What is it?
 
