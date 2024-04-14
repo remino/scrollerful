@@ -9,7 +9,6 @@ end
 
 configure :build do
 	activate :gzip
-	activate :minify_css
 	activate :minify_javascript, compressor: Terser.new
 
 	activate :asset_hash do |config|
@@ -20,11 +19,12 @@ configure :build do
 	
 	after_configuration do
 		use ::HtmlCompressor::Rack,
+			if: :use_middleware?,
 			compress_css: true,
 			compress_javascript: true,
 			css_compressor: :yui,
 			enabled: true,
-			javascript_compressor: :yui,
+      javascript_compressor: Terser.new,
 			preserve_line_breaks: false,
 			preserve_patterns: [],
 			remove_comments: true,
@@ -67,6 +67,13 @@ activate :external_pipeline,
 	source: ".build/js",
 	latency: 2
 
+helpers do
+	def use_middleware?(path)
+		puts 'path: ' + path
+		path != '/scrollerful/demo/simple/index.html'
+	end
+end
+	
 ignore '.DS_Store'
 
 page '/*.json', layout: false
