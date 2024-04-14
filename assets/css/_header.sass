@@ -33,10 +33,7 @@
 				@for $i from 1 through $children-count
 					&:nth-child(#{$i})
 						$fill: color.adjust($color-origin, $hue: math.div(($i - 1), $children-count) * 360deg)
-						--fill-end: #{light-color($fill)}
-
-						@include dark
-							--fill-end: #{$fill}
+						--fill-end: #{$fill}
 
 		h2
 			--sclf-delay: 60
