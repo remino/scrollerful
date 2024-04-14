@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'haml', '~> 5'
 gem 'htmlcompressor'
+gem 'image_optim', '~> 0.31.2'
 gem 'middleman', '~> 4.2'
 gem 'middleman-autoprefixer', '~> 3.0'
 gem 'middleman-livereload'

@@ -1,0 +1,135 @@
+#!/bin/sh
+
+build_images_main() {
+	SCRIPT_INV="$( basename "$0" )"
+
+	E_ARGS=16
+	E_MISSING=17
+
+	[ $# -lt 1 ] && _help && return
+
+	SOURCE_DIR="$1"
+	[ $# -gt 1 ] && DEST_DIR="$2"
+	[ -z "$DEST_DIR" ] && DEST_DIR="$SOURCE_DIR"
+
+	[ ! -d "$SOURCE_DIR" ] && _error "No directory: $SOURCE_DIR" && return "$E_ARGS"
+
+	_cmd_exists magick \
+		|| ( _error "ImageMagick not installed" && return "$E_MISSING" )
+
+	_find "$SOURCE_DIR" | while read -r file
+	do
+		dest_file="$( _dst_for_src "$SOURCE_DIR" "$DEST_DIR" "$file" )"
+		dest_dir="$( dirname "$dest_file" )"
+
+		[ ! -d "$dest_dir" ] && mkdir -p "$dest_dir"
+
+		if _has_transparency "$file"
+		then
+			_gen_file "$file" "$dest_file.png"
+		else
+			_gen_file "$file" "$dest_file.jpg"
+		fi
+
+		_gen_file "$file" "$dest_file.webp"
+	done
+}
+
+_cmd_exists() {
+	command -v "$1" >/dev/null 2>&1
+}
+
+_dst_for_src() {
+	source="$1"
+	dest="$2"
+	old_path="$3"
+	[ "$source" = "$dest" ] && echo "$old_path" && return
+	new_path="$dest$( expr "$old_path" : "$source\(.*\)" )"
+	echo "$new_path"
+}
+
+_error() {
+	echo "$1" >&2
+}
+
+_find() {
+	find "$1" \
+		\( \
+			-iname '*.avif' \
+			-not -iname '*.jpg.avif' \
+			-not -iname '*.png.avif' \
+		\) \
+	;
+}
+
+_gen_webp() {
+	src="$1"
+	dest="$2"
+	convert "$src" "$dest"
+}
+
+_gen_file() {
+	src="$1"
+	dest="$2"
+	ext="$( echo "$dest" | grep -o '\.[^.]*$' | tr -d '.' )"
+
+	[ -f "$dest" ] && return
+
+	"_gen_${ext}" "$src" "$dest"
+}
+
+_gen_jpg() {
+	src="$1"
+	dest="$2"
+	convert "$src" -quality 60 "$dest"
+	_cmd_exists image_optim && image_optim --no-oxipng --no-pngout "$dest"
+}
+
+_gen_png() {
+	src="$1"
+	dest="$2"
+	convert "$src" "$dest"
+	_cmd_exists image_optim && image_optim --no-oxipng --no-pngout "$dest"
+}
+
+_has_cache_dir() {
+	[ -d "$CACHE_DIR" ]
+}
+
+_has_no_cache_dir() {
+	! _has_cache_dir
+}
+
+_has_transparency() {
+	src="$1"
+	convert "$src" -format "%[opaque]" info: | grep -iq 'false'
+}
+
+_help() {
+cat <<USAGE
+Usage: $SCRIPT_INV <dir>
+
+Convert AVIF images in directory to JPEG & WebP.
+
+Also optimizes JPEG images using image_optim.
+
+USAGE
+}
+
+_md5sum() {
+	_cmd_exists md5sum \
+		|| ( _error "md5sum not installed" && return "$E_MISSING" )
+
+	md5sum | cut -d ' ' -f 1
+}
+
+_sum_check() {
+	src="$1"
+	sum="$2"
+
+	[ -f "$sum" ] \
+		&& md5sum < "$src" | cut -d ' ' -f 1 | diff - "$sum" \
+	;
+}
+
+build_images_main "$@"

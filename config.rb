@@ -8,14 +8,9 @@ activate :autoprefixer do |prefix|
 end
 
 configure :build do
+	activate :asset_hash, exts: %w(.css .js)
 	activate :gzip
 	activate :minify_javascript, compressor: Terser.new
-
-	activate :asset_hash do |config|
-		config.ignore = [
-			/share-.*/,
-		]
-	end
 	
 	after_configuration do
 		use ::HtmlCompressor::Rack,
@@ -42,6 +37,12 @@ configure :build do
 			simple_boolean_attributes: true,
 			simple_doctype: false
 	end
+
+	activate :external_pipeline,
+		name: :img,
+		command: "bin/build_images #{app.source_dir} .build/img",
+		source: ".build/img",
+		latency: 2
 
 	after_build do |builder|
 		builder.thor.run 'bin/build_brotli build'
