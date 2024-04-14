@@ -78,6 +78,12 @@
 	position: fixed
 	z-index: 100
 
+	@media (max-width: 30rem)
+		display: grid
+		inset: auto 0.4em 0.4em
+		grid-template-columns: repeat(2, 1fr)
+		grid-template-rows: 1fr
+
 	fieldset
 		align-items: stretch
 		border: none
@@ -152,19 +158,25 @@
 		flex-shrink: 1
 
 		a
+			align-self: center
 			color: inherit
-			display: block
+			display: flex
+			gap: 0.6em
+			flex-flow: column
+			justify-content: center
+			padding: 0.6em 0
 			text-decoration: none
 			width: 100%
 
 			span
 				text-align: center
 				text-transform: uppercase
-				padding: 0.6em
 				display: block
 
 	.logo
+		display: block
 		filter: drop-shadow(0.1em 0.1em #000)
+		margin: 0 auto
 		width: 13em
 
 .sclf
