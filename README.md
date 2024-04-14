@@ -187,12 +187,7 @@ main()
 
 **Step 4.** Try it!
 
-[See the above in action](demo/example/)
-
-[Back to top](#scrollerful)
-
-
-
+[See the above in action](https://remino.net/scrollerful/demo/simple/)
 
 [Back to top](#scrollerful)
 
