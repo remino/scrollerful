@@ -59,7 +59,7 @@
 		"test": "npx jasmine"
 	},
 	"type": "module",
-	"version": "0.6.4",
+	"version": "1.0.0",
 	"watch": {
 		"css:build": {
 			"extensions": "css,sass,scss",
