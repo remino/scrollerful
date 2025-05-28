@@ -4,12 +4,13 @@ By Rémino Rem <https://remino.net>
 
 JavaScript library using CSS variables to animate elements while user scrolls.
 
-⚠️ **2024-08-05:** If you only want scroll animations in CSS and you don't need
-to add JavaScript knowing the position of the scroll, I recommend you use the
+⚠️ **2025-05-28:** If you only want scroll animations in CSS and you don't need
+to add JavaScript knowing the position of the scroll, I recommend you also look
+into the
 [Scroll-driven Animations module in CSS](https://drafts.csswg.org/scroll-animations-1/)
-now supported by Chrome, instead of Scrollerful, along with the
+now supported by Chrome. There is also a
 [polyfill](https://github.com/flackr/scroll-timeline) for browsers that don't
-yet support it, like Firefox and Safari.
+yet support it, like Firefox and Safari, but doesn't work for all cases.
 
 [Demo](https://remino.net/scrollerful/) |
 [Code](https://github.com/remino/scrollerful/)
