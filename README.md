@@ -28,7 +28,6 @@ yet support it, like Firefox and Safari, but doesn't work for all cases.
   - [Control when the animation starts and ends](#control-when-the-animation-starts-and-ends)
   - [Applying multiple animations with different timings](#applying-multiple-animations-with-different-timings)
   - [Animating only when the container covers the viewport](#animating-only-when-the-container-covers-the-viewport)
-  - [Limited support for the new `animation-timeline`](#limited-support-for-the-new-animation-timeline)
   - [Horizontal scrolling](#horizontal-scrolling)
   - [Snapping](#snapping)
   - [Make the whole page the container](#make-the-whole-page-the-container)
@@ -265,22 +264,6 @@ There are two kinds of sprites: `cover` and `contain`. For `cover`, the default,
 animate the moment we see any glimpse of its container. As for `contain`, the
 animation only begins when the container covers the whole viewport, i.e. when
 its top reaches the top of the browser’s window.
-
-### Limited support for the new `animation-timeline`
-
-CSS scroll animations are coming with `animation-timeline` and a handful of
-other properties.
-
-To improve animation performance, this library automatically works with then if
-the browser supports it.
-
-However, keep in mind that the specs for
-[CSS scroll animations](https://wiki.csswg.org/ideas/timelines) may change. At
-the moment, only Chrome support them by default, and Firefox as well when its
-`layout.css.scroll-driven-animations.enabled` flag is enabled.
-
-That said, `animation-timeline` cannot emit events like **Scrollerful**
-does—that’s exclusive to JavaScript.
 
 ### Horizontal scrolling
 
