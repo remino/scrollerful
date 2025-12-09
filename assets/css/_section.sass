@@ -15,11 +15,11 @@
 				@for $i from 1 through length($names)
 					$name: nth($names, $i)
 					&:nth-child(#{$i})
-						animation-name: motto-#{$name}
+						--sclf-animation: motto-#{$name}
 
 					&--style
 						> strong
-							animation-name: motto-end-gradient, text-tilt
+							--sclf-animation: motto-end-gradient, text-tilt
 
 section
 	font-weight: bold

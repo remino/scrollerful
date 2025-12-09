@@ -36,19 +36,19 @@
 						--fill-end: #{$fill}
 
 		h2
+			--sclf-animation: fade, move-up-in
 			--sclf-delay: 60
 			--sclf-duration: 20
 			animation-direction: normal, normal
-			animation-name: fade, move-up-in
 			text-align: center
 
 		p
+			--sclf-animation: fade, move-up-out
 			--sclf-duration: 20
 			animation-direction: reverse, normal
-			animation-name: fade, move-up-out
 
 		.scroll-down
-			animation-name: scroll-down-fade-out
+			--sclf-animation: scroll-down-fade-out
 
 header
 	@include lvh(300)
