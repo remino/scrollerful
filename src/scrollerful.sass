@@ -54,9 +54,6 @@
 					@include lvw(100)
 					height: auto
 
-			@supports (animation-timeline: scroll())
-				view-timeline: --sclf-float x
-
 	&__ruler
 		@include lvh(100)
 		@include lvw(100)
@@ -102,23 +99,3 @@
 
 		&--padding
 			@include lvh(100)
-
-	@supports (animation-timeline: scroll())
-		view-timeline: --sclf-float y
-
-		&__sprite
-			&, &--contain, &--cover
-				animation-delay: 0s
-				animation-play-state: running
-				animation-timeline: --sclf-float
-
-			&, &--cover
-				animation-range: cover calc(var(--#{$prefix}-delay, 0) * 1%) cover calc(var(--#{$prefix}-duration, 100) * 1%)
-
-			&--contain
-				animation-range: contain calc(var(--#{$prefix}-delay, 0) * 1%) contain calc(var(--#{$prefix}-duration, 100) * 1%)
-
-@supports (animation-timeline: scroll())
-	.#{$prefix}--enabled
-		&, .#{$prefix}--enabled
-			view-timeline: --sclf-float y
