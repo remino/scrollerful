@@ -47,6 +47,7 @@
 	"main": "dist/scrollerful.cjs",
 	"name": "scrollerful",
 	"scripts": {
+		"build": "npm run css:build && npm run js:build",
 		"css:build": "npm run css:sass && npm run css:postcss",
 		"css:postcss": "npm exec -- postcss .build/sass-css/ --dir .build/css/scrollerful/",
 		"css:sass": "npm exec -- sass --no-source-map --load-path=node_modules/ assets/css/:.build/sass-css/",
