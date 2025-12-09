@@ -15,6 +15,8 @@ yet support it, like Firefox and Safari, but doesn't work for all cases.
 [Demo](https://remino.net/scrollerful/) |
 [Code](https://github.com/remino/scrollerful/)
 
+<!-- mtoc-start -->
+
 - [About](#about)
   - [What is it?](#what-is-it)
   - [How does it work?](#how-does-it-work)
@@ -36,6 +38,8 @@ yet support it, like Firefox and Safari, but doesn't work for all cases.
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+
+<!-- mtoc-end -->
 
 ## About
 
@@ -65,8 +69,8 @@ scrolling.
 - [Sass](https://sass-lang.com)
 - [rollup.js](https://rollupjs.org/guide/en/)
 - Docs:
-  - [Middleman](https://middlemanapp.com)
-  - [mansite](https://github.com/remino/mansite)
+    - [Middleman](https://middlemanapp.com)
+    - [mansite](https://github.com/remino/mansite)
 
 [Back to top](#scrollerful)
 
@@ -82,8 +86,8 @@ Link its auto-start script via `unpkg.org`:
 
 ```html
 <script
-  defer
-  src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
+    defer
+    src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
 ```
 
 ### Via npm
@@ -121,10 +125,10 @@ formats. [Back to top](#scrollerful)
 
 ```html
 <div class="sclf">
-  <div class="sclf__float">
-    <div class="bg sclf__sprite"></div>
-    <div class="toy sclf__sprite--contain"></div>
-  </div>
+    <div class="sclf__float">
+        <div class="bg sclf__sprite"></div>
+        <div class="toy sclf__sprite--contain"></div>
+    </div>
 </div>
 ```
 
@@ -132,40 +136,40 @@ formats. [Back to top](#scrollerful)
 
 ```css
 @keyframes bg {
-  from {
-    background-color: #000;
-  }
+    from {
+        background-color: #000;
+    }
 
-  to {
-    background-color: #fff;
-  }
+    to {
+        background-color: #fff;
+    }
 }
 
 @keyframes toy {
-  from {
-    border-radius: 100%;
-    color: #fff;
-    transform: rotate(0) scale(1);
-  }
+    from {
+        border-radius: 100%;
+        color: #fff;
+        transform: rotate(0) scale(1);
+    }
 
-  to {
-    border-radius: 0;
-    color: #000;
-    transform: rotate(1turn) scale(1.4);
-  }
+    to {
+        border-radius: 0;
+        color: #000;
+        transform: rotate(1turn) scale(1.4);
+    }
 }
 
 .sclf--enabled .bg {
-  animation-name: bg;
-  inset: 0;
-  position: absolute;
-  z-index: -1;
+    animation-name: bg;
+    inset: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 .sclf--enabled .toy {
-  animation-name: toy;
-  height: 6rem;
-  width: 6rem;
+    animation-name: toy;
+    height: 6rem;
+    width: 6rem;
 }
 ```
 
@@ -214,11 +218,11 @@ the container, or finish it before reaching the end.
 
 ```css
 .sclf--enabled .toy {
-  /* Start animation when scrolling at a quarter: */
-  --sclf-delay: 25;
+    /* Start animation when scrolling at a quarter: */
+    --sclf-delay: 25;
 
-  /* End animation when scrolling at three quarters: */
-  --sclf-duration: 75;
+    /* End animation when scrolling at three quarters: */
+    --sclf-duration: 75;
 }
 ```
 
@@ -230,17 +234,17 @@ the `animation-range` for the `animation-timeline` yourself.
 
 ```css
 .sclf--enabled .toy {
-  animation-delay:
-    calc(var(--sclf-progress-contain, 0) * -100s + 25s),
-    calc(var(--sclf-progress-contain, 0) * -100s + 50s),
-    calc(var(--sclf-progress-contain, 0) * -100s + 0s);
+    animation-delay:
+        calc(var(--sclf-progress-contain, 0) * -100s + 25s),
+        calc(var(--sclf-progress-contain, 0) * -100s + 50s),
+        calc(var(--sclf-progress-contain, 0) * -100s + 0s);
 
-  animation-duration: 50s, 50s, 25s;
+    animation-duration: 50s, 50s, 25s;
 
-  animation-range:
-    contain 25% contain 75%,
-    contain 50% contain 100%,
-    contain 0% contain 25%;
+    animation-range:
+        contain 25% contain 75%,
+        contain 50% contain 100%,
+        contain 0% contain 25%;
 }
 ```
 
@@ -273,12 +277,12 @@ the `<body>`:
 
 ```html
 <body class="sclf--x">
-  <div class="sclf">
-    <div class="sclf__float">
-      <div class="bg sclf__sprite"></div>
-      <div class="toy sclf__sprite--contain"></div>
+    <div class="sclf">
+        <div class="sclf__float">
+            <div class="bg sclf__sprite"></div>
+            <div class="toy sclf__sprite--contain"></div>
+        </div>
     </div>
-  </div>
 </body>
 ```
 
@@ -309,8 +313,8 @@ have them animate in place, just omit it. For example:
 
 ```html
 <div class="sclf">
-  <div class="bg sclf__sprite"></div>
-  <div class="toy sclf__sprite--contain"></div>
+    <div class="bg sclf__sprite"></div>
+    <div class="toy sclf__sprite--contain"></div>
 </div>
 ```
 
@@ -325,12 +329,12 @@ turning it into a sprite:
 
 ```css
 .sclf--enabled body {
-  animation-name: bg;
+    animation-name: bg;
 }
 
 /* Ensure the <html> has a proper flexible height. */
 html {
-  min-height: 100%;
+    min-height: 100%;
 }
 ```
 
