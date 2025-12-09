@@ -84,10 +84,9 @@ There are some ways to get **Scrollerful**:
 
 Link its auto-start script via `unpkg.org`:
 
+<!-- prettier-ignore -->
 ```html
-<script
-    defer
-    src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
+<script defer src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
 ```
 
 ### Via npm
