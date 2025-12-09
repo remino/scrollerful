@@ -158,15 +158,15 @@ formats. [Back to top](#scrollerful)
     }
 }
 
-.sclf--enabled .bg {
-    animation-name: bg;
+.bg {
+    --sclf-animation: bg;
     inset: 0;
     position: absolute;
     z-index: -1;
 }
 
-.sclf--enabled .toy {
-    animation-name: toy;
+.toy {
+    --sclf-animation: toy;
     height: 6rem;
     width: 6rem;
 }
@@ -327,8 +327,8 @@ turning it into a sprite:
 ```
 
 ```css
-.sclf--enabled body {
-    animation-name: bg;
+body {
+    --sclf-animation: bg;
 }
 
 /* Ensure the <html> has a proper flexible height. */
