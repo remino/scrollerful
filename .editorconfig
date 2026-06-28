@@ -3,4 +3,25 @@ root = true
 [*]
 end_of_line = lf
 insert_final_newline = true
+indent_size = 2
 indent_style = tab
+
+# shfmt
+binary_next_line = true
+function_next_line = false
+keep_padding = false
+never_split = true
+shell_variant = posix
+space_redirects = true
+switch_case_indent = true
+
+[*.bash]
+shell_variant = bats
+
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 4
+indent_style = space
+
+[*.{yaml,yml}]
+indent_style = space
