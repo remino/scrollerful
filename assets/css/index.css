@@ -544,9 +544,11 @@ body.sclf--x > .sclf:nth-child(10) > .sclf__float {
 	position: fixed;
 }
 .bg__center {
+	background-size: 200% 100%;
+	background-position: 50% 50%;
 	background-image: radial-gradient(
-		150% 75%,
-		rgb(10, 10, 10) 50%,
+		ellipse at center,
+		rgb(10, 10, 10) 0%,
 		rgba(10, 10, 10, 0)
 	);
 }
