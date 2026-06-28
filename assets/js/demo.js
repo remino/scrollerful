@@ -77,10 +77,6 @@ const setupControls = () => {
 	})
 }
 
-const getYouTubeVideo = () => {
-	document.getElementById('ytvid')
-}
-
 const seekVideo = (video, progress) => {
 	if (seeking) return
 
@@ -104,14 +100,6 @@ const setupVideo = () => {
 	})
 
 	video.pause()
-}
-
-const setupYouTubeVideo = () => {
-	// pause video right away
-	const ytvid = getYouTubeVideo()
-	if (!ytvid) return
-
-	ytvid.pauseVideo()
 }
 
 const updateVideo = ({

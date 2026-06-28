@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import style from './scrollerful.css?inline-string'
 import { calcContainProgress, calcCoverProgress } from './calc.js'
 

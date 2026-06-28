@@ -1,9 +1,11 @@
 import scrollerful from './scrollerful.js'
 
-;(function init() {
+const init = () => {
 	if (document.readyState === 'interactive') {
 		scrollerful()
 	} else {
 		document.addEventListener('DOMContentLoaded', scrollerful)
 	}
-})()
+}
+
+init()
