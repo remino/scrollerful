@@ -67,7 +67,7 @@
 		"version": "npm run build && git add dist"
 	},
 	"type": "module",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"allowScripts": {
 		"esbuild@0.28.1": true,
 		"fsevents@2.3.3": true,
