@@ -1,0 +1,7 @@
+{
+	"base": "/",
+	"paths": {
+		"/fonts/": "../../remino.net/fonts/dist/public/fonts/",
+		"/nav/": "../../remino.net/nav/dist/public/nav/"
+	}
+}

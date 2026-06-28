@@ -109,17 +109,17 @@ const copyArtifacts = async () => {
 		resolve(paths.publicAssets, 'demo.js')
 	)
 	await copyFile(
-		resolve(root, 'pages/scrollerful/demo.mp4'),
+		resolve(root, 'src/pages/scrollerful/demo.mp4'),
 		resolve(paths.publicAssets, 'demo.mp4')
 	)
 	await execFileAsync('magick', [
-		resolve(root, 'pages/scrollerful/share.avif'),
+		resolve(root, 'src/pages/scrollerful/share.avif'),
 		'-quality',
 		'90',
 		resolve(paths.publicAssets, 'share.avif.jpg'),
 	])
 	await execFileAsync('magick', [
-		resolve(root, 'pages/scrollerful/share.avif'),
+		resolve(root, 'src/pages/scrollerful/share.avif'),
 		resolve(paths.publicAssets, 'share.avif.webp'),
 	])
 }
@@ -135,7 +135,7 @@ const main = async () => {
 	await clean()
 
 	await buildLibrary({
-		entry: resolve(root, 'src/scrollerful.ts'),
+		entry: resolve(root, 'src/lib/scrollerful.ts'),
 		fileName: format =>
 			format === 'es' ? 'scrollerful.mjs' : 'scrollerful.cjs',
 		formats: ['es', 'cjs'],
@@ -144,7 +144,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'src/scrollerful.ts'),
+		entry: resolve(root, 'src/lib/scrollerful.ts'),
 		fileName: format =>
 			format === 'es' ? 'scrollerful.min.mjs' : 'scrollerful.min.js',
 		formats: ['es', 'cjs'],
@@ -153,7 +153,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'src/auto.ts'),
+		entry: resolve(root, 'src/lib/auto.ts'),
 		fileName: () => 'scrollerful-auto.min.js',
 		formats: ['umd'],
 		minify: true,
@@ -162,7 +162,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'assets/js/demo.ts'),
+		entry: resolve(root, 'src/assets/js/demo.ts'),
 		fileName: () => 'demo.js',
 		formats: ['iife'],
 		minify: true,

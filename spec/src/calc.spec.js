@@ -2,7 +2,7 @@ import {
 	calcContainerEnd,
 	calcContainProgress,
 	calcCoverProgress,
-} from '../../src/calc.ts'
+} from '../../src/lib/calc.ts'
 
 describe('src/calc.js', () => {
 	describe('calcContainerEnd()', () => {

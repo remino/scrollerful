@@ -5,7 +5,7 @@ import minifyHtml from 'astro-minify-html'
 
 export default defineConfig({
 	outDir: './deploy/public',
-	srcDir: '.',
+	srcDir: './src',
 	site: 'https://remino.net/scrollerful/',
 	trailingSlash: 'always',
 	integrations: [

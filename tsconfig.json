@@ -13,9 +13,7 @@
 	},
 	"include": [
 		"src/**/*.ts",
-		"src/**/*.d.ts",
-		"assets/js/**/*.ts",
-		"data/**/*.ts"
+		"src/**/*.d.ts"
 	],
 	"exclude": ["dist", "build", "deploy", "node_modules"]
 }

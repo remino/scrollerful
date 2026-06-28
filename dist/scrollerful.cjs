@@ -1,8 +1,8 @@
 /*! scrollerful v1.2.1 | (c) 2022-2026 Rémino Rem <https://remino.net/> | ISC Licence */
-//#region inline-css:L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M
-var inline_css_L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M_default = "@media screen{@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}";
+//#region inline-css:L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9saWIvc2Nyb2xsZXJmdWwuY3Nz
+var inline_css_L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9saWIvc2Nyb2xsZXJmdWwuY3Nz_default = "@media screen{@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}";
 //#endregion
-//#region src/calc.ts
+//#region src/lib/calc.ts
 var calcContainProgress = (containerStart, containerSize, viewSize) => {
 	if (containerSize === viewSize) {
 		const progress = (containerStart - viewSize) / viewSize * -1;
@@ -20,7 +20,7 @@ var calcContainProgress = (containerStart, containerSize, viewSize) => {
 };
 var calcCoverProgress = (containerStart, containerSize, viewSize) => (containerStart - viewSize) / (viewSize + containerSize) * -1;
 //#endregion
-//#region src/main.ts
+//#region src/lib/main.ts
 var PREFIX = "sclf";
 var CSS_CLASS_ENABLED = `${PREFIX}--enabled`;
 var CSS_CLASS_HORIZONTAL = `${PREFIX}--x`;
@@ -63,7 +63,7 @@ var addStyle = () => {
 	if (getStyleEl()) return;
 	const styleEl = document.createElement("style");
 	styleEl.setAttribute("id", EL_ID_STYLE);
-	styleEl.textContent = inline_css_L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M_default;
+	styleEl.textContent = inline_css_L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9saWIvc2Nyb2xsZXJmdWwuY3Nz_default;
 	if (!document.head.firstChild) {
 		document.head.appendChild(styleEl);
 		return;
@@ -188,7 +188,7 @@ var scrollerful = () => {
 	addEnabledClass();
 };
 //#endregion
-//#region src/scrollerful.ts
+//#region src/lib/scrollerful.ts
 var scrollerful_default = scrollerful;
 //#endregion
 module.exports = scrollerful_default;

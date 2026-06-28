@@ -5,6 +5,10 @@
 	},
 	"browser": "dist/scrollerful.cjs",
 	"description": "Small JS & CSS library for scroll animations.",
+	"dependencies": {
+		"@remino/astro-middleware": "^0.1.0",
+		"@remino/astro-site-nav": "^0.4.2"
+	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^8.62.0",
 		"@typescript-eslint/parser": "^8.62.0",
