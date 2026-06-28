@@ -2,7 +2,7 @@ import { execFile } from 'child_process'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import postcss from 'postcss'
-import { rm, readFile, mkdir, copyFile } from 'fs/promises'
+import { rm, readFile, mkdir, copyFile, writeFile } from 'fs/promises'
 import { resolve } from 'path'
 import { build } from 'vite'
 import { promisify } from 'util'
@@ -16,6 +16,12 @@ const paths = {
 	demoBuild: resolve(root, '.build/js/scrollerful'),
 	publicAssets: resolve(root, 'public/scrollerful'),
 }
+
+const packageJson = JSON.parse(
+	await readFile(resolve(root, 'package.json'), 'utf8')
+)
+const currentYear = new Date().getFullYear()
+const banner = `/*! ${packageJson.name} v${packageJson.version} | (c) 2022-${currentYear} ${packageJson.author.name} <${packageJson.author.url}> | ${packageJson.license} Licence */`
 
 const inlineCssStringPlugin = () => ({
 	enforce: 'pre',
@@ -75,6 +81,11 @@ const buildLibrary = async ({
 			},
 			minify,
 			outDir,
+			rollupOptions: {
+				output: {
+					banner,
+				},
+			},
 			sourcemap: false,
 		},
 	})
@@ -111,6 +122,13 @@ const copyArtifacts = async () => {
 		resolve(root, 'pages/scrollerful/share.avif'),
 		resolve(paths.publicAssets, 'share.avif.webp'),
 	])
+}
+
+const ensureBanner = async filePath => {
+	const file = await readFile(filePath, 'utf8')
+	if (file.startsWith(banner)) return
+
+	await writeFile(filePath, `${banner}\n${file}`)
 }
 
 const main = async () => {
@@ -152,6 +170,14 @@ const main = async () => {
 		emptyOutDir: true,
 		outDir: paths.demoBuild,
 	})
+
+	await Promise.all([
+		ensureBanner(resolve(paths.dist, 'scrollerful.mjs')),
+		ensureBanner(resolve(paths.dist, 'scrollerful.cjs')),
+		ensureBanner(resolve(paths.dist, 'scrollerful.min.mjs')),
+		ensureBanner(resolve(paths.dist, 'scrollerful.min.js')),
+		ensureBanner(resolve(paths.dist, 'scrollerful-auto.min.js')),
+	])
 
 	await copyArtifacts()
 }

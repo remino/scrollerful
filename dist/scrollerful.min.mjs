@@ -1,3 +1,4 @@
+/*! scrollerful v1.2.0 | (c) 2022-2026 Rémino Rem <https://remino.net/> | ISC Licence */
 //#region inline-css:L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M
 var e = (e, t, n) => {
 	if (t === n) {
