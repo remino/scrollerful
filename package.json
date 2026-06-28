@@ -47,7 +47,7 @@
 	"name": "scrollerful",
 	"scripts": {
 		"build": "npm run js:build && npm run site:assets && astro build",
-		"js:build": "node scripts/build-js.mjs",
+		"js:build": "node bin/build-js.mjs",
 		"lint": "npx eslint",
 		"lint:fix": "npx eslint --fix",
 		"dev": "astro dev",
