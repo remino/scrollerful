@@ -28,4 +28,7 @@ export default defineConfig({
 			],
 		}),
 	],
+	build: {
+		assets: 'scrollerful',
+	},
 })
