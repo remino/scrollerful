@@ -50,31 +50,18 @@
 	"main": "dist/scrollerful.cjs",
 	"name": "scrollerful",
 	"scripts": {
-		"build": "npm run css:build && npm run js:build && npm run site:assets && astro build",
-		"css:build": "npm run css:sass && npm run css:postcss",
-		"css:postcss": "npm exec -- postcss .build/sass-css/ --dir .build/css/scrollerful/",
-		"css:sass": "npm exec -- sass --no-source-map --load-path=node_modules/ assets/css/:.build/sass-css/",
-		"css:watch": "npm-watch css:build",
+		"build": "npm run js:build && npm run site:assets && astro build",
 		"js:build": "npx rollup --config rollup.config.js",
 		"js:watch": "npx rollup --config rollup.config.js --watch",
 		"lint": "npx eslint",
 		"lint:fix": "npx eslint --fix",
 		"dev": "astro dev",
 		"preview": "astro preview",
-		"site:assets": "mkdir -p public/scrollerful && cp dist/scrollerful-auto.min.js public/scrollerful/script.js && cp assets/js/demo.js public/scrollerful/demo.js",
+		"site:assets": "mkdir -p public/scrollerful && cp dist/scrollerful-auto.min.js public/scrollerful/script.js && cp .build/js/scrollerful/demo.js public/scrollerful/demo.js",
 		"start": "npm run dev",
 		"test": "npx jasmine",
 		"version": "npm run build && git add dist"
 	},
 	"type": "module",
-	"version": "1.2.0",
-	"watch": {
-		"css:build": {
-			"extensions": "css,sass,scss",
-			"patterns": [
-				"assets/css"
-			],
-			"quiet": false
-		}
-	}
+	"version": "1.2.0"
 }

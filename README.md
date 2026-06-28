@@ -66,7 +66,7 @@ scrolling.
 ### Built With
 
 - JavaScript
-- [Sass](https://sass-lang.com)
+- CSS
 - [rollup.js](https://rollupjs.org/guide/en/)
 - Docs:
     - [Astro](https://astro.build)

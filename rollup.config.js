@@ -15,6 +15,7 @@ const output = { banner }
 const outputCompact = { ...output, compact: true }
 
 const sassPlugin = sass({
+	include: ['**/*.css'],
 	options: {
 		outputStyle: 'compressed',
 	},

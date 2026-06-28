@@ -1,4 +1,4 @@
-import style from './scrollerful.sass'
+import style from './scrollerful.css'
 import { calcContainProgress, calcCoverProgress } from './calc.js'
 
 const PREFIX = 'sclf'
