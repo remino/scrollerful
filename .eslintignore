@@ -1,1 +1,7 @@
-/source/scrollerful/js/*
+.astro
+.build
+build
+dist
+node_modules
+bits
+public

@@ -6,7 +6,8 @@
 	},
 	"extends": [
 		"airbnb-base",
-		"plugin:no-template-curly-in-string-fix/recommended"
+		"plugin:no-template-curly-in-string-fix/recommended",
+		"prettier"
 	],
 	"overrides": [
 		{
@@ -18,6 +19,13 @@
 	],
 	"plugins": ["jasmine"],
 	"root": true,
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".mjs", ".js"]
+			}
+		}
+	},
 	"rules": {
 		"arrow-parens": ["error", "as-needed"],
 		"import/extensions": [
@@ -25,14 +33,6 @@
 			{
 				"mjs": "always",
 				"js": "always"
-			}
-		],
-		"import/resolver": [
-			"error",
-			{
-				"node": {
-					"extensions": [".mjs", ".js"]
-				}
 			}
 		],
 		"indent": [
