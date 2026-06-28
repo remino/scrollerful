@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro'
+import Logo from '../../components/Logo.astro'
+import { site } from '../../data/site.ts'
+import '../../assets/css/index.sass'
+
+const pageUrl = site.url
+---
+<BaseLayout title={site.title} description={site.description} pageUrl={pageUrl}>
+	<header class="sclf">
+		<div class="sclf__float">
+			<h1 class="sclf__sprite">
+				<Logo />
+			</h1>
+			<h2 class="sclf__sprite--contain">Small JS &amp; CSS library for scroll animations</h2>
+			<p class="sclf__sprite--contain">Scroll down to start</p>
+			<div class="scroll-down sclf__sprite">
+				<div class="scroll-down__arrow"></div>
+				<div class="scroll-down__arrow"></div>
+				<div class="scroll-down__arrow"></div>
+				<div class="scroll-down__arrow"></div>
+			</div>
+		</div>
+	</header>
+
+	<section id="motto" class="sclf">
+		<div class="sclf__float">
+			<h2 class="motto">
+				<span class="motto__text motto__text--scroll sclf__sprite--contain">Scroll</span>
+				<span class="motto__text motto__text--with sclf__sprite--contain">with</span>
+				<span class="motto__text motto__text--style sclf__sprite--contain">
+					<strong class="sclf__sprite">style!</strong>
+				</span>
+			</h2>
+		</div>
+	</section>
+
+	<nav id="get" class="sclf">
+		<div class="sclf__float">
+			<menu>
+				<li class="sclf__sprite">
+					<a href="/scrollerful/demo/">
+						<span class="btn__caption sclf__sprite">Try it!</span>
+						<span class="btn__description">Demos</span>
+					</a>
+				</li>
+				<li class="sclf__sprite">
+					<a href="https://github.com/remino/scrollerful">
+						<span class="btn__caption sclf__sprite">Use it!</span>
+						<span class="btn__description">README &amp; Downloads</span>
+					</a>
+				</li>
+			</menu>
+		</div>
+	</nav>
+
+	<div class="bg">
+		<div class="bg__color-1 sclf__sprite--contain"></div>
+		<div class="bg__color-2 sclf__sprite--contain"></div>
+		<div class="bg__center"></div>
+		<div class="bg__cover sclf__sprite--contain"></div>
+	</div>
+</BaseLayout>

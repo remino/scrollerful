@@ -69,8 +69,8 @@ scrolling.
 - [Sass](https://sass-lang.com)
 - [rollup.js](https://rollupjs.org/guide/en/)
 - Docs:
-    - [Middleman](https://middlemanapp.com)
-    - [mansite](https://github.com/remino/mansite)
+    - [Astro](https://astro.build)
+    - [Astro Compressor](https://github.com/rlemaigre/astro-compressor)
 
 [Back to top](#scrollerful)
 

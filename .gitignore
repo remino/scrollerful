@@ -1,4 +1,5 @@
 .build
+.astro
 .env
 /build
 /node_modules
