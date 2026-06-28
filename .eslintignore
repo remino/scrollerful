@@ -1,6 +1,7 @@
 .astro
 .build
 build
+deploy
 dist
 node_modules
 bits

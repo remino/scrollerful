@@ -17,5 +17,5 @@
 		"assets/js/**/*.ts",
 		"data/**/*.ts"
 	],
-	"exclude": ["dist", "build", "node_modules"]
+	"exclude": ["dist", "build", "deploy", "node_modules"]
 }

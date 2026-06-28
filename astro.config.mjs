@@ -4,7 +4,7 @@ import compressor from 'astro-compressor'
 import minifyHtml from 'astro-minify-html'
 
 export default defineConfig({
-	outDir: './build',
+	outDir: './deploy/public',
 	srcDir: '.',
 	site: 'https://remino.net/scrollerful/',
 	trailingSlash: 'always',

@@ -1,5 +1,6 @@
-.build
 .astro
 .env
+.build
 /build
+/deploy
 /node_modules
