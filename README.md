@@ -67,7 +67,7 @@ scrolling.
 
 - JavaScript
 - CSS
-- [rollup.js](https://rollupjs.org/guide/en/)
+- [Vite](https://vite.dev)
 - Docs:
     - [Astro](https://astro.build)
     - [Astro Compressor](https://github.com/rlemaigre/astro-compressor)

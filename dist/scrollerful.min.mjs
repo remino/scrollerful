@@ -1,2 +1,106 @@
-/*! scrollerful v1.2.0 | (c) 2022-2026 Rémino Rem <https://remino.net/> | ISC Licence */
-var e = "@media screen{@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports(scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}";const calcContainProgress=(r,t,c)=>{if(t===c){const t=(r-c)/c*-1;switch(!0){case r<0:return t;case r>0:return t-1;default:return .5}}const e=r/(t-c)*-1;return 1==t<c?1-e:e};const calcCoverProgress=(r,t,c)=>(r-c)/(c+t)*-1;const r="sclf",o=`${r}--enabled`,s=`${r}--x`,c=`${r}--inside--contain`,i=`${r}--inside--cover`,a=`${r}__ruler`,d=`--${r}-contain`,l=`--${r}-cover`,u=`${r}:contain:enter`,m=`${r}:contain:exit`,v=`${r}:cover:enter`,g=`${r}:cover:exit`,y=`${r}:scroll`,p=`.${r}`,h=`.${r}`,E=`${r}_ruler`,b=`${r}_style`;let f;const $=(e,t=!1)=>t?e.scrollWidth:e.scrollHeight,L=e=>document.getElementById(E).getBoundingClientRect()[e?"width":"height"],w=(e,t,n)=>{const[r,o]=((...e)=>e.sort(((e,t)=>e-t)))(t,n);return e>=r&&e<=o},C=async(e,r)=>{const o=((e,r)=>{const{containerStart:o,containerSize:s,viewSize:c}=((e,t)=>{const{size:n,start:r}=((e,t=!1)=>{if(t){const{left:t,width:n}=e.getBoundingClientRect();return {size:n,start:t}}const{height:n,top:r}=e.getBoundingClientRect();return {size:n,start:r}})(e,t),o=((e,t)=>["auto","scroll"].includes(getComputedStyle(e).getPropertyValue("overflow-"+(t?"x":"y"))))(e,t);return {containerStart:r,containerSize:o?$(e,t):n,viewSize:o?n:L(t)}})(e,r);return {contain:calcContainProgress(o,s,c),cover:calcCoverProgress(o,s,c)}})(e,r);e.dispatchEvent(new CustomEvent(y,{detail:{progress:o},bubbles:!0,cancelable:!0,composed:!1}));},S=({target:e,detail:{progress:{contain:t,cover:n}}})=>{var r;w(n,0,1)?(e.style.setProperty(d,t),e.style.setProperty(l,n)):(r=e,[d,l].forEach((e=>r.style.removeProperty(e))));},z=(e,t,n,r,o)=>{w(t,0,1)?e.classList.contains(o)||(e.classList.add(o),e.dispatchEvent(new CustomEvent(n,{bubbles:!0,cancelable:!0,composed:!1}))):e.classList.contains(o)&&(e.classList.remove(o),e.dispatchEvent(new CustomEvent(r,{bubbles:!0,cancelable:!0,composed:!1})));},A=({target:e,detail:{progress:{contain:t}}})=>{z(e,t,u,m,c);},B=({target:e,detail:{progress:{cover:t}}})=>{z(e,t,v,g,i);},x=({target:e})=>{f&&cancelAnimationFrame(f),f=requestAnimationFrame((()=>{(async e=>{const t=e.classList.contains(s);Promise.all([e,...e.querySelectorAll(h)].map((e=>C(e,t))));})(e),f=null;}));},P=e=>{[e,...e.querySelectorAll(h)].forEach((e=>{e.addEventListener(y,S),e.addEventListener(y,B),e.addEventListener(y,A);}));};var m$1 = ()=>{(()=>{if(document.getElementById(b))return;const t=document.createElement("style");t.setAttribute("id",b),t.textContent=e,document.head.firstChild?document.head.insertBefore(t,document.head.firstChild):document.head.appendChild(t);})(),(()=>{if(document.getElementById(E))return;const e=document.createElement("div");e.setAttribute("id",E),e.classList.add(a),document.body.appendChild(e);})(),Array.from(document.querySelectorAll(p)).forEach((e=>{e.addEventListener("resize",x),e.addEventListener("scroll",x),P(e),x({target:e});})),window.addEventListener("resize",(()=>x({target:document.body}))),window.addEventListener("scroll",(()=>x({target:document.body}))),P(document.body),x({target:document.body}),document.documentElement.classList.add(o);};export{m$1 as default};
+//#region inline-css:L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M
+var e = (e, t, n) => {
+	if (t === n) {
+		let t = (e - n) / n * -1;
+		switch (!0) {
+			case e < 0: return t;
+			case e > 0: return t - 1;
+			default: return .5;
+		}
+	}
+	let r = e / (t - n) * -1;
+	switch (!0) {
+		case t < n: return 1 - r;
+		default: return r;
+	}
+}, t = (e, t, n) => (e - n) / (n + t) * -1, n = "sclf", r = `${n}--enabled`, i = `${n}--x`, a = `${n}--inside--contain`, o = `${n}--inside--cover`, s = `${n}__ruler`, c = `--${n}-contain`, l = `--${n}-cover`, u = `${n}:contain:enter`, d = `${n}:contain:exit`, f = `${n}:cover:enter`, p = `${n}:cover:exit`, m = `${n}:scroll`, h = `.${n}`, g = `.${n}`, _ = `${n}_ruler`, v = `${n}_style`, y, b = (e, t = !1) => t ? e.scrollWidth : e.scrollHeight, x = () => document.getElementById(v), S = () => document.getElementById(_).getBoundingClientRect(), C = (e) => S()[e ? "width" : "height"], w = (e, t) => ["auto", "scroll"].includes(getComputedStyle(e).getPropertyValue(`overflow-${t ? "x" : "y"}`)), T = (...e) => e.sort((e, t) => e - t), E = (e, t, n) => {
+	let [r, i] = T(t, n);
+	return e >= r && e <= i;
+}, D = () => {
+	document.documentElement.classList.add(r);
+}, O = () => {
+	if (document.getElementById(_)) return;
+	let e = document.createElement("div");
+	e.setAttribute("id", _), e.classList.add(s), document.body.appendChild(e);
+}, k = () => {
+	if (x()) return;
+	let e = document.createElement("style");
+	if (e.setAttribute("id", v), e.textContent = "@media screen{@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}", !document.head.firstChild) {
+		document.head.appendChild(e);
+		return;
+	}
+	document.head.insertBefore(e, document.head.firstChild);
+}, A = (e, t = !1) => {
+	if (t) {
+		let { left: t, width: n } = e.getBoundingClientRect();
+		return {
+			size: n,
+			start: t
+		};
+	}
+	let { height: n, top: r } = e.getBoundingClientRect();
+	return {
+		size: n,
+		start: r
+	};
+}, j = (e, t) => {
+	let { size: n, start: r } = A(e, t), i = w(e, t);
+	return {
+		containerStart: r,
+		containerSize: i ? b(e, t) : n,
+		viewSize: i ? n : C(t)
+	};
+}, M = (n, r) => {
+	let { containerStart: i, containerSize: a, viewSize: o } = j(n, r);
+	return {
+		contain: e(i, a, o),
+		cover: t(i, a, o)
+	};
+}, N = async (e, t) => {
+	let n = M(e, t);
+	e.dispatchEvent(new CustomEvent(m, {
+		detail: { progress: n },
+		bubbles: !0,
+		cancelable: !0,
+		composed: !1
+	}));
+}, P = (e, ...t) => {
+	t.forEach((t) => e.style.removeProperty(t));
+}, F = ({ target: e, detail: { progress: { contain: t, cover: n } } }) => {
+	if (!E(n, 0, 1)) {
+		P(e, c, l);
+		return;
+	}
+	e.style.setProperty(c, t), e.style.setProperty(l, n);
+}, I = (e, t, n, r, i) => {
+	E(t, 0, 1) ? e.classList.contains(i) || (e.classList.add(i), e.dispatchEvent(new CustomEvent(n, {
+		bubbles: !0,
+		cancelable: !0,
+		composed: !1
+	}))) : e.classList.contains(i) && (e.classList.remove(i), e.dispatchEvent(new CustomEvent(r, {
+		bubbles: !0,
+		cancelable: !0,
+		composed: !1
+	})));
+}, L = ({ target: e, detail: { progress: { contain: t } } }) => {
+	I(e, t, u, d, a);
+}, R = ({ target: e, detail: { progress: { cover: t } } }) => {
+	I(e, t, f, p, o);
+}, z = async (e) => {
+	let t = e.classList.contains(i);
+	Promise.all([e, ...e.querySelectorAll(g)].map((e) => N(e, t)));
+}, B = ({ target: e }) => {
+	y && cancelAnimationFrame(y), y = requestAnimationFrame(() => {
+		z(e), y = null;
+	});
+}, V = (e) => {
+	[e, ...e.querySelectorAll(g)].forEach((e) => {
+		e.addEventListener(m, F), e.addEventListener(m, R), e.addEventListener(m, L);
+	});
+}, H = () => {
+	k(), O(), Array.from(document.querySelectorAll(h)).forEach((e) => {
+		e.addEventListener("resize", B), e.addEventListener("scroll", B), V(e), B({ target: e });
+	}), window.addEventListener("resize", () => B({ target: document.body })), window.addEventListener("scroll", () => B({ target: document.body })), V(document.body), B({ target: document.body }), D();
+};
+//#endregion
+export { H as default };
