@@ -1,2 +1,8 @@
-*.js
-*.md
+.astro
+.build
+build
+dist
+node_modules
+bits
+public/scrollerful/demo.js
+public/scrollerful/script.js
