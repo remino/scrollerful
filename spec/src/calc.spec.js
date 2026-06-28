@@ -1,7 +1,17 @@
-import { calcInnerProgress, calcOuterProgress } from '../../src/calc.js'
+import {
+	calcContainerEnd,
+	calcContainProgress,
+	calcCoverProgress,
+} from '../../src/calc.js'
 
 describe('src/calc.js', () => {
-	describe('calcInnerProgress()', () => {
+	describe('calcContainerEnd()', () => {
+		it('returns the container end from its start and size', () => {
+			expect(calcContainerEnd(10, 25)).toBe(35)
+		})
+	})
+
+	describe('calcContainProgress()', () => {
 		const cases = [
 			// testNumber, containerStart, containerSize, viewSize, expected
 
@@ -30,13 +40,13 @@ describe('src/calc.js', () => {
 		cases.forEach(([
 			testNumber, containerStart, containerSize, viewSize, expected,
 		]) => {
-			it(`(${testNumber}) returns inner progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
-				expect(calcInnerProgress(containerStart, containerSize, viewSize)).toBe(expected)
+			it(`(${testNumber}) returns contain progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
+				expect(calcContainProgress(containerStart, containerSize, viewSize)).toBe(expected)
 			})
 		})
 	})
 
-	describe('calcOuterProgress()', () => {
+	describe('calcCoverProgress()', () => {
 		const cases = [
 			// testNumber, containerStart, containerSize, viewSize, expected
 
@@ -65,8 +75,8 @@ describe('src/calc.js', () => {
 		cases.forEach(([
 			testNumber, containerStart, containerSize, viewSize, expected,
 		]) => {
-			it(`(${testNumber}) returns outer progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
-				expect(calcOuterProgress(containerStart, containerSize, viewSize)).toBe(expected)
+			it(`(${testNumber}) returns cover progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
+				expect(calcCoverProgress(containerStart, containerSize, viewSize)).toBe(expected)
 			})
 		})
 	})
