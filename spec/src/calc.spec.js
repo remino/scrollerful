@@ -37,13 +37,15 @@ describe('src/calc.js', () => {
 			['1.15', -100, 100, 100, 2],
 		]
 
-		cases.forEach(([
-			testNumber, containerStart, containerSize, viewSize, expected,
-		]) => {
-			it(`(${testNumber}) returns contain progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
-				expect(calcContainProgress(containerStart, containerSize, viewSize)).toBe(expected)
-			})
-		})
+		cases.forEach(
+			([testNumber, containerStart, containerSize, viewSize, expected]) => {
+				it(`(${testNumber}) returns contain progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
+					expect(
+						calcContainProgress(containerStart, containerSize, viewSize)
+					).toBe(expected)
+				})
+			}
+		)
 	})
 
 	describe('calcCoverProgress()', () => {
@@ -72,12 +74,14 @@ describe('src/calc.js', () => {
 			['2.15', -100, 100, 100, 1],
 		]
 
-		cases.forEach(([
-			testNumber, containerStart, containerSize, viewSize, expected,
-		]) => {
-			it(`(${testNumber}) returns cover progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
-				expect(calcCoverProgress(containerStart, containerSize, viewSize)).toBe(expected)
-			})
-		})
+		cases.forEach(
+			([testNumber, containerStart, containerSize, viewSize, expected]) => {
+				it(`(${testNumber}) returns cover progress of ${expected} for containerStart ${containerStart}, containerSize ${containerSize}, and viewSize ${viewSize}`, () => {
+					expect(
+						calcCoverProgress(containerStart, containerSize, viewSize)
+					).toBe(expected)
+				})
+			}
+		)
 	})
 })

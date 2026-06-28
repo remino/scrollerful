@@ -5,15 +5,27 @@ const isContain = () => document.body.classList.contains('demo--contain')
 
 const showProgress = (target, progress) => {
 	// eslint-disable-next-line no-param-reassign
-	target.querySelector('.item--percentage output').textContent = Math.max(0, Math.min(100, Math.round(progress * 100)))
+	target.querySelector('.item--percentage output').textContent = Math.max(
+		0,
+		Math.min(100, Math.round(progress * 100))
+	)
 }
 
-const updatePercentage = ({ target, detail: { progress: { contain, cover } } }) => {
+const updatePercentage = ({
+	target,
+	detail: {
+		progress: { contain, cover },
+	},
+}) => {
 	showProgress(target, isContain() ? contain : cover)
 }
 
 const changedDirection = value => {
-	document.body.classList.remove('demo--horizontal', 'demo--vertical', 'sclf--x')
+	document.body.classList.remove(
+		'demo--horizontal',
+		'demo--vertical',
+		'sclf--x'
+	)
 	document.body.classList.add(`demo--${value}`)
 	if (value === 'horizontal') document.body.classList.add('sclf--x')
 }
@@ -51,7 +63,8 @@ const radioChanged = ({ currentTarget }) => {
 		case 'size':
 			changedSize(currentTarget.value)
 			break
-		default: break
+		default:
+			break
 	}
 }
 
@@ -80,9 +93,15 @@ const setupVideo = () => {
 	const video = document.querySelector('video')
 	if (!video) return
 
-	video.addEventListener('play', () => { video.pause() })
-	video.addEventListener('seeked', () => { seeking = false })
-	video.addEventListener('seeking', () => { seeking = true })
+	video.addEventListener('play', () => {
+		video.pause()
+	})
+	video.addEventListener('seeked', () => {
+		seeking = false
+	})
+	video.addEventListener('seeking', () => {
+		seeking = true
+	})
 
 	video.pause()
 }
@@ -95,7 +114,12 @@ const setupYouTubeVideo = () => {
 	ytvid.pauseVideo()
 }
 
-const updateVideo = ({ currentTarget, detail: { progress: { contain, cover } } }) => {
+const updateVideo = ({
+	currentTarget,
+	detail: {
+		progress: { contain, cover },
+	},
+}) => {
 	const video = currentTarget.querySelector('video')
 	if (!video) return
 
@@ -116,10 +140,10 @@ const main = () => {
 	setupVideo()
 }
 
-(function init() {
+;(function init() {
 	if (document.readyState === 'interactive') {
 		main()
 	} else {
 		document.addEventListener('DOMContentLoaded', main)
 	}
-}())
+})()

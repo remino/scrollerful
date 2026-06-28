@@ -1,13 +1,15 @@
-(() => {
+;(() => {
 	const step = 20
 	const endPosition = 1200
 	let position = 0
 
-	Array.from(['header p', 'header h2', 'header .scroll-down']).forEach(selector => {
-		const el = document.querySelector(selector)
-		if (!el) return
-		el.remove()
-	})
+	Array.from(['header p', 'header h2', 'header .scroll-down']).forEach(
+		selector => {
+			const el = document.querySelector(selector)
+			if (!el) return
+			el.remove()
+		}
+	)
 
 	document.body.style.overflow = 'hidden'
 

@@ -24,12 +24,17 @@ const EL_ID_STYLE = `${PREFIX}_style`
 
 let requestId
 
-const getElScrollSize = (el, horizontal = false) => (horizontal ? el.scrollWidth : el.scrollHeight)
+const getElScrollSize = (el, horizontal = false) =>
+	horizontal ? el.scrollWidth : el.scrollHeight
 const getStyleEl = () => document.getElementById(EL_ID_STYLE)
-const getViewportRect = () => document.getElementById(EL_ID_RULER).getBoundingClientRect()
-const getViewportSize = horizontal => getViewportRect()[horizontal ? 'width' : 'height']
-const showsOverflow = (el, horizontal) => ['auto', 'scroll']
-	.includes(getComputedStyle(el).getPropertyValue(`overflow-${horizontal ? 'x' : 'y'}`))
+const getViewportRect = () =>
+	document.getElementById(EL_ID_RULER).getBoundingClientRect()
+const getViewportSize = horizontal =>
+	getViewportRect()[horizontal ? 'width' : 'height']
+const showsOverflow = (el, horizontal) =>
+	['auto', 'scroll'].includes(
+		getComputedStyle(el).getPropertyValue(`overflow-${horizontal ? 'x' : 'y'}`)
+	)
 const sortNums = (...nums) => nums.sort((a, b) => a - b)
 
 const isWithin = (num, a, b) => {
@@ -88,7 +93,10 @@ const getContainerCoords = (el, horizontal) => {
 }
 
 const sectionProgress = (el, horizontal) => {
-	const { containerStart, containerSize, viewSize } = getContainerCoords(el, horizontal)
+	const { containerStart, containerSize, viewSize } = getContainerCoords(
+		el,
+		horizontal
+	)
 
 	return {
 		contain: calcContainProgress(containerStart, containerSize, viewSize),
@@ -105,7 +113,7 @@ const processSection = async (el, horizontal) => {
 			bubbles: true,
 			cancelable: true,
 			composed: false,
-		}),
+		})
 	)
 }
 
@@ -123,7 +131,7 @@ const setStyleVars = ({
 		removeStyleProperties(
 			target,
 			CSS_PROP_PROGRESS_CONTAIN,
-			CSS_PROP_PROGRESS_COVER,
+			CSS_PROP_PROGRESS_COVER
 		)
 		return
 	}
@@ -132,7 +140,13 @@ const setStyleVars = ({
 	target.style.setProperty(CSS_PROP_PROGRESS_COVER, cover)
 }
 
-const triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
+const triggerEnterExit = (
+	target,
+	progress,
+	eventEnter,
+	eventExit,
+	className
+) => {
 	if (!isWithin(progress, 0, 1)) {
 		if (target.classList.contains(className)) {
 			target.classList.remove(className)
@@ -142,7 +156,7 @@ const triggerEnterExit = (target, progress, eventEnter, eventExit, className) =>
 					bubbles: true,
 					cancelable: true,
 					composed: false,
-				}),
+				})
 			)
 		}
 	} else if (!target.classList.contains(className)) {
@@ -153,38 +167,49 @@ const triggerEnterExit = (target, progress, eventEnter, eventExit, className) =>
 				bubbles: true,
 				cancelable: true,
 				composed: false,
-			}),
+			})
 		)
 	}
 }
 
-const triggerContainEnterExit = ({ target, detail: { progress: { contain } } }) => {
+const triggerContainEnterExit = ({
+	target,
+	detail: {
+		progress: { contain },
+	},
+}) => {
 	triggerEnterExit(
 		target,
 		contain,
 		EVENT_CONTAIN_ENTER,
 		EVENT_CONTAIN_EXIT,
-		CSS_CLASS_INSIDE_CONTAIN,
+		CSS_CLASS_INSIDE_CONTAIN
 	)
 }
 
-const triggerCoverEnterExit = ({ target, detail: { progress: { cover } } }) => {
+const triggerCoverEnterExit = ({
+	target,
+	detail: {
+		progress: { cover },
+	},
+}) => {
 	triggerEnterExit(
 		target,
 		cover,
 		EVENT_COVER_ENTER,
 		EVENT_COVER_EXIT,
-		CSS_CLASS_INSIDE_COVER,
+		CSS_CLASS_INSIDE_COVER
 	)
 }
 
 const scrollFrame = async target => {
 	const horizontal = target.classList.contains(CSS_CLASS_HORIZONTAL)
 
-	Promise.all([
-		target,
-		...target.querySelectorAll(SEL_TRAY),
-	].map(el => processSection(el, horizontal)))
+	Promise.all(
+		[target, ...target.querySelectorAll(SEL_TRAY)].map(el =>
+			processSection(el, horizontal)
+		)
+	)
 }
 
 const scroll = ({ target }) => {
@@ -197,7 +222,7 @@ const scroll = ({ target }) => {
 }
 
 const addScrollListeners = scrollEl => {
-	[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
+	;[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
 		el.addEventListener(EVENT_SCROLL, setStyleVars)
 		el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
 		el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
