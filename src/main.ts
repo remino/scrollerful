@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import style from './scrollerful.css?inline-string'
-import { calcContainProgress, calcCoverProgress } from './calc.js'
+import { calcContainProgress, calcCoverProgress } from './calc'
 
 const PREFIX = 'sclf'
 
@@ -18,36 +18,55 @@ const EVENT_COVER_EXIT = `${PREFIX}:cover:exit`
 const EVENT_SCROLL = `${PREFIX}:scroll`
 const SEL_SCROLL = `.${PREFIX}`
 const SEL_TRAY = `.${PREFIX}`
-// TODO Predict internia to smoothen animations
-// const SMOOTHING_FACTOR = 50
 const EL_ID_RULER = `${PREFIX}_ruler`
 const EL_ID_STYLE = `${PREFIX}_style`
 
+type AxisCoords = {
+	size: number
+	start: number
+}
+
+type ContainerCoords = {
+	containerStart: number
+	containerSize: number
+	viewSize: number
+}
+
+type ScrollProgress = {
+	contain: number
+	cover: number
+}
+
+type ScrollEventDetail = {
+	progress: ScrollProgress
+}
+
 let requestId
 
-const getElScrollSize = (el, horizontal = false) =>
+const getElScrollSize = (el: HTMLElement, horizontal = false): number =>
 	horizontal ? el.scrollWidth : el.scrollHeight
-const getStyleEl = () => document.getElementById(EL_ID_STYLE)
-const getViewportRect = () =>
+const getStyleEl = (): HTMLStyleElement | null =>
+	document.getElementById(EL_ID_STYLE) as HTMLStyleElement | null
+const getViewportRect = (): DOMRect =>
 	document.getElementById(EL_ID_RULER).getBoundingClientRect()
-const getViewportSize = horizontal =>
+const getViewportSize = (horizontal: boolean): number =>
 	getViewportRect()[horizontal ? 'width' : 'height']
-const showsOverflow = (el, horizontal) =>
+const showsOverflow = (el: HTMLElement, horizontal: boolean): boolean =>
 	['auto', 'scroll'].includes(
 		getComputedStyle(el).getPropertyValue(`overflow-${horizontal ? 'x' : 'y'}`)
 	)
-const sortNums = (...nums) => nums.sort((a, b) => a - b)
+const sortNums = (...nums: number[]): number[] => nums.sort((a, b) => a - b)
 
-const isWithin = (num, a, b) => {
+const isWithin = (num: number, a: number, b: number): boolean => {
 	const [min, max] = sortNums(a, b)
 	return num >= min && num <= max
 }
 
-const addEnabledClass = () => {
+const addEnabledClass = (): void => {
 	document.documentElement.classList.add(CSS_CLASS_ENABLED)
 }
 
-const addRuler = () => {
+const addRuler = (): void => {
 	if (document.getElementById(EL_ID_RULER)) return
 
 	const ruler = document.createElement('div')
@@ -57,7 +76,7 @@ const addRuler = () => {
 	document.body.appendChild(ruler)
 }
 
-const addStyle = () => {
+const addStyle = (): void => {
 	if (getStyleEl()) return
 
 	const styleEl = document.createElement('style')
@@ -72,7 +91,10 @@ const addStyle = () => {
 	document.head.insertBefore(styleEl, document.head.firstChild)
 }
 
-const getElAxisCoords = (el, horizontal = false) => {
+const getElAxisCoords = (
+	el: HTMLElement,
+	horizontal = false
+): AxisCoords => {
 	if (horizontal) {
 		const { left, width } = el.getBoundingClientRect()
 		return { size: width, start: left }
@@ -82,7 +104,10 @@ const getElAxisCoords = (el, horizontal = false) => {
 	return { size: height, start: top }
 }
 
-const getContainerCoords = (el, horizontal) => {
+const getContainerCoords = (
+	el: HTMLElement,
+	horizontal: boolean
+): ContainerCoords => {
 	const { size, start } = getElAxisCoords(el, horizontal)
 	const overflow = showsOverflow(el, horizontal)
 
@@ -93,7 +118,10 @@ const getContainerCoords = (el, horizontal) => {
 	}
 }
 
-const sectionProgress = (el, horizontal) => {
+const sectionProgress = (
+	el: HTMLElement,
+	horizontal: boolean
+): ScrollProgress => {
 	const { containerStart, containerSize, viewSize } = getContainerCoords(
 		el,
 		horizontal
@@ -105,7 +133,7 @@ const sectionProgress = (el, horizontal) => {
 	}
 }
 
-const processSection = async (el, horizontal) => {
+const processSection = (el: HTMLElement, horizontal: boolean): void => {
 	const progress = sectionProgress(el, horizontal)
 
 	el.dispatchEvent(
@@ -118,16 +146,21 @@ const processSection = async (el, horizontal) => {
 	)
 }
 
-const removeStyleProperties = (el, ...names) => {
+const removeStyleProperties = (el: HTMLElement, ...names: string[]): void => {
 	names.forEach(name => el.style.removeProperty(name))
 }
 
-const setStyleVars = ({
-	target,
-	detail: {
+const setStyleVars = (event: Event): void => {
+	const { target, detail } = event as CustomEvent<ScrollEventDetail> & {
+		target: HTMLElement | null
+	}
+
+	if (!target) return
+
+	const {
 		progress: { contain, cover },
-	},
-}) => {
+	} = detail
+
 	if (!isWithin(cover, 0, 1)) {
 		removeStyleProperties(
 			target,
@@ -137,17 +170,17 @@ const setStyleVars = ({
 		return
 	}
 
-	target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, contain)
-	target.style.setProperty(CSS_PROP_PROGRESS_COVER, cover)
+	target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, String(contain))
+	target.style.setProperty(CSS_PROP_PROGRESS_COVER, String(cover))
 }
 
 const triggerEnterExit = (
-	target,
-	progress,
-	eventEnter,
-	eventExit,
-	className
-) => {
+	target: HTMLElement,
+	progress: number,
+	eventEnter: string,
+	eventExit: string,
+	className: string
+): void => {
 	if (!isWithin(progress, 0, 1)) {
 		if (target.classList.contains(className)) {
 			target.classList.remove(className)
@@ -173,12 +206,17 @@ const triggerEnterExit = (
 	}
 }
 
-const triggerContainEnterExit = ({
-	target,
-	detail: {
+const triggerContainEnterExit = (event: Event): void => {
+	const { target, detail } = event as CustomEvent<ScrollEventDetail> & {
+		target: HTMLElement | null
+	}
+
+	if (!target) return
+
+	const {
 		progress: { contain },
-	},
-}) => {
+	} = detail
+
 	triggerEnterExit(
 		target,
 		contain,
@@ -188,12 +226,17 @@ const triggerContainEnterExit = ({
 	)
 }
 
-const triggerCoverEnterExit = ({
-	target,
-	detail: {
+const triggerCoverEnterExit = (event: Event): void => {
+	const { target, detail } = event as CustomEvent<ScrollEventDetail> & {
+		target: HTMLElement | null
+	}
+
+	if (!target) return
+
+	const {
 		progress: { cover },
-	},
-}) => {
+	} = detail
+
 	triggerEnterExit(
 		target,
 		cover,
@@ -203,17 +246,17 @@ const triggerCoverEnterExit = ({
 	)
 }
 
-const scrollFrame = async target => {
+const scrollFrame = (target: HTMLElement): void => {
 	const horizontal = target.classList.contains(CSS_CLASS_HORIZONTAL)
 
 	Promise.all(
-		[target, ...target.querySelectorAll(SEL_TRAY)].map(el =>
-			processSection(el, horizontal)
+		[target, ...Array.from(target.querySelectorAll<HTMLElement>(SEL_TRAY))].map(
+			el => processSection(el, horizontal)
 		)
 	)
 }
 
-const scroll = ({ target }) => {
+const scroll = (target: HTMLElement): void => {
 	if (requestId) cancelAnimationFrame(requestId)
 
 	requestId = requestAnimationFrame(() => {
@@ -222,29 +265,33 @@ const scroll = ({ target }) => {
 	})
 }
 
-const addScrollListeners = scrollEl => {
-	;[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach(el => {
-		el.addEventListener(EVENT_SCROLL, setStyleVars)
-		el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
-		el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
-	})
+const addScrollListeners = (scrollEl: HTMLElement): void => {
+	;[scrollEl, ...Array.from(scrollEl.querySelectorAll<HTMLElement>(SEL_TRAY))].forEach(
+		el => {
+			el.addEventListener(EVENT_SCROLL, setStyleVars)
+			el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
+			el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
+		}
+	)
 }
 
-const scrollerful = () => {
+const scrollerful = (): void => {
 	addStyle()
 	addRuler()
 
-	Array.from(document.querySelectorAll(SEL_SCROLL)).forEach(target => {
-		target.addEventListener('resize', scroll)
-		target.addEventListener('scroll', scroll)
-		addScrollListeners(target)
-		scroll({ target })
-	})
+	Array.from(document.querySelectorAll<HTMLElement>(SEL_SCROLL)).forEach(
+		target => {
+			target.addEventListener('resize', () => scroll(target))
+			target.addEventListener('scroll', () => scroll(target))
+			addScrollListeners(target)
+			scroll(target)
+		}
+	)
 
-	window.addEventListener('resize', () => scroll({ target: document.body }))
-	window.addEventListener('scroll', () => scroll({ target: document.body }))
+	window.addEventListener('resize', () => scroll(document.body))
+	window.addEventListener('scroll', () => scroll(document.body))
 	addScrollListeners(document.body)
-	scroll({ target: document.body })
+	scroll(document.body)
 
 	addEnabledClass()
 }

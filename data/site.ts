@@ -1,4 +1,12 @@
-export const site = {
+export interface SiteData {
+	title: string
+	description: string
+	url: string
+	shareImage: string
+	twitterHandle: string
+}
+
+export const site: SiteData = {
 	title: 'Scrollerful',
 	description:
 		'JavaScript library using CSS variables to animate elements while user scrolls.',

@@ -57,7 +57,7 @@ var e = (e, t, n) => {
 		contain: e(i, a, o),
 		cover: t(i, a, o)
 	};
-}, N = async (e, t) => {
+}, N = (e, t) => {
 	let n = M(e, t);
 	e.dispatchEvent(new CustomEvent(m, {
 		detail: { progress: n },
@@ -67,12 +67,15 @@ var e = (e, t, n) => {
 	}));
 }, P = (e, ...t) => {
 	t.forEach((t) => e.style.removeProperty(t));
-}, F = ({ target: e, detail: { progress: { contain: t, cover: n } } }) => {
-	if (!E(n, 0, 1)) {
-		P(e, c, l);
+}, F = (e) => {
+	let { target: t, detail: n } = e;
+	if (!t) return;
+	let { progress: { contain: r, cover: i } } = n;
+	if (!E(i, 0, 1)) {
+		P(t, c, l);
 		return;
 	}
-	e.style.setProperty(c, t), e.style.setProperty(l, n);
+	t.style.setProperty(c, String(r)), t.style.setProperty(l, String(i));
 }, I = (e, t, n, r, i) => {
 	E(t, 0, 1) ? e.classList.contains(i) || (e.classList.add(i), e.dispatchEvent(new CustomEvent(n, {
 		bubbles: !0,
@@ -83,25 +86,31 @@ var e = (e, t, n) => {
 		cancelable: !0,
 		composed: !1
 	})));
-}, L = ({ target: e, detail: { progress: { contain: t } } }) => {
-	I(e, t, u, d, a);
-}, R = ({ target: e, detail: { progress: { cover: t } } }) => {
-	I(e, t, f, p, o);
-}, z = async (e) => {
+}, L = (e) => {
+	let { target: t, detail: n } = e;
+	if (!t) return;
+	let { progress: { contain: r } } = n;
+	I(t, r, u, d, a);
+}, R = (e) => {
+	let { target: t, detail: n } = e;
+	if (!t) return;
+	let { progress: { cover: r } } = n;
+	I(t, r, f, p, o);
+}, z = (e) => {
 	let t = e.classList.contains(i);
-	Promise.all([e, ...e.querySelectorAll(g)].map((e) => N(e, t)));
-}, B = ({ target: e }) => {
+	Promise.all([e, ...Array.from(e.querySelectorAll(g))].map((e) => N(e, t)));
+}, B = (e) => {
 	y && cancelAnimationFrame(y), y = requestAnimationFrame(() => {
 		z(e), y = null;
 	});
 }, V = (e) => {
-	[e, ...e.querySelectorAll(g)].forEach((e) => {
+	[e, ...Array.from(e.querySelectorAll(g))].forEach((e) => {
 		e.addEventListener(m, F), e.addEventListener(m, R), e.addEventListener(m, L);
 	});
 }, H = () => {
 	k(), O(), Array.from(document.querySelectorAll(h)).forEach((e) => {
-		e.addEventListener("resize", B), e.addEventListener("scroll", B), V(e), B({ target: e });
-	}), window.addEventListener("resize", () => B({ target: document.body })), window.addEventListener("scroll", () => B({ target: document.body })), V(document.body), B({ target: document.body }), D();
+		e.addEventListener("resize", () => B(e)), e.addEventListener("scroll", () => B(e)), V(e), B(e);
+	}), window.addEventListener("resize", () => B(document.body)), window.addEventListener("scroll", () => B(document.body)), V(document.body), B(document.body), D();
 };
 //#endregion
 export { H as default };

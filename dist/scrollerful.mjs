@@ -2,7 +2,7 @@
 //#region inline-css:L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M
 var inline_css_L1VzZXJzL3JlbWkvU2l0ZXMvcmVtaW5vL3Njcm9sbGVyZnVsL3NyYy9zY3JvbGxlcmZ1bC5jc3M_default = "@media screen{@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center;max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh;position:relative}.sclf--enabled .sclf--padding{height:100vh;height:100lvh}}";
 //#endregion
-//#region src/calc.js
+//#region src/calc.ts
 var calcContainProgress = (containerStart, containerSize, viewSize) => {
 	if (containerSize === viewSize) {
 		const progress = (containerStart - viewSize) / viewSize * -1;
@@ -20,7 +20,7 @@ var calcContainProgress = (containerStart, containerSize, viewSize) => {
 };
 var calcCoverProgress = (containerStart, containerSize, viewSize) => (containerStart - viewSize) / (viewSize + containerSize) * -1;
 //#endregion
-//#region src/main.js
+//#region src/main.ts
 var PREFIX = "sclf";
 var CSS_CLASS_ENABLED = `${PREFIX}--enabled`;
 var CSS_CLASS_HORIZONTAL = `${PREFIX}--x`;
@@ -100,7 +100,7 @@ var sectionProgress = (el, horizontal) => {
 		cover: calcCoverProgress(containerStart, containerSize, viewSize)
 	};
 };
-var processSection = async (el, horizontal) => {
+var processSection = (el, horizontal) => {
 	const progress = sectionProgress(el, horizontal);
 	el.dispatchEvent(new CustomEvent(EVENT_SCROLL, {
 		detail: { progress },
@@ -112,13 +112,16 @@ var processSection = async (el, horizontal) => {
 var removeStyleProperties = (el, ...names) => {
 	names.forEach((name) => el.style.removeProperty(name));
 };
-var setStyleVars = ({ target, detail: { progress: { contain, cover } } }) => {
+var setStyleVars = (event) => {
+	const { target, detail } = event;
+	if (!target) return;
+	const { progress: { contain, cover } } = detail;
 	if (!isWithin(cover, 0, 1)) {
 		removeStyleProperties(target, CSS_PROP_PROGRESS_CONTAIN, CSS_PROP_PROGRESS_COVER);
 		return;
 	}
-	target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, contain);
-	target.style.setProperty(CSS_PROP_PROGRESS_COVER, cover);
+	target.style.setProperty(CSS_PROP_PROGRESS_CONTAIN, String(contain));
+	target.style.setProperty(CSS_PROP_PROGRESS_COVER, String(cover));
 };
 var triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
 	if (!isWithin(progress, 0, 1)) {
@@ -139,17 +142,23 @@ var triggerEnterExit = (target, progress, eventEnter, eventExit, className) => {
 		}));
 	}
 };
-var triggerContainEnterExit = ({ target, detail: { progress: { contain } } }) => {
+var triggerContainEnterExit = (event) => {
+	const { target, detail } = event;
+	if (!target) return;
+	const { progress: { contain } } = detail;
 	triggerEnterExit(target, contain, EVENT_CONTAIN_ENTER, EVENT_CONTAIN_EXIT, CSS_CLASS_INSIDE_CONTAIN);
 };
-var triggerCoverEnterExit = ({ target, detail: { progress: { cover } } }) => {
+var triggerCoverEnterExit = (event) => {
+	const { target, detail } = event;
+	if (!target) return;
+	const { progress: { cover } } = detail;
 	triggerEnterExit(target, cover, EVENT_COVER_ENTER, EVENT_COVER_EXIT, CSS_CLASS_INSIDE_COVER);
 };
-var scrollFrame = async (target) => {
+var scrollFrame = (target) => {
 	const horizontal = target.classList.contains(CSS_CLASS_HORIZONTAL);
-	Promise.all([target, ...target.querySelectorAll(SEL_TRAY)].map((el) => processSection(el, horizontal)));
+	Promise.all([target, ...Array.from(target.querySelectorAll(SEL_TRAY))].map((el) => processSection(el, horizontal)));
 };
-var scroll = ({ target }) => {
+var scroll = (target) => {
 	if (requestId) cancelAnimationFrame(requestId);
 	requestId = requestAnimationFrame(() => {
 		scrollFrame(target);
@@ -157,7 +166,7 @@ var scroll = ({ target }) => {
 	});
 };
 var addScrollListeners = (scrollEl) => {
-	[scrollEl, ...scrollEl.querySelectorAll(SEL_TRAY)].forEach((el) => {
+	[scrollEl, ...Array.from(scrollEl.querySelectorAll(SEL_TRAY))].forEach((el) => {
 		el.addEventListener(EVENT_SCROLL, setStyleVars);
 		el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit);
 		el.addEventListener(EVENT_SCROLL, triggerContainEnterExit);
@@ -167,19 +176,19 @@ var scrollerful = () => {
 	addStyle();
 	addRuler();
 	Array.from(document.querySelectorAll(SEL_SCROLL)).forEach((target) => {
-		target.addEventListener("resize", scroll);
-		target.addEventListener("scroll", scroll);
+		target.addEventListener("resize", () => scroll(target));
+		target.addEventListener("scroll", () => scroll(target));
 		addScrollListeners(target);
-		scroll({ target });
+		scroll(target);
 	});
-	window.addEventListener("resize", () => scroll({ target: document.body }));
-	window.addEventListener("scroll", () => scroll({ target: document.body }));
+	window.addEventListener("resize", () => scroll(document.body));
+	window.addEventListener("scroll", () => scroll(document.body));
 	addScrollListeners(document.body);
-	scroll({ target: document.body });
+	scroll(document.body);
 	addEnabledClass();
 };
 //#endregion
-//#region src/scrollerful.js
+//#region src/scrollerful.ts
 var scrollerful_default = scrollerful;
 //#endregion
 export { scrollerful_default as default };

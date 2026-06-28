@@ -1,22 +1,40 @@
 let seeking = false
 
+type ScrollProgress = {
+	contain: number
+	cover: number
+}
+
+type ScrollDetail = {
+	progress: ScrollProgress
+}
+
+type ScrollEvent = CustomEvent<ScrollDetail> & {
+	currentTarget: Element | null
+	target: Element | null
+}
+
 const clamp = (min, value, max) => Math.max(min, Math.min(max, value))
 const isContain = () => document.body.classList.contains('demo--contain')
 
 const showProgress = (target, progress) => {
-	// eslint-disable-next-line no-param-reassign
-	target.querySelector('.item--percentage output').textContent = Math.max(
-		0,
-		Math.min(100, Math.round(progress * 100))
+	const output = target.querySelector('.item--percentage output')
+	if (!output) return
+
+	output.textContent = String(
+		Math.max(0, Math.min(100, Math.round(progress * 100)))
 	)
 }
 
-const updatePercentage = ({
-	target,
-	detail: {
+const updatePercentage = (event: Event) => {
+	const { target, detail } = event as ScrollEvent
+
+	if (!target) return
+
+	const {
 		progress: { contain, cover },
-	},
-}) => {
+	} = detail
+
 	showProgress(target, isContain() ? contain : cover)
 }
 
@@ -81,8 +99,8 @@ const seekVideo = (video, progress) => {
 	if (seeking) return
 
 	const time = (video.duration / 2) * Math.abs(clamp(0, progress, 1))
-	// eslint-disable-next-line no-param-reassign
-	video.currentTime = time
+	const media = video
+	media.currentTime = time
 }
 
 const setupVideo = () => {
@@ -102,12 +120,15 @@ const setupVideo = () => {
 	video.pause()
 }
 
-const updateVideo = ({
-	currentTarget,
-	detail: {
+const updateVideo = (event: Event) => {
+	const { currentTarget, detail } = event as ScrollEvent
+
+	if (!currentTarget) return
+
+	const {
 		progress: { contain, cover },
-	},
-}) => {
+	} = detail
+
 	const video = currentTarget.querySelector('video')
 	if (!video) return
 
@@ -124,7 +145,6 @@ const main = () => {
 	})
 
 	setupControls()
-	// setupYouTubeVideo()
 	setupVideo()
 }
 

@@ -135,7 +135,7 @@ const main = async () => {
 	await clean()
 
 	await buildLibrary({
-		entry: resolve(root, 'src/scrollerful.js'),
+		entry: resolve(root, 'src/scrollerful.ts'),
 		fileName: format =>
 			format === 'es' ? 'scrollerful.mjs' : 'scrollerful.cjs',
 		formats: ['es', 'cjs'],
@@ -144,7 +144,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'src/scrollerful.js'),
+		entry: resolve(root, 'src/scrollerful.ts'),
 		fileName: format =>
 			format === 'es' ? 'scrollerful.min.mjs' : 'scrollerful.min.js',
 		formats: ['es', 'cjs'],
@@ -153,7 +153,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'src/auto.js'),
+		entry: resolve(root, 'src/auto.ts'),
 		fileName: () => 'scrollerful-auto.min.js',
 		formats: ['umd'],
 		minify: true,
@@ -162,7 +162,7 @@ const main = async () => {
 	})
 
 	await buildLibrary({
-		entry: resolve(root, 'assets/js/demo.js'),
+		entry: resolve(root, 'assets/js/demo.ts'),
 		fileName: () => 'demo.js',
 		formats: ['iife'],
 		minify: true,
