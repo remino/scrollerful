@@ -37,7 +37,9 @@ const inlineCssStringPlugin = () => ({
 		const prefix = 'inline-css:'
 		if (!id.startsWith(prefix)) return null
 
-		const filePath = Buffer.from(id.slice(prefix.length), 'base64url').toString('utf8')
+		const filePath = Buffer.from(id.slice(prefix.length), 'base64url').toString(
+			'utf8'
+		)
 
 		this.addWatchFile(filePath)
 
@@ -58,23 +60,24 @@ const buildLibrary = async ({
 	name,
 	outDir,
 	emptyOutDir = false,
-}) => build({
-	configFile: false,
-	publicDir: false,
-	plugins: [inlineCssStringPlugin()],
-	build: {
-		emptyOutDir,
-		lib: {
-			entry,
-			fileName,
-			formats,
-			name,
+}) =>
+	build({
+		configFile: false,
+		publicDir: false,
+		plugins: [inlineCssStringPlugin()],
+		build: {
+			emptyOutDir,
+			lib: {
+				entry,
+				fileName,
+				formats,
+				name,
+			},
+			minify,
+			outDir,
+			sourcemap: false,
 		},
-		minify,
-		outDir,
-		sourcemap: false,
-	},
-})
+	})
 
 const clean = async () => {
 	await Promise.all([
@@ -88,19 +91,20 @@ const copyArtifacts = async () => {
 	await mkdir(paths.publicAssets, { recursive: true })
 	await copyFile(
 		resolve(paths.dist, 'scrollerful-auto.min.js'),
-		resolve(paths.publicAssets, 'script.js'),
+		resolve(paths.publicAssets, 'script.js')
 	)
 	await copyFile(
 		resolve(paths.demoBuild, 'demo.js'),
-		resolve(paths.publicAssets, 'demo.js'),
+		resolve(paths.publicAssets, 'demo.js')
 	)
 	await copyFile(
 		resolve(root, 'pages/scrollerful/demo.mp4'),
-		resolve(paths.publicAssets, 'demo.mp4'),
+		resolve(paths.publicAssets, 'demo.mp4')
 	)
 	await execFileAsync('magick', [
 		resolve(root, 'pages/scrollerful/share.avif'),
-		'-quality', '90',
+		'-quality',
+		'90',
 		resolve(paths.publicAssets, 'share.avif.jpg'),
 	])
 	await execFileAsync('magick', [
@@ -114,7 +118,8 @@ const main = async () => {
 
 	await buildLibrary({
 		entry: resolve(root, 'src/scrollerful.js'),
-		fileName: format => (format === 'es' ? 'scrollerful.mjs' : 'scrollerful.cjs'),
+		fileName: format =>
+			format === 'es' ? 'scrollerful.mjs' : 'scrollerful.cjs',
 		formats: ['es', 'cjs'],
 		emptyOutDir: true,
 		outDir: paths.dist,
@@ -122,7 +127,8 @@ const main = async () => {
 
 	await buildLibrary({
 		entry: resolve(root, 'src/scrollerful.js'),
-		fileName: format => (format === 'es' ? 'scrollerful.min.mjs' : 'scrollerful.min.js'),
+		fileName: format =>
+			format === 'es' ? 'scrollerful.min.mjs' : 'scrollerful.min.js',
 		formats: ['es', 'cjs'],
 		minify: true,
 		outDir: paths.dist,
