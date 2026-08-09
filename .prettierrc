@@ -16,6 +16,7 @@
 		{ "files": "*.yml", "options": { "parser": "yaml", "useTabs": false } },
 		{ "files": "*.yaml", "options": { "parser": "yaml", "useTabs": false } }
 	],
+	"plugins": ["prettier-plugin-astro"],
 	"printWidth": 80,
 	"proseWrap": "always",
 	"quoteProps": "as-needed",
