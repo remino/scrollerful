@@ -17,6 +17,7 @@ module.exports = {
 			'node -e "if (!process.env.RELEASE_IT_GITHUB_TOKEN) { console.error(\'RELEASE_IT_GITHUB_TOKEN is required for automated GitHub releases.\'); process.exit(1) }"',
 			'npm test',
 			'npm run typecheck',
+			'npm run lint:check',
 			'npm run format:check',
 		],
 		'after:bump': [

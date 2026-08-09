@@ -117,14 +117,17 @@ const getContainerCoords = (
 	const { size, start } = getElAxisCoords(el, horizontal)
 	const overflow = showsOverflow(el, horizontal)
 	const documentScroller = isDocumentScroller(el)
+	let containerSize = size
+
+	if (documentScroller) {
+		containerSize = getDocumentScrollSize(horizontal)
+	} else if (overflow) {
+		containerSize = getElScrollSize(el, horizontal)
+	}
 
 	return {
 		containerStart: start,
-		containerSize: documentScroller
-			? getDocumentScrollSize(horizontal)
-			: overflow
-				? getElScrollSize(el, horizontal)
-				: size,
+		containerSize,
 		viewSize: overflow ? size : getViewportSize(horizontal),
 	}
 }

@@ -45,10 +45,10 @@ var e = (e, t, n) => {
 		start: r
 	};
 }, P = (e, t) => {
-	let { size: n, start: r } = N(e, t), i = D(e, t);
-	return {
+	let { size: n, start: r } = N(e, t), i = D(e, t), a = x(e), o = n;
+	return a ? o = S(t) : i && (o = b(e, t)), {
 		containerStart: r,
-		containerSize: x(e) ? S(t) : i ? b(e, t) : n,
+		containerSize: o,
 		viewSize: i ? n : E(t)
 	};
 }, F = (n, r) => {
