@@ -59,8 +59,10 @@ const pageUrl = site.url
 		</div>
 	</nav>
 
-	<form class="controls" aria-label="Demo controls">
-		<fieldset>
+	<details class="controls">
+		<summary>Demo Controls</summary>
+		<form aria-label="Demo controls">
+			<fieldset>
 			<legend>Direction</legend>
 			<label>
 				<input type="radio" name="direction" value="vertical" checked />
@@ -70,9 +72,9 @@ const pageUrl = site.url
 				<input type="radio" name="direction" value="horizontal" />
 				<span>Horizontal</span>
 			</label>
-		</fieldset>
+			</fieldset>
 
-		<fieldset>
+			<fieldset>
 			<legend>Container Size</legend>
 			<label>
 				<input type="radio" name="size" value="large" checked />
@@ -86,9 +88,9 @@ const pageUrl = site.url
 				<input type="radio" name="size" value="small" />
 				<span>Small</span>
 			</label>
-		</fieldset>
+			</fieldset>
 
-		<fieldset>
+			<fieldset>
 			<legend>Sprite Scope</legend>
 			<label>
 				<input type="radio" name="scope" value="cover" checked />
@@ -98,8 +100,9 @@ const pageUrl = site.url
 				<input type="radio" name="scope" value="contain" />
 				<span>Contain</span>
 			</label>
-		</fieldset>
-	</form>
+			</fieldset>
+		</form>
+	</details>
 
 	<section id="demo" class="section--scroll-scroll sclf">
 		<div class="sclf__float">

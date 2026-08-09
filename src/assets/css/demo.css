@@ -93,22 +93,28 @@
 	backdrop-filter: blur(0.4rem);
 	background: rgba(0, 0, 0, 0.6);
 	border-radius: 0.5em;
-	display: flex;
-	flex-flow: column;
+	display: block;
 	font-size: max(14px, 0.4rem);
-	inset: auto 0.4em calc(var(--rmn-ribbon-push, 0) + 0.4em) auto;
+	inset: auto 1.8em calc(var(--rmn-ribbon-push, 0) + 0.9em) auto;
 	justify-content: center;
 	margin: 0;
 	padding: 0.6em;
 	position: fixed;
 	z-index: 100;
 }
+.controls summary {
+	cursor: pointer;
+	font-weight: 700;
+	padding: 0.3em;
+	text-transform: uppercase;
+}
+.controls form {
+	display: flex;
+	flex-flow: column;
+}
 @media (max-width: 30rem) {
 	.controls {
-		display: grid;
 		inset: auto 0.4em 0.4em;
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: 1fr;
 	}
 }
 .controls fieldset {

@@ -1,4 +1,5 @@
 let seeking = false
+const controlsOpenKey = 'scrollerful-demo-controls-open'
 
 type ScrollProgress = {
 	contain: number
@@ -88,7 +89,21 @@ const radioChanged = ({ currentTarget }) => {
 
 const setupControls = () => {
 	const controls = document.querySelector('.controls')
-	if (!controls) return
+	if (!(controls instanceof HTMLDetailsElement)) return
+
+	try {
+		controls.open = localStorage.getItem(controlsOpenKey) === 'true'
+	} catch {
+		// Keep the controls closed when browser storage is unavailable.
+	}
+
+	controls.addEventListener('toggle', () => {
+		try {
+			localStorage.setItem(controlsOpenKey, String(controls.open))
+		} catch {
+			// The controls still work when browser storage is unavailable.
+		}
+	})
 
 	document.querySelectorAll('input[type=radio]').forEach(el => {
 		el.addEventListener('change', radioChanged)
