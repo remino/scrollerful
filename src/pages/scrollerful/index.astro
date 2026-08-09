@@ -22,41 +22,51 @@ const pageUrl = site.url
 			<h2 class="sclf__sprite--contain">
 				Small JS &amp; CSS library for scroll animations
 			</h2>
-			<p class="sclf__sprite--contain">Scroll to start</p>
-			<div class="scroll-down sclf__sprite">
-				<div class="scroll-down__wrapper">
-					<div class="scroll-down__arrow"></div>
-					<div class="scroll-down__arrow"></div>
-					<div class="scroll-down__arrow"></div>
-					<div class="scroll-down__arrow"></div>
+			<template class="js-template">
+				<p class="sclf__sprite--contain">Scroll to start</p>
+				<div class="scroll-down sclf__sprite">
+					<div class="scroll-down__wrapper">
+						<div class="scroll-down__arrow"></div>
+						<div class="scroll-down__arrow"></div>
+						<div class="scroll-down__arrow"></div>
+						<div class="scroll-down__arrow"></div>
+					</div>
 				</div>
-			</div>
+			</template>
 		</div>
 	</header>
 
-	<section id="motto" class="sclf">
-		<div class="sclf__float">
-			<h2 class="motto">
-				<span class="motto__text motto__text--scroll sclf__sprite--contain"
-					>Scroll</span
-				>
-				<span class="motto__text motto__text--with sclf__sprite--contain"
-					>with</span
-				>
-				<span class="motto__text motto__text--style sclf__sprite--contain">
-					<strong class="sclf__sprite">style!</strong>
-				</span>
-			</h2>
-		</div>
-	</section>
+	<noscript>
+		<section class="prose warning">
+			<p>⚠️ The scroll animations on this page require JavaScript.</p>
+		</section>
+	</noscript>
 
-	<section id="usage" class="section--prose">
-		<article class="usage sclf__sprite--contain">
+	<template class="js-template">
+		<section id="motto" class="sclf">
+			<div class="sclf__float">
+				<h2 class="motto">
+					<span class="motto__text motto__text--scroll sclf__sprite--contain"
+						>Scroll</span
+					>
+					<span class="motto__text motto__text--with sclf__sprite--contain"
+						>with</span
+					>
+					<span class="motto__text motto__text--style sclf__sprite--contain">
+						<strong class="sclf__sprite">style!</strong>
+					</span>
+				</h2>
+			</div>
+		</section>
+	</template>
+
+	<section id="usage" class="prose">
+		<article class="prose__article sclf__sprite--contain">
 			<Usage />
 		</article>
 	</section>
 
-	<template class="demo-template">
+	<template class="demo-template js-template">
 		<section id="demo" class="section--scroll-scroll sclf">
 			<div class="sclf__float">
 				<div class="bg sclf__sprite">

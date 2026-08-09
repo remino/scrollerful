@@ -349,7 +349,7 @@ footer nav a {
 	overflow-x: hidden;
 }
 
-.usage {
+.prose__article {
 	box-sizing: border-box;
 	font-size: clamp(12px, 1rem, 16px);
 	font-weight: 400;
@@ -358,28 +358,28 @@ footer nav a {
 	padding: 0 2rem;
 	text-align: left;
 }
-.usage h2 {
+.prose__article h2 {
 	margin: 0 0 0.8rem;
 }
-.usage p {
+.prose__article p {
 	margin: 0 0 1.4rem;
 }
-.usage a {
+.prose__article a {
 	color: inherit;
 	text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
 	text-underline-offset: 0.2em;
 }
-.usage code,
-.usage pre {
+.prose__article code,
+.prose__article pre {
 	font-family:
 		'Iosevka Term', Menlo, Consolas, monaco, 'Ubuntu Mono', 'Liberation Mono',
 		'Courier New', Courier, monospace;
 	line-height: inherit;
 }
-.usage .code-block {
+.prose__article .code-block {
 	position: relative;
 }
-.usage pre {
+.prose__article pre {
 	background: #11131c;
 	box-sizing: border-box;
 	color: #dce4ff;
@@ -392,7 +392,7 @@ footer nav a {
 	padding: 1.25rem;
 	white-space: pre;
 }
-.usage pre > code {
+.prose__article pre > code {
 	background: transparent;
 	border: none;
 	border-radius: 0;
@@ -402,7 +402,7 @@ footer nav a {
 	min-inline-size: 100%;
 	padding: 0;
 }
-.usage .copy {
+.prose__article .copy {
 	appearance: none;
 	background: #000;
 	border: solid 0.1em #fff;
@@ -429,28 +429,28 @@ footer nav a {
 	text-align: center;
 	transition: opacity var(--transition-duration) ease-in-out;
 }
-.usage .copy:focus {
+.prose__article .copy:focus {
 	background: #666;
 	color: #fff;
 }
-.usage .copy:hover {
+.prose__article .copy:hover {
 	background: #333;
 	color: #fff;
 }
-.usage .copy:active {
+.prose__article .copy:active {
 	background: #666;
 	color: #fff;
 }
 @media (pointer: fine) {
-	.usage .copy {
+	.prose__article .copy {
 		opacity: 0;
 	}
-	.usage pre:hover .copy,
-	.usage .copy:focus {
+	.prose__article pre:hover .copy,
+	.prose__article .copy:focus {
 		opacity: 1;
 	}
 }
-.usage .usage__more {
+.prose__article .prose__article__more {
 	margin-bottom: 0;
 }
 
@@ -655,11 +655,15 @@ body.sclf--x > .sclf:nth-child(10) > .sclf__float {
 	background: var(--color-bg-strong);
 }
 
-.sclf--x .section--prose {
+.sclf--x .prose {
 	flex-shrink: 0;
 	max-height: 100vh;
 	max-height: 100dvh;
 	min-width: auto;
 	width: 100%;
 	overflow: auto;
+}
+
+.warning {
+	background: color-mix(in srgb, red, transparent 80%);
 }

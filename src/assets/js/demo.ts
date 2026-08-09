@@ -89,13 +89,16 @@ const radioChanged = ({ currentTarget }) => {
 	}
 }
 
-const loadDemoTemplate = () => {
-	const template = document.querySelector('template.demo-template')
-	if (!(template instanceof HTMLTemplateElement)) return null
+const loadDemoTemplates = () => {
+	let controls: Element | null = null
 
-	const content = template.content.cloneNode(true) as DocumentFragment
-	const controls = content.querySelector('.controls')
-	template.replaceWith(content)
+	document.querySelectorAll('template.js-template').forEach(template => {
+		if (!(template instanceof HTMLTemplateElement)) return
+
+		const content = template.content.cloneNode(true) as DocumentFragment
+		controls ??= content.querySelector('.controls')
+		template.replaceWith(content)
+	})
 
 	return controls
 }
@@ -141,7 +144,7 @@ const revealControlsAfterIntro = controls => {
 
 const setupCopyButtons = () => {
 	addCopyButtons({
-		blockSelector: '.usage pre',
+		blockSelector: '.prose__article pre',
 		wrapperClass: 'code-block',
 		wrapperElement: true,
 	})
@@ -195,7 +198,7 @@ const updateVideo = (event: Event) => {
 }
 
 const main = () => {
-	const controls = setupControls(loadDemoTemplate())
+	const controls = setupControls(loadDemoTemplates())
 
 	Array.from(document.querySelectorAll('.section--percentage')).forEach(el => {
 		el.addEventListener('sclf:scroll', updatePercentage)
