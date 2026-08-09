@@ -9,20 +9,12 @@
 		"plugin:no-template-curly-in-string-fix/recommended",
 		"prettier"
 	],
-	"overrides": [
-		{
-			"files": ["source/nav/nav.js"],
-			"rules": {
-				"wrap-iife": ["error", "inside"]
-			}
-		}
-	],
-	"plugins": ["jasmine"],
+	"plugins": ["astro", "jasmine"],
 	"root": true,
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"extensions": [".mjs", ".js", ".ts"]
+				"extensions": [".astro", ".mjs", ".js", ".ts"]
 			}
 		}
 	},
@@ -54,6 +46,26 @@
 		"semi": ["error", "never"]
 	},
 	"overrides": [
+		{
+			"files": ["source/nav/nav.js"],
+			"rules": {
+				"wrap-iife": ["error", "inside"]
+			}
+		},
+		{
+			"extends": ["plugin:astro/recommended"],
+			"files": ["*.astro"],
+			"parser": "astro-eslint-parser",
+			"parserOptions": {
+				"extraFileExtensions": [".astro"],
+				"parser": "@typescript-eslint/parser"
+			},
+			"rules": {
+				"import/extensions": "off",
+				"import/no-unresolved": "off",
+				"indent": "off"
+			}
+		},
 		{
 			"files": ["*.ts"],
 			"parser": "@typescript-eslint/parser",
