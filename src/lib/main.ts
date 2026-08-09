@@ -45,6 +45,13 @@ let requestId
 
 const getElScrollSize = (el: HTMLElement, horizontal = false): number =>
 	horizontal ? el.scrollWidth : el.scrollHeight
+const isDocumentScroller = (el: HTMLElement): boolean =>
+	el === document.body || el === document.documentElement
+const getDocumentScrollSize = (horizontal = false): number =>
+	Math.max(
+		getElScrollSize(document.body, horizontal),
+		getElScrollSize(document.documentElement, horizontal)
+	)
 const getStyleEl = (): HTMLStyleElement | null =>
 	document.getElementById(EL_ID_STYLE) as HTMLStyleElement | null
 const hasBundledStyle = (): boolean =>
@@ -93,10 +100,7 @@ const addStyle = (): void => {
 	document.head.insertBefore(styleEl, document.head.firstChild)
 }
 
-const getElAxisCoords = (
-	el: HTMLElement,
-	horizontal = false
-): AxisCoords => {
+const getElAxisCoords = (el: HTMLElement, horizontal = false): AxisCoords => {
 	if (horizontal) {
 		const { left, width } = el.getBoundingClientRect()
 		return { size: width, start: left }
@@ -112,10 +116,15 @@ const getContainerCoords = (
 ): ContainerCoords => {
 	const { size, start } = getElAxisCoords(el, horizontal)
 	const overflow = showsOverflow(el, horizontal)
+	const documentScroller = isDocumentScroller(el)
 
 	return {
 		containerStart: start,
-		containerSize: overflow ? getElScrollSize(el, horizontal) : size,
+		containerSize: documentScroller
+			? getDocumentScrollSize(horizontal)
+			: overflow
+				? getElScrollSize(el, horizontal)
+				: size,
 		viewSize: overflow ? size : getViewportSize(horizontal),
 	}
 }
@@ -268,13 +277,14 @@ const scroll = (target: HTMLElement): void => {
 }
 
 const addScrollListeners = (scrollEl: HTMLElement): void => {
-	;[scrollEl, ...Array.from(scrollEl.querySelectorAll<HTMLElement>(SEL_TRAY))].forEach(
-		el => {
-			el.addEventListener(EVENT_SCROLL, setStyleVars)
-			el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
-			el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
-		}
-	)
+	;[
+		scrollEl,
+		...Array.from(scrollEl.querySelectorAll<HTMLElement>(SEL_TRAY)),
+	].forEach(el => {
+		el.addEventListener(EVENT_SCROLL, setStyleVars)
+		el.addEventListener(EVENT_SCROLL, triggerCoverEnterExit)
+		el.addEventListener(EVENT_SCROLL, triggerContainEnterExit)
+	})
 }
 
 const scrollerful = (): void => {

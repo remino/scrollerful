@@ -40,6 +40,8 @@ var EL_ID_RULER = `${PREFIX}_ruler`;
 var EL_ID_STYLE = `${PREFIX}_style`;
 var requestId;
 var getElScrollSize = (el, horizontal = false) => horizontal ? el.scrollWidth : el.scrollHeight;
+var isDocumentScroller = (el) => el === document.body || el === document.documentElement;
+var getDocumentScrollSize = (horizontal = false) => Math.max(getElScrollSize(document.body, horizontal), getElScrollSize(document.documentElement, horizontal));
 var getStyleEl = () => document.getElementById(EL_ID_STYLE);
 var hasBundledStyle = () => Boolean(document.querySelector("meta[name=\"scrollerful-css\"]"));
 var getViewportRect = () => document.getElementById(EL_ID_RULER).getBoundingClientRect();
@@ -90,7 +92,7 @@ var getContainerCoords = (el, horizontal) => {
 	const overflow = showsOverflow(el, horizontal);
 	return {
 		containerStart: start,
-		containerSize: overflow ? getElScrollSize(el, horizontal) : size,
+		containerSize: isDocumentScroller(el) ? getDocumentScrollSize(horizontal) : overflow ? getElScrollSize(el, horizontal) : size,
 		viewSize: overflow ? size : getViewportSize(horizontal)
 	};
 };

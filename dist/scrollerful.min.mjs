@@ -14,24 +14,24 @@ var e = (e, t, n) => {
 		case t < n: return 1 - r;
 		default: return r;
 	}
-}, t = (e, t, n) => (e - n) / (n + t) * -1, n = "sclf", r = `${n}--enabled`, i = `${n}--x`, a = `${n}--inside--contain`, o = `${n}--inside--cover`, s = `${n}__ruler`, c = `--${n}-contain`, l = `--${n}-cover`, u = `${n}:contain:enter`, d = `${n}:contain:exit`, f = `${n}:cover:enter`, p = `${n}:cover:exit`, m = `${n}:scroll`, h = `.${n}`, g = `.${n}`, _ = `${n}_ruler`, v = `${n}_style`, y, b = (e, t = !1) => t ? e.scrollWidth : e.scrollHeight, x = () => document.getElementById(v), S = () => !!document.querySelector("meta[name=\"scrollerful-css\"]"), C = () => document.getElementById(_).getBoundingClientRect(), w = (e) => C()[e ? "width" : "height"], T = (e, t) => ["auto", "scroll"].includes(getComputedStyle(e).getPropertyValue(`overflow-${t ? "x" : "y"}`)), E = (...e) => e.sort((e, t) => e - t), D = (e, t, n) => {
-	let [r, i] = E(t, n);
+}, t = (e, t, n) => (e - n) / (n + t) * -1, n = "sclf", r = `${n}--enabled`, i = `${n}--x`, a = `${n}--inside--contain`, o = `${n}--inside--cover`, s = `${n}__ruler`, c = `--${n}-contain`, l = `--${n}-cover`, u = `${n}:contain:enter`, d = `${n}:contain:exit`, f = `${n}:cover:enter`, p = `${n}:cover:exit`, m = `${n}:scroll`, h = `.${n}`, g = `.${n}`, _ = `${n}_ruler`, v = `${n}_style`, y, b = (e, t = !1) => t ? e.scrollWidth : e.scrollHeight, x = (e) => e === document.body || e === document.documentElement, S = (e = !1) => Math.max(b(document.body, e), b(document.documentElement, e)), C = () => document.getElementById(v), w = () => !!document.querySelector("meta[name=\"scrollerful-css\"]"), T = () => document.getElementById(_).getBoundingClientRect(), E = (e) => T()[e ? "width" : "height"], D = (e, t) => ["auto", "scroll"].includes(getComputedStyle(e).getPropertyValue(`overflow-${t ? "x" : "y"}`)), O = (...e) => e.sort((e, t) => e - t), k = (e, t, n) => {
+	let [r, i] = O(t, n);
 	return e >= r && e <= i;
-}, O = () => {
+}, A = () => {
 	document.documentElement.classList.add(r);
-}, k = () => {
+}, j = () => {
 	if (document.getElementById(_)) return;
 	let e = document.createElement("div");
 	e.setAttribute("id", _), e.classList.add(s), document.body.appendChild(e);
-}, A = () => {
-	if (x() || S()) return;
+}, M = () => {
+	if (C() || w()) return;
 	let e = document.createElement("style");
 	if (e.setAttribute("id", v), e.textContent = "@media screen{@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{scroll-snap-stop:normal;scroll-snap-type:y proximity}}.sclf--enabled .sclf--snap,.sclf--enabled.sclf--snap{overflow-y:auto}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--snap .sclf,.sclf--enabled.sclf--snap .sclf{scroll-snap-align:start}}@supports (scroll-snap-stop:always){.sclf--enabled .sclf--x.sclf--snap,.sclf--enabled.sclf--snap .sclf--x,.sclf--enabled.sclf--snap:has(.sclf--x){scroll-snap-type:x proximity}}}@media screen{.sclf--enabled .sclf--snap{height:100%}.sclf--enabled .sclf--x{display:flex;flex-flow:row nowrap}.sclf--enabled .sclf--x.sclf--snap{overflow-x:auto;overflow-y:hidden}.sclf--enabled .sclf--x .sclf__float{height:100vh;height:100svh;left:0;max-height:none;max-width:100%;top:auto;width:100vw;width:100lvw}.sclf--enabled .sclf--x .sclf{flex-shrink:0;height:auto;width:300vw;width:300lvw}.sclf--enabled .sclf--x .sclf--padding{height:auto;width:100vw;width:100lvw}.sclf--enabled .sclf__ruler{background:none transparent;border:none;bottom:0;display:block;height:100vh;height:100lvh;left:-200%;pointer-events:none;position:absolute;top:0;-webkit-user-select:none;user-select:none;width:100vw;width:100lvw;z-index:-10}.sclf--enabled .sclf__float{max-height:100%;overflow:hidden;position:sticky;top:0}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--contain,.sclf--enabled .sclf__sprite--cover{animation-duration:calc(var(--sclf-duration, 100)*1s);animation-fill-mode:both;animation-name:var(--sclf-animation);animation-play-state:paused;animation-timing-function:linear}.sclf--enabled .sclf__sprite,.sclf--enabled .sclf__sprite--cover{animation-delay:calc(var(--sclf-cover, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf__sprite--contain{animation-delay:calc(var(--sclf-contain, 0)*-100s + var(--sclf-delay, 0)*1s)}.sclf--enabled .sclf{height:300vh;height:300lvh}.sclf,.sclf--enabled .sclf--padding{height:100vh;height:100lvh}.sclf{position:relative}.sclf__float{align-items:center;display:flex;flex-flow:column;height:100vh;height:100lvh;justify-content:center}}", !document.head.firstChild) {
 		document.head.appendChild(e);
 		return;
 	}
 	document.head.insertBefore(e, document.head.firstChild);
-}, j = (e, t = !1) => {
+}, N = (e, t = !1) => {
 	if (t) {
 		let { left: t, width: n } = e.getBoundingClientRect();
 		return {
@@ -44,40 +44,40 @@ var e = (e, t, n) => {
 		size: n,
 		start: r
 	};
-}, M = (e, t) => {
-	let { size: n, start: r } = j(e, t), i = T(e, t);
+}, P = (e, t) => {
+	let { size: n, start: r } = N(e, t), i = D(e, t);
 	return {
 		containerStart: r,
-		containerSize: i ? b(e, t) : n,
-		viewSize: i ? n : w(t)
+		containerSize: x(e) ? S(t) : i ? b(e, t) : n,
+		viewSize: i ? n : E(t)
 	};
-}, N = (n, r) => {
-	let { containerStart: i, containerSize: a, viewSize: o } = M(n, r);
+}, F = (n, r) => {
+	let { containerStart: i, containerSize: a, viewSize: o } = P(n, r);
 	return {
 		contain: e(i, a, o),
 		cover: t(i, a, o)
 	};
-}, P = (e, t) => {
-	let n = N(e, t);
+}, I = (e, t) => {
+	let n = F(e, t);
 	e.dispatchEvent(new CustomEvent(m, {
 		detail: { progress: n },
 		bubbles: !0,
 		cancelable: !0,
 		composed: !1
 	}));
-}, F = (e, ...t) => {
+}, L = (e, ...t) => {
 	t.forEach((t) => e.style.removeProperty(t));
-}, I = (e) => {
+}, R = (e) => {
 	let { target: t, detail: n } = e;
 	if (!t) return;
 	let { progress: { contain: r, cover: i } } = n;
-	if (!D(i, 0, 1)) {
-		F(t, c, l);
+	if (!k(i, 0, 1)) {
+		L(t, c, l);
 		return;
 	}
 	t.style.setProperty(c, String(r)), t.style.setProperty(l, String(i));
-}, L = (e, t, n, r, i) => {
-	D(t, 0, 1) ? e.classList.contains(i) || (e.classList.add(i), e.dispatchEvent(new CustomEvent(n, {
+}, z = (e, t, n, r, i) => {
+	k(t, 0, 1) ? e.classList.contains(i) || (e.classList.add(i), e.dispatchEvent(new CustomEvent(n, {
 		bubbles: !0,
 		cancelable: !0,
 		composed: !1
@@ -86,31 +86,31 @@ var e = (e, t, n) => {
 		cancelable: !0,
 		composed: !1
 	})));
-}, R = (e) => {
+}, B = (e) => {
 	let { target: t, detail: n } = e;
 	if (!t) return;
 	let { progress: { contain: r } } = n;
-	L(t, r, u, d, a);
-}, z = (e) => {
+	z(t, r, u, d, a);
+}, V = (e) => {
 	let { target: t, detail: n } = e;
 	if (!t) return;
 	let { progress: { cover: r } } = n;
-	L(t, r, f, p, o);
-}, B = (e) => {
-	let t = e.classList.contains(i);
-	Promise.all([e, ...Array.from(e.querySelectorAll(g))].map((e) => P(e, t)));
-}, V = (e) => {
-	y && cancelAnimationFrame(y), y = requestAnimationFrame(() => {
-		B(e), y = null;
-	});
+	z(t, r, f, p, o);
 }, H = (e) => {
-	[e, ...Array.from(e.querySelectorAll(g))].forEach((e) => {
-		e.addEventListener(m, I), e.addEventListener(m, z), e.addEventListener(m, R);
+	let t = e.classList.contains(i);
+	Promise.all([e, ...Array.from(e.querySelectorAll(g))].map((e) => I(e, t)));
+}, U = (e) => {
+	y && cancelAnimationFrame(y), y = requestAnimationFrame(() => {
+		H(e), y = null;
 	});
-}, U = () => {
-	A(), k(), Array.from(document.querySelectorAll(h)).forEach((e) => {
-		e.addEventListener("resize", () => V(e)), e.addEventListener("scroll", () => V(e)), H(e), V(e);
-	}), window.addEventListener("resize", () => V(document.body)), window.addEventListener("scroll", () => V(document.body)), H(document.body), V(document.body), O();
+}, W = (e) => {
+	[e, ...Array.from(e.querySelectorAll(g))].forEach((e) => {
+		e.addEventListener(m, R), e.addEventListener(m, V), e.addEventListener(m, B);
+	});
+}, G = () => {
+	M(), j(), Array.from(document.querySelectorAll(h)).forEach((e) => {
+		e.addEventListener("resize", () => U(e)), e.addEventListener("scroll", () => U(e)), W(e), U(e);
+	}), window.addEventListener("resize", () => U(document.body)), window.addEventListener("scroll", () => U(document.body)), W(document.body), U(document.body), A();
 };
 //#endregion
-export { U as default };
+export { G as default };

@@ -277,6 +277,10 @@
 	transform: rotate(-90deg);
 }
 
+header .scroll-down__wrapper {
+	transition: transform 0.2s ease-in-out;
+}
+
 header h1 {
 	font-size: 6rem;
 	text-transform: uppercase;
@@ -649,4 +653,13 @@ body.sclf--x > .sclf:nth-child(10) > .sclf__float {
 	--sclf-duration: 10;
 	animation-direction: reverse;
 	background: var(--color-bg-strong);
+}
+
+.sclf--x .section--prose {
+	flex-shrink: 0;
+	max-height: 100vh;
+	max-height: 100dvh;
+	min-width: auto;
+	width: 100%;
+	overflow: auto;
 }
