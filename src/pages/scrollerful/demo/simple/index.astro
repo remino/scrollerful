@@ -2,11 +2,15 @@
 import '../../../../assets/css/style.css'
 import '../../../../lib/scrollerful.css'
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1" />
+		<meta
+			name="viewport"
+			content="viewport-fit=cover, width=device-width, initial-scale=1"
+		/>
 		<meta name="scrollerful-css" content="bundled" />
 		<title>Example in README // Scrollerful</title>
 		<script src="../../../../lib/auto.ts"></script>
@@ -149,9 +153,10 @@ import '../../../../lib/scrollerful.css'
 			}
 		</style>
 		<script>
-			(() => {
+			;(() => {
 				const SYMBOLS = [...'🛑✋😳🔶⌛🏃🤔💭😃👍✅']
-				const symbol = percentage => SYMBOLS[Math.round((percentage / 100) * (SYMBOLS.length - 1))]
+				const symbol = percentage =>
+					SYMBOLS[Math.round((percentage / 100) * (SYMBOLS.length - 1))]
 				const clamp = (min, val, max) => Math.max(min, Math.min(max, val))
 
 				const showContainProgress = ({
@@ -160,11 +165,14 @@ import '../../../../lib/scrollerful.css'
 					},
 				}) => {
 					const roundedProgress = clamp(0, Math.round(progress * 100), 100)
-					document.querySelector('.toy').innerHTML = `<strong>${symbol(roundedProgress)}</strong><span>${roundedProgress}%</span>`
+					document.querySelector('.toy').innerHTML =
+						`<strong>${symbol(roundedProgress)}</strong><span>${roundedProgress}%</span>`
 				}
 
 				const main = () => {
-					document.querySelector('.sclf').addEventListener('sclf:scroll', showContainProgress)
+					document
+						.querySelector('.sclf')
+						.addEventListener('sclf:scroll', showContainProgress)
 				}
 
 				if (document.readyState === 'interactive') {
@@ -187,7 +195,9 @@ import '../../../../lib/scrollerful.css'
 			<menu>
 				<li><a href="/scrollerful/"><strong>Scrollerful</strong></a></li>
 				<li><a href="/scrollerful/demo/">More Demos</a></li>
-				<li><a href="https://github.com/remino/scrollerful">Docs (README)</a></li>
+				<li>
+					<a href="https://github.com/remino/scrollerful">Docs (README)</a>
+				</li>
 			</menu>
 		</nav>
 	</body>

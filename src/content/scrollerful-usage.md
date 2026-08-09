@@ -6,20 +6,22 @@ Scrollerful supplies the progress values that drive your CSS animations.
 
 ```html
 <section class="sclf">
-  <div class="sclf__float">
-    <output class="progress">0%</output>
-  </div>
+    <div class="sclf__float">
+        <output class="progress">0%</output>
+    </div>
 </section>
 
-<script defer src="https://unpkg.com/scrollerful@1.2.1/dist/scrollerful-auto.min.js"></script>
+<script
+    defer
+    src="https://unpkg.com/scrollerful@1.2.1/dist/scrollerful-auto.min.js"></script>
 
 <script>
-  const scene = document.querySelector('.sclf')
-  const progress = document.querySelector('.progress')
+    const scene = document.querySelector('.sclf')
+    const progress = document.querySelector('.progress')
 
-  scene.addEventListener('sclf:scroll', ({ detail }) => {
-    progress.textContent = `${Math.round(detail.progress.contain * 100)}%`
-  })
+    scene.addEventListener('sclf:scroll', ({ detail }) => {
+        progress.textContent = `${Math.round(detail.progress.contain * 100)}%`
+    })
 </script>
 ```
 

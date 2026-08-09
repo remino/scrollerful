@@ -11,9 +11,6 @@
 		"target": "ES2020",
 		"types": []
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.d.ts"
-	],
+	"include": ["src/**/*.ts", "src/**/*.d.ts"],
 	"exclude": ["dist", "build", "deploy", "node_modules"]
 }
