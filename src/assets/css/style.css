@@ -6,6 +6,7 @@
 	src: url('/fonts/InterVariable.woff2') format('woff2');
 	font-named-instance: 'Regular';
 }
+
 :root {
 	--color-bg: #333;
 	--color-bg-strong: #111;

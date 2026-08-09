@@ -96,7 +96,7 @@
 	display: flex;
 	flex-flow: column;
 	font-size: max(14px, 0.4rem);
-	inset: auto 0.4em 0.4em auto;
+	inset: auto 0.4em calc(var(--rmn-ribbon-push, 0) + 0.4em) auto;
 	justify-content: center;
 	margin: 0;
 	padding: 0.6em;
