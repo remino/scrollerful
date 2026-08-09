@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import style from './scrollerful.css?inline-string'
+import style from './scrollerful.css?inline'
 import { calcContainProgress, calcCoverProgress } from './calc'
 
 const PREFIX = 'sclf'
@@ -47,6 +47,8 @@ const getElScrollSize = (el: HTMLElement, horizontal = false): number =>
 	horizontal ? el.scrollWidth : el.scrollHeight
 const getStyleEl = (): HTMLStyleElement | null =>
 	document.getElementById(EL_ID_STYLE) as HTMLStyleElement | null
+const hasBundledStyle = (): boolean =>
+	Boolean(document.querySelector('meta[name="scrollerful-css"]'))
 const getViewportRect = (): DOMRect =>
 	document.getElementById(EL_ID_RULER).getBoundingClientRect()
 const getViewportSize = (horizontal: boolean): number =>
@@ -77,7 +79,7 @@ const addRuler = (): void => {
 }
 
 const addStyle = (): void => {
-	if (getStyleEl()) return
+	if (getStyleEl() || hasBundledStyle()) return
 
 	const styleEl = document.createElement('style')
 	styleEl.setAttribute('id', EL_ID_STYLE)

@@ -16,6 +16,7 @@ export default defineConfig({
 			minifyJS: true,
 		}),
 		compressor({
+			zstd: false,
 			fileExtensions: [
 				'.css',
 				'.js',

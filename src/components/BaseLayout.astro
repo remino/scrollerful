@@ -2,9 +2,9 @@
 import SiteNavFooter from '@remino/astro-site-nav/SiteNavFooter.astro'
 import SiteNavHeader from '@remino/astro-site-nav/SiteNavHeader.astro'
 import SiteNavHtmlHead from '@remino/astro-site-nav/SiteNavHtmlHead.astro'
-import HeaderNav from './HeaderNav.astro'
 import { site } from '../data/site'
 import '../assets/css/style.css'
+import '../lib/scrollerful.css'
 
 const {
 	bodyClass = '',
@@ -12,29 +12,16 @@ const {
 	pageUrl = site.url,
 	title = site.title,
 } = Astro.props
-
-const navItems = [
-	{ label: 'Home', href: '/scrollerful/' },
-	{ label: 'Demo', href: '/scrollerful/#demo' },
-	{
-		label: 'GitHub',
-		href: 'https://github.com/remino/scrollerful',
-		external: true,
-	},
-	{
-		label: 'npm',
-		href: 'https://www.npmjs.com/package/scrollerful',
-		external: true,
-	},
-]
 ---
+
 <!doctype html>
 <html lang="en" class="no-js rmn-nav-ribbon-bg-blur">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
 			name="viewport"
-			content="viewport-fit=cover, width=device-width, initial-scale=1.0" />
+			content="viewport-fit=cover, width=device-width, initial-scale=1.0"
+		/>
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta property="og:title" content={title} />
@@ -51,6 +38,7 @@ const navItems = [
 		<meta name="twitter:site" content={site.twitterHandle} />
 		<meta name="twitter:creator" content={site.twitterHandle} />
 		<meta name="twitter:url" content={pageUrl} />
+		<meta name="scrollerful-css" content="bundled" />
 		<SiteNavHtmlHead />
 		<slot name="head" />
 		<script>
@@ -60,15 +48,11 @@ const navItems = [
 	</head>
 	<body class={bodyClass}>
 		<SiteNavHeader />
-		<header class="site-header">
-			<a href="/scrollerful/">Scrollerful</a>
-			<HeaderNav items={navItems} />
-		</header>
 		<slot />
 		<SiteNavFooter>
 			<a href="/scrollerful/">Scrollerful</a>
 		</SiteNavFooter>
-		<script is:inline src="/scrollerful/script.js"></script>
+		<script src="../lib/auto.ts"></script>
 		<slot name="scripts" />
 	</body>
 </html>

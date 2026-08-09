@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../../components/BaseLayout.astro'
 import Logo from '../../components/Logo.astro'
+import Usage from '../../content/scrollerful-usage.md'
 import { site } from '../../data/site.ts'
 import '../../assets/css/index.css'
 import '../../assets/css/demo.css'
 
 const pageUrl = site.url
 ---
+
 <BaseLayout
 	title={site.title}
 	description={site.description}
@@ -17,13 +19,17 @@ const pageUrl = site.url
 			<h1 class="sclf__sprite">
 				<Logo />
 			</h1>
-			<h2 class="sclf__sprite--contain">Small JS &amp; CSS library for scroll animations</h2>
-			<p class="sclf__sprite--contain">Scroll down to start</p>
+			<h2 class="sclf__sprite--contain">
+				Small JS &amp; CSS library for scroll animations
+			</h2>
+			<p class="sclf__sprite--contain">Scroll to start</p>
 			<div class="scroll-down sclf__sprite">
-				<div class="scroll-down__arrow"></div>
-				<div class="scroll-down__arrow"></div>
-				<div class="scroll-down__arrow"></div>
-				<div class="scroll-down__arrow"></div>
+				<div class="scroll-down__wrapper">
+					<div class="scroll-down__arrow"></div>
+					<div class="scroll-down__arrow"></div>
+					<div class="scroll-down__arrow"></div>
+					<div class="scroll-down__arrow"></div>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -31,8 +37,12 @@ const pageUrl = site.url
 	<section id="motto" class="sclf">
 		<div class="sclf__float">
 			<h2 class="motto">
-				<span class="motto__text motto__text--scroll sclf__sprite--contain">Scroll</span>
-				<span class="motto__text motto__text--with sclf__sprite--contain">with</span>
+				<span class="motto__text motto__text--scroll sclf__sprite--contain"
+					>Scroll</span
+				>
+				<span class="motto__text motto__text--with sclf__sprite--contain"
+					>with</span
+				>
 				<span class="motto__text motto__text--style sclf__sprite--contain">
 					<strong class="sclf__sprite">style!</strong>
 				</span>
@@ -40,100 +50,105 @@ const pageUrl = site.url
 		</div>
 	</section>
 
-	<nav id="get" class="sclf">
-		<div class="sclf__float">
-			<menu>
-				<li class="sclf__sprite">
-					<a href="#demo">
-						<span class="btn__caption sclf__sprite">Try it!</span>
-						<span class="btn__description">Live demo</span>
-					</a>
-				</li>
-				<li class="sclf__sprite">
-					<a href="https://github.com/remino/scrollerful">
-						<span class="btn__caption sclf__sprite">Use it!</span>
-						<span class="btn__description">README &amp; Downloads</span>
-					</a>
-				</li>
-			</menu>
-		</div>
-	</nav>
+	<section id="usage">
+		<article class="usage sclf__sprite--contain">
+			<Usage />
+		</article>
+	</section>
 
-	<details class="controls">
-		<summary>Demo Controls</summary>
-		<form aria-label="Demo controls">
-			<fieldset>
-			<legend>Direction</legend>
-			<label>
-				<input type="radio" name="direction" value="vertical" checked />
-				<span>Vertical</span>
-			</label>
-			<label>
-				<input type="radio" name="direction" value="horizontal" />
-				<span>Horizontal</span>
-			</label>
-			</fieldset>
-
-			<fieldset>
-			<legend>Container Size</legend>
-			<label>
-				<input type="radio" name="size" value="large" checked />
-				<span>Large</span>
-			</label>
-			<label>
-				<input type="radio" name="size" value="medium" />
-				<span>Medium</span>
-			</label>
-			<label>
-				<input type="radio" name="size" value="small" />
-				<span>Small</span>
-			</label>
-			</fieldset>
-
-			<fieldset>
-			<legend>Sprite Scope</legend>
-			<label>
-				<input type="radio" name="scope" value="cover" checked />
-				<span>Cover</span>
-			</label>
-			<label>
-				<input type="radio" name="scope" value="contain" />
-				<span>Contain</span>
-			</label>
-			</fieldset>
-		</form>
-	</details>
-
-	<section id="demo" class="section--scroll-scroll sclf">
-		<div class="sclf__float">
-			<div class="bg sclf__sprite">
-				<p class="item--scroll-scroll sclf__sprite">Scroll!</p>
+	<template class="demo-template">
+		<section id="demo" class="section--scroll-scroll sclf">
+			<div class="sclf__float">
+				<div class="bg sclf__sprite">
+					<p class="item--scroll-scroll sclf__sprite">Scroll!</p>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section class="section--percentage sclf">
-		<div class="sclf__float">
-			<div class="bg sclf__sprite"></div>
-			<h2 class="item--percentage sclf__sprite"><output></output>%</h2>
-		</div>
-	</section>
+		<section class="section--percentage sclf">
+			<div class="sclf__float">
+				<div class="bg sclf__sprite"></div>
+				<h2 class="item--percentage sclf__sprite"><output></output>%</h2>
+			</div>
+		</section>
 
-	<section class="section--piechart sclf">
-		<div class="sclf__float">
-			<div class="bg sclf__sprite"></div>
-			<div class="item--piechart sclf__sprite"></div>
-		</div>
-	</section>
+		<section class="section--piechart sclf">
+			<div class="sclf__float">
+				<div class="bg sclf__sprite"></div>
+				<div class="item--piechart sclf__sprite"></div>
+			</div>
+		</section>
 
-	<section class="section--video sclf">
+		<section class="section--video sclf">
+			<div class="sclf__float">
+				<div class="bg sclf__sprite"></div>
+				<video autoplay controls muted playsinline>
+					<source src="/scrollerful/demo.mp4" type="video/mp4" />
+				</video>
+			</div>
+		</section>
+
+		<details class="controls">
+			<summary>Demo Controls</summary>
+			<form aria-label="Demo controls">
+				<fieldset>
+					<legend>Direction</legend>
+					<label>
+						<input type="radio" name="direction" value="vertical" checked />
+						<span>Vertical</span>
+					</label>
+					<label>
+						<input type="radio" name="direction" value="horizontal" />
+						<span>Horizontal</span>
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<legend>Container Size</legend>
+					<label>
+						<input type="radio" name="size" value="large" checked />
+						<span>Large</span>
+					</label>
+					<label>
+						<input type="radio" name="size" value="medium" />
+						<span>Medium</span>
+					</label>
+					<label>
+						<input type="radio" name="size" value="small" />
+						<span>Small</span>
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<legend>Sprite Scope</legend>
+					<label>
+						<input type="radio" name="scope" value="cover" checked />
+						<span>Cover</span>
+					</label>
+					<label>
+						<input type="radio" name="scope" value="contain" />
+						<span>Contain</span>
+					</label>
+				</fieldset>
+			</form>
+		</details>
+	</template>
+
+	<footer class="sclf">
 		<div class="sclf__float">
-			<div class="bg sclf__sprite"></div>
-			<video autoplay controls muted playsinline>
-				<source src="/scrollerful/demo.mp4" type="video/mp4" />
-			</video>
+			<nav class="sclf__sprite--contain" aria-label="Scrollerful resources">
+				<dl>
+					<dt>
+						<a href="https://github.com/remino/scrollerful">Code &amp; Docs</a>
+					</dt>
+					<dd>on GitHub</dd>
+				</dl>
+			</nav>
+			<nav class="sclf__sprite--contain" aria-label="Page navigation">
+				<a href="#">Scroll back to top</a>
+			</nav>
 		</div>
-	</section>
+	</footer>
 
 	<div class="bg">
 		<div class="bg__color-1 sclf__sprite--contain"></div>
@@ -141,5 +156,5 @@ const pageUrl = site.url
 		<div class="bg__center"></div>
 		<div class="bg__cover sclf__sprite--contain"></div>
 	</div>
-	<script slot="scripts" defer src="/scrollerful/demo.js"></script>
+	<script src="../../assets/js/demo.ts"></script>
 </BaseLayout>

@@ -98,9 +98,19 @@
 	inset: auto 1.8em calc(var(--rmn-ribbon-push, 0) + 0.9em) auto;
 	justify-content: center;
 	margin: 0;
+	opacity: 1;
 	padding: 0.6em;
 	position: fixed;
 	z-index: 100;
+}
+.js .controls {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease-in-out;
+}
+.js .controls.controls--visible {
+	opacity: 1;
+	pointer-events: auto;
 }
 .controls summary {
 	cursor: pointer;
@@ -111,11 +121,6 @@
 .controls form {
 	display: flex;
 	flex-flow: column;
-}
-@media (max-width: 30rem) {
-	.controls {
-		inset: auto 0.4em 0.4em;
-	}
 }
 .controls fieldset {
 	align-items: stretch;

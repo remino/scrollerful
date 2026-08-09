@@ -4,62 +4,65 @@ import Logo from '../../../components/Logo.astro'
 import { site } from '../../../data/site.ts'
 import '../../../assets/css/demo.css'
 ---
+
 <BaseLayout
 	title={site.title}
 	description={site.description}
 	pageUrl={`${site.url}demo/`}
 	bodyClass="demo--vertical demo--large demo--cover">
-	<details class="controls">
-		<summary>Demo Controls</summary>
-		<form aria-label="Demo controls">
-			<fieldset>
-				<legend>Direction</legend>
-				<label>
-					<input type="radio" name="direction" value="vertical" checked />
-					<span>Vertical</span>
-				</label>
-				<label>
-					<input type="radio" name="direction" value="horizontal" />
-					<span>Horizontal</span>
-				</label>
-			</fieldset>
+	<template class="controls-template">
+		<details class="controls">
+			<summary>Demo Controls</summary>
+			<form aria-label="Demo controls">
+				<fieldset>
+					<legend>Direction</legend>
+					<label>
+						<input type="radio" name="direction" value="vertical" checked />
+						<span>Vertical</span>
+					</label>
+					<label>
+						<input type="radio" name="direction" value="horizontal" />
+						<span>Horizontal</span>
+					</label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Container Size</legend>
-				<label>
-					<input type="radio" name="size" value="large" checked />
-					<span>Large</span>
-				</label>
-				<label>
-					<input type="radio" name="size" value="medium" />
-					<span>Medium</span>
-				</label>
-				<label>
-					<input type="radio" name="size" value="small" />
-					<span>Small</span>
-				</label>
-			</fieldset>
+				<fieldset>
+					<legend>Container Size</legend>
+					<label>
+						<input type="radio" name="size" value="large" checked />
+						<span>Large</span>
+					</label>
+					<label>
+						<input type="radio" name="size" value="medium" />
+						<span>Medium</span>
+					</label>
+					<label>
+						<input type="radio" name="size" value="small" />
+						<span>Small</span>
+					</label>
+				</fieldset>
 
-			<fieldset>
-				<legend>Sprite Scope</legend>
-				<label>
-					<input type="radio" name="scope" value="cover" checked />
-					<span>Cover</span>
-				</label>
-				<label>
-					<input type="radio" name="scope" value="contain" />
-					<span>Contain</span>
-				</label>
-			</fieldset>
+				<fieldset>
+					<legend>Sprite Scope</legend>
+					<label>
+						<input type="radio" name="scope" value="cover" checked />
+						<span>Cover</span>
+					</label>
+					<label>
+						<input type="radio" name="scope" value="contain" />
+						<span>Contain</span>
+					</label>
+				</fieldset>
 
-			<nav>
-				<a href="/scrollerful/">
-					<span>Back to</span>
-					<Logo />
-				</a>
-			</nav>
-		</form>
-	</details>
+				<nav>
+					<a href="/scrollerful/">
+						<span>Back to</span>
+						<Logo />
+					</a>
+				</nav>
+			</form>
+		</details>
+	</template>
 
 	<section class="section--scroll-scroll sclf">
 		<div class="sclf__float">
@@ -93,5 +96,5 @@ import '../../../assets/css/demo.css'
 			</video>
 		</div>
 	</section>
-	<script slot="scripts" defer src="/scrollerful/demo.js"></script>
+	<script src="../../../assets/js/demo.ts"></script>
 </BaseLayout>

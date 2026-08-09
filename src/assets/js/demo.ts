@@ -1,3 +1,5 @@
+import { addCopyButtons } from '@remino/functions'
+
 let seeking = false
 const controlsOpenKey = 'scrollerful-demo-controls-open'
 
@@ -87,9 +89,20 @@ const radioChanged = ({ currentTarget }) => {
 	}
 }
 
-const setupControls = () => {
-	const controls = document.querySelector('.controls')
-	if (!(controls instanceof HTMLDetailsElement)) return
+const loadDemoTemplate = () => {
+	const template = document.querySelector('template.demo-template')
+	if (!(template instanceof HTMLTemplateElement)) return null
+
+	const content = template.content.cloneNode(true) as DocumentFragment
+	const controls = content.querySelector('.controls')
+	template.replaceWith(content)
+
+	return controls
+}
+
+const setupControls = element => {
+	if (!(element instanceof HTMLDetailsElement)) return null
+	const controls = element
 
 	try {
 		controls.open = localStorage.getItem(controlsOpenKey) === 'true'
@@ -108,6 +121,37 @@ const setupControls = () => {
 	document.querySelectorAll('input[type=radio]').forEach(el => {
 		el.addEventListener('change', radioChanged)
 	})
+
+	return controls
+}
+
+const revealControlsAfterIntro = controls => {
+	const intro = document.querySelector('.sclf')
+	if (!controls || !intro) return
+
+	const observer = new IntersectionObserver(entries => {
+		if (entries[0].isIntersecting) return
+
+		controls.classList.add('controls--visible')
+		observer.disconnect()
+	})
+
+	observer.observe(intro)
+}
+
+const setupCopyButtons = () => {
+	addCopyButtons({
+		blockSelector: '.usage pre',
+		wrapperClass: 'code-block',
+		wrapperElement: true,
+	})
+}
+
+const scrollToHash = () => {
+	const target = document.getElementById(window.location.hash.slice(1))
+	if (!target) return
+
+	requestAnimationFrame(() => target.scrollIntoView())
 }
 
 const seekVideo = (video, progress) => {
@@ -151,6 +195,8 @@ const updateVideo = (event: Event) => {
 }
 
 const main = () => {
+	const controls = setupControls(loadDemoTemplate())
+
 	Array.from(document.querySelectorAll('.section--percentage')).forEach(el => {
 		el.addEventListener('sclf:scroll', updatePercentage)
 	})
@@ -159,8 +205,11 @@ const main = () => {
 		el.addEventListener('sclf:scroll', updateVideo)
 	})
 
-	setupControls()
+	revealControlsAfterIntro(controls)
+	setupCopyButtons()
 	setupVideo()
+	window.addEventListener('hashchange', scrollToHash)
+	scrollToHash()
 }
 
 ;(function init() {

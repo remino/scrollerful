@@ -13,7 +13,6 @@ const execFileAsync = promisify(execFile)
 const paths = {
 	dist: resolve(root, 'dist'),
 	distLegacy: resolve(root, 'dist/scrollerful'),
-	demoBuild: resolve(root, '.build/js/scrollerful'),
 	publicAssets: resolve(root, 'public/scrollerful'),
 }
 
@@ -27,7 +26,7 @@ const inlineCssStringPlugin = () => ({
 	enforce: 'pre',
 	name: 'inline-css-string',
 	async resolveId(source, importer) {
-		const query = '?inline-string'
+		const query = '?inline'
 		if (!source.endsWith(query)) return null
 
 		const sourcePath = source.slice(0, -query.length)
@@ -94,20 +93,11 @@ const clean = async () => {
 	await Promise.all([
 		rm(paths.dist, { force: true, recursive: true }),
 		rm(paths.distLegacy, { force: true, recursive: true }),
-		rm(paths.demoBuild, { force: true, recursive: true }),
 	])
 }
 
 const copyArtifacts = async () => {
 	await mkdir(paths.publicAssets, { recursive: true })
-	await copyFile(
-		resolve(paths.dist, 'scrollerful-auto.min.js'),
-		resolve(paths.publicAssets, 'script.js')
-	)
-	await copyFile(
-		resolve(paths.demoBuild, 'demo.js'),
-		resolve(paths.publicAssets, 'demo.js')
-	)
 	await copyFile(
 		resolve(root, 'src/pages/scrollerful/demo.mp4'),
 		resolve(paths.publicAssets, 'demo.mp4')
@@ -159,16 +149,6 @@ const main = async () => {
 		minify: true,
 		name: 'scrollerful',
 		outDir: paths.dist,
-	})
-
-	await buildLibrary({
-		entry: resolve(root, 'src/assets/js/demo.ts'),
-		fileName: () => 'demo.js',
-		formats: ['iife'],
-		minify: true,
-		name: 'scrollerful',
-		emptyOutDir: true,
-		outDir: paths.demoBuild,
 	})
 
 	await Promise.all([
