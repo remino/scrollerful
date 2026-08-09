@@ -3,12 +3,15 @@
 <!-- mtoc-start -->
 
 - [HEAD](#head)
+- [v1.2.2](#v122)
 - [v1.0.0](#v100)
 - [v0.6.4](#v064)
 
 <!-- mtoc-end -->
 
 ## HEAD
+
+## v1.2.2
 
 - Fixed
     - Measure the document’s full scroll size so horizontal page scrolling has

@@ -1,5 +1,7 @@
 # Scrollerful
 
+Scrollerful v1.2.2
+
 By Rémino Rem <https://remino.net>
 
 JavaScript library using CSS variables to animate elements while user scrolls.
@@ -86,7 +88,7 @@ Link its auto-start script via `unpkg.org`:
 
 <!-- prettier-ignore -->
 ```html
-<script defer src="https://unpkg.com/scrollerful@1.0.0/dist/scrollerful-auto.min.js"></script>
+<script defer src="https://unpkg.com/scrollerful@1.2.2/dist/scrollerful-auto.min.js"></script>
 ```
 
 ### Via npm
