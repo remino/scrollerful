@@ -349,12 +349,19 @@ footer nav a {
 	overflow-x: hidden;
 }
 
+.prose {
+	box-sizing: border-box;
+	padding: 2rlh 2rem;
+}
+
 .prose__article {
+	align-content: center;
 	box-sizing: border-box;
 	font-size: clamp(12px, 1rem, 16px);
 	font-weight: 400;
-	margin: 2rem auto;
+	margin: 0 auto;
 	max-width: 42rem;
+	min-height: 100%;
 	padding: 0 2rem;
 	text-align: left;
 }
