@@ -293,7 +293,7 @@ header h1 .logo {
 	max-width: 80rem;
 }
 header p {
-	bottom: calc(var(--rmn-ribbon-push, 0px) + 12rem);
+	bottom: calc(var(--rmn-ribbon-push, 0px) + 22%);
 	margin: auto 0;
 	position: absolute;
 }
