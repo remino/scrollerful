@@ -1,12 +1,20 @@
 # CHANGELOG
 
-All notable changes to this project will be documented in this file.
+<!-- mtoc-start -->
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+- [HEAD](#head)
+- [v1.0.0](#v100)
+- [v0.6.4](#v064)
 
-## [1.0.0] - 2024-04-14
+<!-- mtoc-end -->
+
+## HEAD
+
+- Fixed
+    - Measure the document’s full scroll size so horizontal page scrolling has
+      accurate animation progress.
+
+## v1.0.0
 
 If you were using any version before 1.0.0, there are numerous breaking changes:
 
@@ -67,9 +75,6 @@ const {
 - Identical links assigned in each translation file.
 - Duplicate index file for the english version.
 
-## 0.6.4 - 2023-04-09
+## v0.6.4
 
 See git commit history for details on this release and previous ones.
-
-[1.0.0]: https://github.com/remino/scrollerful/compare/v1.0.0...v0.6.4
-[0.6.4]: https://github.com/remino/scrollerful/releases/tag/v0.6.4

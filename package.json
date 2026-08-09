@@ -36,6 +36,7 @@
 		"postcss-value-parser": "^4.2.0",
 		"prettier": "^3.9.1",
 		"prettier-plugin-astro": "^0.14.1",
+		"release-it": "^20.2.1",
 		"tsx": "^4.22.4",
 		"typescript": "^5.9.3",
 		"vite": "^8.1.0"
@@ -57,6 +58,9 @@
 	"license": "ISC",
 	"main": "dist/scrollerful.cjs",
 	"name": "scrollerful",
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/"
+	},
 	"scripts": {
 		"build": "npm run js:build && npm run site:assets && astro build",
 		"docs:commit": "export COMMIT=\"$(git rev-parse HEAD)\" && cd deploy && git add . && git commit -m \"Add build for $COMMIT\"; true",
@@ -71,11 +75,12 @@
 		"deploy": "rsdeploy -w",
 		"deploy:dryrun": "rsdeploy",
 		"preview": "astro preview",
+		"release": "release-it",
+		"release:dry-run": "release-it --dry-run --verbose",
 		"site:assets": "mkdir -p public/scrollerful",
 		"start": "npm run dev",
 		"test": "tsx ./node_modules/jasmine/bin/jasmine.js",
-		"typecheck": "tsc --noEmit",
-		"version": "npm run build && git add dist"
+		"typecheck": "tsc --noEmit"
 	},
 	"type": "module",
 	"version": "1.2.1",
