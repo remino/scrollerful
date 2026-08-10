@@ -1,45 +1,4 @@
-import { addCopyButtons } from '@remino/functions'
-
-let seeking = false
 const controlsOpenKey = 'scrollerful-demo-controls-open'
-
-type ScrollProgress = {
-	contain: number
-	cover: number
-}
-
-type ScrollDetail = {
-	progress: ScrollProgress
-}
-
-type ScrollEvent = CustomEvent<ScrollDetail> & {
-	currentTarget: Element | null
-	target: Element | null
-}
-
-const clamp = (min, value, max) => Math.max(min, Math.min(max, value))
-const isContain = () => document.body.classList.contains('demo--contain')
-
-const showProgress = (target, progress) => {
-	const output = target.querySelector('.item--percentage output')
-	if (!output) return
-
-	output.textContent = String(
-		Math.max(0, Math.min(100, Math.round(progress * 100)))
-	)
-}
-
-const updatePercentage = (event: Event) => {
-	const { target, detail } = event as ScrollEvent
-
-	if (!target) return
-
-	const {
-		progress: { contain, cover },
-	} = detail
-
-	showProgress(target, isContain() ? contain : cover)
-}
 
 const changedDirection = value => {
 	document.body.classList.remove(
@@ -142,77 +101,7 @@ const revealControlsAfterIntro = controls => {
 	observer.observe(intro)
 }
 
-const setupCopyButtons = () => {
-	addCopyButtons({
-		blockSelector: '.prose__article pre',
-		wrapperClass: 'code-block',
-		wrapperElement: true,
-	})
-}
-
-const scrollToHash = () => {
-	const target = document.getElementById(window.location.hash.slice(1))
-	if (!target) return
-
-	requestAnimationFrame(() => target.scrollIntoView())
-}
-
-const seekVideo = (video, progress) => {
-	if (seeking) return
-
-	const time = (video.duration / 2) * Math.abs(clamp(0, progress, 1))
-	const media = video
-	media.currentTime = time
-}
-
-const setupVideo = () => {
-	const video = document.querySelector('video')
-	if (!video) return
-
-	video.addEventListener('play', () => {
-		video.pause()
-	})
-	video.addEventListener('seeked', () => {
-		seeking = false
-	})
-	video.addEventListener('seeking', () => {
-		seeking = true
-	})
-
-	video.pause()
-}
-
-const updateVideo = (event: Event) => {
-	const { currentTarget, detail } = event as ScrollEvent
-
-	if (!currentTarget) return
-
-	const {
-		progress: { contain, cover },
-	} = detail
-
-	const video = currentTarget.querySelector('video')
-	if (!video) return
-
-	seekVideo(video, isContain() ? contain : cover)
-}
-
-const initDemo = () => {
+export const initControls = () => {
 	const controls = setupControls(loadDemoTemplates())
-
-	Array.from(document.querySelectorAll('.section--percentage')).forEach(el => {
-		el.addEventListener('sclf:scroll', updatePercentage)
-	})
-
-	Array.from(document.querySelectorAll('.section--video')).forEach(el => {
-		el.addEventListener('sclf:scroll', updateVideo)
-	})
-
 	revealControlsAfterIntro(controls)
-	setupCopyButtons()
-	setupVideo()
-	window.addEventListener('hashchange', scrollToHash)
-	scrollToHash()
 }
-
-export default initDemo

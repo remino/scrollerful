@@ -1,4 +1,4 @@
-import initDemo from './demo'
+import initDemo from './site/demo'
 import scrollerful from '../../lib/scrollerful'
 
 const showContent = () => {
