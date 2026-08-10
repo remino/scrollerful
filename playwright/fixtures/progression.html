@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Scrollerful progression fixture</title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				overflow: hidden;
+			}
+
+			#scroller {
+				height: 100vh;
+				width: 100vw;
+				overflow: auto;
+			}
+
+			#scroller.horizontal {
+				overflow-y: hidden;
+			}
+
+			.spacer {
+				flex: 0 0 100vh;
+				height: 100vh;
+				width: 100vw;
+			}
+
+			.horizontal .spacer {
+				flex-basis: 100vw;
+				height: 100vh;
+				width: 100vw;
+			}
+
+			#section {
+				height: var(--section-size);
+				position: relative;
+				width: 100vw;
+			}
+
+			.horizontal #section {
+				height: 100vh;
+				width: var(--section-size);
+			}
+
+			.sprite {
+				--sclf-animation: progress;
+			}
+
+			@keyframes progress {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+		</style>
+	</head>
+	<body>
+		<div id="scroller" class="sclf">
+			<div class="spacer"></div>
+			<section id="section" class="sclf">
+				<div id="contain-sprite" class="sclf__sprite--contain sprite"></div>
+				<div id="cover-sprite" class="sclf__sprite--cover sprite"></div>
+			</section>
+			<div class="spacer"></div>
+		</div>
+		<script type="module">
+			import scrollerful from '/src/lib/main.ts'
+
+			const params = new URLSearchParams(window.location.search)
+			const horizontal = params.get('axis') === 'horizontal'
+			const size = Number(params.get('size'))
+			const scroller = document.getElementById('scroller')
+			const section = document.getElementById('section')
+
+			if (horizontal) {
+				scroller.classList.add('sclf--x', 'horizontal')
+				section.classList.add('sclf--x')
+			}
+			section.style.setProperty('--section-size', `${size}${horizontal ? 'vw' : 'vh'}`)
+			scrollerful()
+		</script>
+	</body>
+</html>

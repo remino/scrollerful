@@ -4,3 +4,4 @@
 /build
 /deploy
 /node_modules
+/test-results
