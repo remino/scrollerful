@@ -10,7 +10,8 @@
 	font-weight: 400;
 	margin: 0 auto;
 	max-width: 42rem;
-	min-height: 100%;
+	min-height: 100vh;
+	min-height: 100dvh;
 	padding: 0 2rem;
 	text-align: left;
 }
