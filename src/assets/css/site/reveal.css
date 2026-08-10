@@ -1,0 +1,13 @@
+.js .content {
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+}
+.js.content-visible .content {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js .content {
+		transition: none;
+	}
+}

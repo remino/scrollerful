@@ -1,12 +1,20 @@
 import initDemo from './demo'
 import scrollerful from '../../lib/scrollerful'
 
+const showContent = () => {
+	document.documentElement.classList.add('content-visible')
+}
+
+const fallback = window.setTimeout(showContent, 1000)
+
 const init = () => {
 	initDemo()
 	scrollerful()
-	requestAnimationFrame(() =>
+	requestAnimationFrame(() => {
 		document.documentElement.classList.add('sclf--ready')
-	)
+		showContent()
+		window.clearTimeout(fallback)
+	})
 }
 
 if (document.readyState === 'interactive') {
