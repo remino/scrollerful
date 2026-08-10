@@ -1,0 +1,1 @@
+import{t as e}from"./scrollerful.Cs4MpHTq.js";document.readyState===`interactive`?e():document.addEventListener(`DOMContentLoaded`,e);
