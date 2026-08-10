@@ -1,4 +1,5 @@
 const controlsOpenKey = 'scrollerful-demo-controls-open'
+const scopeSpriteSelector = '.sclf:not(.contain-always)'
 
 const changedDirection = value => {
 	document.body.classList.remove(
@@ -15,15 +16,19 @@ const changedScope = value => {
 	document.body.classList.add(`demo--${value}`)
 
 	if (value === 'contain') {
-		document.querySelectorAll('.sclf__sprite').forEach(el => {
-			el.classList.remove('sclf__sprite')
-			el.classList.add('sclf__sprite--contain')
-		})
+		document
+			.querySelectorAll(`${scopeSpriteSelector} .sclf__sprite`)
+			.forEach(el => {
+				el.classList.remove('sclf__sprite')
+				el.classList.add('sclf__sprite--contain')
+			})
 	} else {
-		document.querySelectorAll('.sclf__sprite--contain').forEach(el => {
-			el.classList.remove('sclf__sprite--contain')
-			el.classList.add('sclf__sprite')
-		})
+		document
+			.querySelectorAll(`${scopeSpriteSelector} .sclf__sprite--contain`)
+			.forEach(el => {
+				el.classList.remove('sclf__sprite--contain')
+				el.classList.add('sclf__sprite')
+			})
 	}
 }
 
