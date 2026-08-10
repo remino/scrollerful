@@ -84,6 +84,11 @@ const setupControls = element => {
 		el.addEventListener('change', radioChanged)
 	})
 
+	const scope = document.querySelector<HTMLInputElement>(
+		'input[name=scope]:checked'
+	)
+	if (scope) changedScope(scope.value)
+
 	return controls
 }
 
