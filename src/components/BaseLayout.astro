@@ -9,6 +9,7 @@ import '../lib/scrollerful.css'
 const {
 	bodyClass = '',
 	description = site.description,
+	initializeScrollerful = true,
 	pageUrl = site.url,
 	title = site.title,
 } = Astro.props
@@ -52,7 +53,7 @@ const {
 		<SiteNavFooter>
 			<a href="/scrollerful/">Scrollerful</a>
 		</SiteNavFooter>
-		<script src="../lib/auto.ts"></script>
+		{initializeScrollerful && <script src="../lib/auto.ts" />}
 		<slot name="scripts" />
 	</body>
 </html>

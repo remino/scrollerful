@@ -221,8 +221,8 @@
 	width: 13em;
 }
 
-.sclf,
-.sclf__float {
+.sclf--ready .sclf,
+.sclf--ready .sclf__float {
 	transition: 0.6s ease-in-out;
 	transition-property: height, width;
 }

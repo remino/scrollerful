@@ -197,7 +197,7 @@ const updateVideo = (event: Event) => {
 	seekVideo(video, isContain() ? contain : cover)
 }
 
-const main = () => {
+const initDemo = () => {
 	const controls = setupControls(loadDemoTemplates())
 
 	Array.from(document.querySelectorAll('.section--percentage')).forEach(el => {
@@ -215,10 +215,4 @@ const main = () => {
 	scrollToHash()
 }
 
-;(function init() {
-	if (document.readyState === 'interactive') {
-		main()
-	} else {
-		document.addEventListener('DOMContentLoaded', main)
-	}
-})()
+export default initDemo
