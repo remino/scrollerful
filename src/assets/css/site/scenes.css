@@ -1,5 +1,5 @@
-.sclf--ready .sclf,
-.sclf--ready .sclf__float {
+.site--ready .sclf,
+.site--ready .sclf__float {
 	transition: 0.6s ease-in-out;
 	transition-property: height, width;
 }

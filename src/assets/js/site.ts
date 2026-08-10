@@ -11,7 +11,7 @@ const init = () => {
 	initDemo()
 	scrollerful()
 	requestAnimationFrame(() => {
-		document.documentElement.classList.add('sclf--ready')
+		document.documentElement.classList.add('site--ready')
 		showContent()
 		window.clearTimeout(fallback)
 	})
