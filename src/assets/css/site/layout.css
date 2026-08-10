@@ -1,0 +1,96 @@
+body.sclf--x > .sclf > .sclf__float.sclf__sprite--contain {
+	animation-name: number-plate;
+}
+body.sclf--x > .sclf > .sclf__float h1 {
+	font-size: 20vmin;
+}
+body.sclf--x > .sclf:nth-child(1) > .sclf__float {
+	--plate-bg: #ff2424;
+}
+body.sclf--x > .sclf:nth-child(2) > .sclf__float {
+	--plate-bg: #ffa724;
+}
+body.sclf--x > .sclf:nth-child(3) > .sclf__float {
+	--plate-bg: #d3ff24;
+}
+body.sclf--x > .sclf:nth-child(4) > .sclf__float {
+	--plate-bg: #50ff24;
+}
+body.sclf--x > .sclf:nth-child(5) > .sclf__float {
+	--plate-bg: #24ff7b;
+}
+body.sclf--x > .sclf:nth-child(6) > .sclf__float {
+	--plate-bg: #24ffff;
+}
+body.sclf--x > .sclf:nth-child(7) > .sclf__float {
+	--plate-bg: #247bff;
+}
+body.sclf--x > .sclf:nth-child(8) > .sclf__float {
+	--plate-bg: #5024ff;
+}
+body.sclf--x > .sclf:nth-child(9) > .sclf__float {
+	--plate-bg: #d324ff;
+}
+body.sclf--x > .sclf:nth-child(10) > .sclf__float {
+	--plate-bg: #ff24a7;
+}
+
+.bg {
+	inset: 0;
+	position: fixed;
+	z-index: -1;
+}
+.bg > [class^='bg__'] {
+	inset: 0;
+	position: fixed;
+}
+.bg__center {
+	background-size: 200% 100%;
+	background-position: 50% 50%;
+	background-image: radial-gradient(
+		ellipse at center,
+		rgb(10, 10, 10) 0%,
+		rgba(10, 10, 10, 0)
+	);
+}
+.bg__color-1 {
+	--sclf-animation: hue-rotate;
+	--sclf-delay: -75;
+	animation-iteration-count: infinite;
+	background-image: radial-gradient(
+		circle at -40% 60%,
+		hsl(315, 100%, 50%),
+		hsla(315, 100%, 50%, 0)
+	);
+	opacity: 1;
+}
+.bg__color-2 {
+	--sclf-animation: hue-rotate;
+	--sclf-delay: -25;
+	animation-iteration-count: infinite;
+	background-image: radial-gradient(
+		circle at 140% 40%,
+		hsl(45, 100%, 50%),
+		hsla(45, 100%, 50%, 0)
+	);
+	opacity: 1;
+}
+.bg__cover {
+	--sclf-animation: fade;
+	--sclf-duration: 10;
+	animation-direction: reverse;
+	background: var(--color-bg-strong);
+}
+
+.sclf--x .prose {
+	flex-shrink: 0;
+	max-height: 100vh;
+	max-height: 100dvh;
+	min-width: auto;
+	width: 100%;
+	overflow: auto;
+}
+
+.warning {
+	background: color-mix(in srgb, red, transparent 80%);
+}

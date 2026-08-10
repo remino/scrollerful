@@ -1,0 +1,116 @@
+nav menu {
+	align-items: center;
+	display: flex;
+	gap: 1.6rem;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+nav menu,
+nav menu > li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+nav menu a {
+	transition: all var(--transition-duration) ease-in-out;
+	display: block;
+	padding: 1.2rem 2.6rem;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+}
+nav menu a > .btn__caption {
+	transition: all var(--transition-duration) ease-in-out;
+	background-clip: text;
+	background-image: var(--rainbow-gradient);
+	background-position-x: 0%;
+	background-size: 150% 150%;
+	color: transparent;
+	font-size: 2rem;
+	font-weight: 500;
+	letter-spacing: 0.02rem;
+	position: relative;
+	text-transform: uppercase;
+	z-index: 100;
+}
+nav menu a > .btn__description {
+	color: var(--color-fg);
+	display: block;
+	font-size: 1rem;
+	font-weight: 200;
+	z-index: 100;
+}
+nav menu a:focus > .btn__caption,
+nav menu a:hover > .btn__caption {
+	background-position-x: 150%;
+	font-weight: 700;
+	letter-spacing: 0.04rem;
+}
+nav menu a:focus {
+	outline: none;
+	transform: scale(1.2);
+}
+nav menu a:hover {
+	outline: none;
+	transform: scale(1.1);
+}
+nav menu a:active {
+	transform: scale(1) translateY(0.1rem);
+}
+nav menu a:active > .bg {
+	box-shadow: 0.05rem 0.05rem #000;
+}
+nav menu li {
+	flex-grow: 1;
+	flex-shrink: 0;
+}
+nav menu li:last-child {
+	--pos-start: 70vw;
+}
+
+.sclf--enabled section .motto > .motto__text:nth-child(1) {
+	--sclf-animation: motto-start;
+}
+.sclf--enabled section .motto > .motto__text--style > strong {
+	--sclf-animation: motto-end-gradient, text-tilt;
+}
+.sclf--enabled section .motto > .motto__text:nth-child(2) {
+	--sclf-animation: motto-middle;
+}
+.sclf--enabled section .motto > .motto__text--style > strong {
+	--sclf-animation: motto-end-gradient, text-tilt;
+}
+.sclf--enabled section .motto > .motto__text:nth-child(3) {
+	--sclf-animation: motto-end;
+}
+.sclf--enabled section .motto > .motto__text--style > strong {
+	--sclf-animation: motto-end-gradient, text-tilt;
+}
+
+section {
+	font-weight: bold;
+	text-align: center;
+}
+section .motto {
+	font-size: 4rem;
+	margin: 0;
+}
+section .motto > .motto__text {
+	display: block;
+	top: 50%;
+	left: 0;
+	margin-top: -0.5em;
+	position: absolute;
+	width: 100%;
+}
+section .motto > .motto__text:last-child {
+	font-size: 6rem;
+}
+section .motto > .motto__text:last-child > strong {
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: var(--rainbow-gradient);
+	background-size: 200% 200%;
+	display: inline-block;
+}

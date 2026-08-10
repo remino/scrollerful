@@ -1,0 +1,164 @@
+.sclf--enabled header .logo > path {
+	--fill-start: var(--color-fg);
+	animation-duration: 100s, 50s, 100s;
+	animation-name: logo-char-zoom-in, logo-char-colorize, logo-char-fade-in;
+	animation-timing-function: ease-in-out, steps(1, end), ease-in-out;
+	transform-origin: center center;
+}
+.sclf--enabled header .logo > path:nth-child(6),
+.sclf--enabled header .logo > path:nth-child(6) {
+	--sclf-delay: 2;
+}
+.sclf--enabled header .logo > path:nth-child(5),
+.sclf--enabled header .logo > path:nth-child(7) {
+	--sclf-delay: 4;
+}
+.sclf--enabled header .logo > path:nth-child(4),
+.sclf--enabled header .logo > path:nth-child(8) {
+	--sclf-delay: 6;
+}
+.sclf--enabled header .logo > path:nth-child(3),
+.sclf--enabled header .logo > path:nth-child(9) {
+	--sclf-delay: 8;
+}
+.sclf--enabled header .logo > path:nth-child(2),
+.sclf--enabled header .logo > path:nth-child(10) {
+	--sclf-delay: 10;
+}
+.sclf--enabled header .logo > path:nth-child(1),
+.sclf--enabled header .logo > path:nth-child(11) {
+	--sclf-delay: 12;
+}
+.sclf--enabled header .logo > path:nth-child(1) {
+	--fill-end: #ff5c5c;
+}
+.sclf--enabled header .logo > path:nth-child(2) {
+	--fill-end: #ffb55c;
+}
+.sclf--enabled header .logo > path:nth-child(3) {
+	--fill-end: #f0ff5c;
+}
+.sclf--enabled header .logo > path:nth-child(4) {
+	--fill-end: #97ff5c;
+}
+.sclf--enabled header .logo > path:nth-child(5) {
+	--fill-end: #5cff7a;
+}
+.sclf--enabled header .logo > path:nth-child(6) {
+	--fill-end: #5cffd3;
+}
+.sclf--enabled header .logo > path:nth-child(7) {
+	--fill-end: #5cd3ff;
+}
+.sclf--enabled header .logo > path:nth-child(8) {
+	--fill-end: #5c7aff;
+}
+.sclf--enabled header .logo > path:nth-child(9) {
+	--fill-end: #975cff;
+}
+.sclf--enabled header .logo > path:nth-child(10) {
+	--fill-end: #f05cff;
+}
+.sclf--enabled header .logo > path:nth-child(11) {
+	--fill-end: #ff5cb5;
+}
+.sclf--enabled header h2 {
+	--sclf-animation: fade, move-up-in;
+	--sclf-delay: 60;
+	--sclf-duration: 20;
+	animation-direction: normal, normal;
+	text-align: center;
+}
+.sclf--enabled header p {
+	--sclf-animation: fade, move-up-out;
+	--sclf-duration: 20;
+	animation-direction: reverse, normal;
+}
+.sclf--enabled header .scroll-down {
+	--sclf-animation: scroll-down-fade-out;
+}
+.sclf--enabled footer nav {
+	--sclf-animation: fade, move-up-in;
+	--sclf-delay: 10;
+	--sclf-duration: 20;
+	animation-direction: normal, normal;
+}
+.sclf--enabled footer nav + nav {
+	--sclf-delay: 20;
+}
+
+.sclf--x header .scroll-down__wrapper {
+	transform: rotate(-90deg);
+}
+
+header .scroll-down__wrapper {
+	transition: transform 0.2s ease-in-out;
+}
+
+header h1 {
+	font-size: 6rem;
+	text-transform: uppercase;
+}
+header h1 .logo {
+	width: 90vw;
+	width: 90lvw;
+	display: block;
+	height: auto;
+	max-width: 80rem;
+}
+header p {
+	bottom: calc(var(--rmn-ribbon-push, 0px) + 22%);
+	margin: auto 0;
+	position: absolute;
+}
+header .scroll-down {
+	bottom: calc(var(--rmn-ribbon-push, 0px) + 2rem);
+	margin: auto 0;
+	position: absolute;
+}
+header .scroll-down .scroll-down__arrow {
+	--size: 1rem;
+	animation: scroll-down-arrow-blink 4s infinite ease-in-out both;
+	background: var(--color-fg);
+	clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+	margin: var(--size) 0 var(--size) 0;
+	height: var(--size);
+	width: var(--size);
+}
+header .scroll-down .scroll-down__arrow:nth-child(2) {
+	animation-delay: 0.125s;
+}
+header .scroll-down .scroll-down__arrow:nth-child(3) {
+	animation-delay: 0.25s;
+}
+header .scroll-down .scroll-down__arrow:nth-child(4) {
+	animation-delay: 0.375s;
+}
+
+footer nav {
+	margin: 1lh 0;
+	text-align: center;
+}
+
+footer nav dl {
+	margin: 0;
+}
+footer nav dt {
+	font-size: 2rem;
+}
+footer nav dd {
+	margin: 0;
+}
+footer nav a {
+	color: inherit;
+}
+
+.sclf--enabled nav a > .btn__caption {
+	--sclf-animation: big-button-color;
+}
+.sclf--enabled nav menu > li {
+	--sclf-animation: big-button;
+}
+.sclf--enabled #motto .sclf__float {
+	overflow-x: hidden;
+}
