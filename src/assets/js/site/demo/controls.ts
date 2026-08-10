@@ -33,8 +33,7 @@ const changedScope = value => {
 }
 
 const changedSize = value => {
-	document.body.classList.remove('demo--small', 'demo--medium', 'demo--large')
-	document.body.classList.add(`demo--${value}`)
+	document.body.style.setProperty('--container-size', value)
 }
 
 const radioChanged = ({ currentTarget }) => {
@@ -93,6 +92,11 @@ const setupControls = element => {
 		'input[name=scope]:checked'
 	)
 	if (scope) changedScope(scope.value)
+
+	const size = document.querySelector<HTMLInputElement>(
+		'input[name=size]:checked'
+	)
+	if (size) changedSize(size.value)
 
 	return controls
 }

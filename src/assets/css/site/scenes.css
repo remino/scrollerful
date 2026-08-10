@@ -24,30 +24,20 @@
 .sclf--enabled .demo--cover .item--piechart {
 	--progress: var(--sclf-cover, 0);
 }
-.sclf--enabled .demo--vertical.demo--large .sclf {
-	height: 300vh;
-	height: 300lvh;
+body {
+	--container-size: 300;
 }
-.sclf--enabled .demo--vertical.demo--medium .sclf {
-	height: 100vh;
-	height: 100lvh;
+.sclf--enabled .demo--vertical .sclf {
+	height: calc(var(--container-size) * 1vh);
+	height: calc(var(--container-size) * 1lvh);
 }
-.sclf--enabled .demo--vertical.demo--small .sclf {
-	height: 50vh;
-	height: 50lvh;
+.sclf--enabled .demo--horizontal .sclf {
+	width: calc(var(--container-size) * 1vw);
+	width: calc(var(--container-size) * 1lvw);
 }
-.sclf--enabled .demo--horizontal.demo--large .sclf {
-	width: 300vw;
-	width: 300lvw;
-}
-.sclf--enabled .demo--horizontal.demo--medium .sclf {
-	width: 100vw;
-	width: 100lvw;
-}
-.sclf--enabled .demo--horizontal.demo--small .sclf,
-.sclf--enabled .demo--horizontal.demo--small .prose {
-	width: 50vw;
-	width: 50lvw;
+.sclf--enabled .demo--horizontal .prose {
+	width: min(100%, calc(var(--container-size) * 1vw));
+	width: min(100%, calc(var(--container-size) * 1lvw));
 }
 .sclf--enabled .section--percentage {
 	--color-1: #b2456e;
