@@ -1,7 +1,0 @@
-.astro
-.env
-.build
-/build
-/deploy
-/node_modules
-/test-results
